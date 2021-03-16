@@ -1,0 +1,37 @@
+﻿<Window x:Class="pm_client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pm_client"
+        mc:Ignorable="d"
+        Title="山东大学无纸化会议系统" Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}" ResizeMode="NoResize" WindowStyle="None" Left="0" IsTabStop="True" Top="0">
+    <Grid x:Name="container">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="343*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="259*"/>
+            <ColumnDefinition Width="911*"/>
+            <ColumnDefinition Width="196*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2"  VerticalAlignment="Stretch"  Width="auto" Height="auto" HorizontalAlignment="Stretch" Background="{StaticResource sdu_red}" Orientation="Horizontal" >
+            <Button Content="Button" Width="63" Background="{x:Null}"/>
+            <TextBlock TextWrapping="Wrap" Text="TextBlock" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel  Grid.Row="1">
+            <RadioButton  FontSize="16"  Style="{StaticResource side_button_1}" VerticalContentAlignment="Stretch" BorderThickness="5,1,1,1" Click="RadioButton_Click">
+                <StackPanel>
+                    <Image Source="res/drawable/note.png" Width="70" Margin="50"></Image>
+                    <TextBlock Text="笔记"></TextBlock>
+                </StackPanel>
+            </RadioButton>
+            <Button Content="投票" Width="75"/>
+            <Button Content="笔记" Width="75"/>
+            <Button Content="应用" Width="75"/>
+        </StackPanel>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Stretch" Background="{StaticResource sdu_red}" FontSize="64" Foreground="White"/>
+
+    </Grid>
+</Window>
