@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="pm_client.view.vote_result"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:pm_client.view"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1300">
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="244*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="327*"/>
+            <ColumnDefinition Width="719*"/>
+            <ColumnDefinition Width="172*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" Text="hahaha" VerticalAlignment="Center"  Style="{StaticResource title_64}"   />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ana" VerticalAlignment="Center"  Style="{StaticResource title_40}"  />
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left"   TextWrapping="Wrap" Text="+1s" VerticalAlignment="Center"   FontFamily="DengXian" FontWeight="Bold" FontSize="48"  />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="2"    >
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title}" Style="{StaticResource title_48}"/>
+        </ScrollViewer>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"  Height="334"  Grid.Row="2" VerticalAlignment="Top"   Grid.ColumnSpan="2">
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20" BorderThickness="50"/>
+                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   Padding="8,20,0,20"/>
+                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20"/>
+                <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource choice2}" Template="{DynamicResource choice}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Content="Button" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center"    Grid.Column="2"  Style="{StaticResource ResourceKey=normal_btn}" BorderThickness="0"/>
+
+    </Grid>
+</UserControl>

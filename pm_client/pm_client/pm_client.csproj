@@ -56,8 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="util\data.cs" />
-    <Compile Include="view\file_list_view.xaml.cs">
-      <DependentUpon>file_list_view.xaml</DependentUpon>
+    <Compile Include="view\file_view.xaml.cs">
+      <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\file_pdf_view.xaml.cs">
       <DependentUpon>file_pdf_view.xaml</DependentUpon>
@@ -65,8 +65,14 @@
     <Compile Include="view\file_video_view.xaml.cs">
       <DependentUpon>file_video_view.xaml</DependentUpon>
     </Compile>
-    <Compile Include="view\logout.xaml.cs">
-      <DependentUpon>logout.xaml</DependentUpon>
+    <Compile Include="view\note.xaml.cs">
+      <DependentUpon>note.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\remote.xaml.cs">
+      <DependentUpon>remote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\settings_usercontrol.xaml.cs">
+      <DependentUpon>settings_usercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\sidebar_btn.xaml.cs">
       <DependentUpon>sidebar_btn.xaml</DependentUpon>
@@ -76,6 +82,18 @@
     </Compile>
     <Compile Include="view\temp.xaml.cs">
       <DependentUpon>temp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\vote.xaml.cs">
+      <DependentUpon>vote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\vote_list_view.xaml.cs">
+      <DependentUpon>vote_list_view.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\vote_result.xaml.cs">
+      <DependentUpon>vote_result.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\vote_result_detail.xaml.cs">
+      <DependentUpon>vote_result_detail.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="view\file_list_view.xaml">
+    <Page Include="view\file_view.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,7 +123,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="view\logout.xaml">
+    <Page Include="view\note.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\remote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\settings_usercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,6 +144,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\temp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\vote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\vote_list_view.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\vote_result.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\vote_result_detail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,9 +197,19 @@
     <Resource Include="res\drawable\back_button.png" />
     <Resource Include="res\drawable\file.png" />
     <Resource Include="res\drawable\note.png" />
-    <Resource Include="res\drawable\raise_vote.png" />
     <Resource Include="res\drawable\setting.png" />
     <Resource Include="res\drawable\vote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\o_back_button.png" />
+    <Resource Include="res\drawable\o_file.png" />
+    <Resource Include="res\drawable\o_note.png" />
+    <Resource Include="res\drawable\o_setting.png" />
+    <Resource Include="res\drawable\o_vote.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\o_remote.png" />
+    <Resource Include="res\drawable\remote.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

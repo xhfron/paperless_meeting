@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="sdu_red" Color="#9C0C13"/>
+    <SolidColorBrush x:Key="sidebar_white" Color="#F7F7F7"/>
     <Style x:Key="lbl_style_1">
         <!--设备编号-->
         <Setter Property="Control.FontFamily" Value="DengXian"/>
@@ -12,6 +13,38 @@
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
         <Setter Property="Control.FontSize" Value="32"/>
         <Setter Property="Control.Margin" Value="0,40,0,0"/>
+    </Style>
+    <Style x:Key="title_64">
+        <Setter Property="Control.FontFamily" Value="DengXian"/>
+        <Setter Property="Control.FontSize" Value="64"/>
+        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+    </Style>
+    <Style x:Key="title_40">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="40"/>
+        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+    </Style>
+    <Style x:Key="title_48">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="48"/>
+        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+    </Style>
+    <Style x:Key="normal_btn">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="32"/>
+        <Setter Property="Control.Padding" Value="28,1,36,1"/>
+    </Style>
+    <Style x:Key="choice1" TargetType="RadioButton">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="48"/>
+        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+        <Setter Property="Control.Padding" Value="8,20,0,20"/>
+    </Style>
+    <Style x:Key="choice2" TargetType="CheckBox">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="48"/>
+        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+        <Setter Property="Control.Padding" Value="8,20,0,20"/>
     </Style>
     <ControlTemplate  x:Key="side_button_temp">
         
@@ -52,19 +85,21 @@
     <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF212121"/>
     <Style x:Key="side_button_1" TargetType="{x:Type RadioButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+        <Setter Property="Background" Value="White"  />
         <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#FF77899E" />
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="BorderThickness" Value="5,1,1,1"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Left"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                    <Grid x:Name="templateRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <Border x:Name="radioButtonBorder" BorderBrush="White"  BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid x:Name="markGrid" Margin="0">
                                 <Ellipse x:Name="optionMark" Fill="#00ff00" MinWidth="0" MinHeight="6" Opacity="0"/>
                             </Grid>
@@ -93,10 +128,14 @@
                         </Trigger-->
                         <Trigger Property="IsChecked" Value="true">
                             <Setter  Property="BorderBrush"  TargetName="radioButtonBorder" Value="{StaticResource sdu_red}"/>
+                            <Setter  Property="Foreground"     Value="{StaticResource sdu_red }"/>
+                            <Setter Property="Background" Value="{StaticResource sdu_red }"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter  Property="BorderBrush"  TargetName="radioButtonBorder" Value="white"/>
-                            <!--Setter Property="Opacity" TargetName="optionMark" Value="0.0"/-->
+                            <Setter  Property="Foreground"     Value="#FF77899E" />
+                                    <Setter Property="Background" Value="White" />
+                                    <!--Setter Property="Opacity" TargetName="optionMark" Value="0.0"/-->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -1,11 +1,17 @@
 ﻿
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\App.xaml;;
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\MainWindow.xaml;;
-FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\logout.xaml;;
-FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\file_list_view.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\file_view.xaml;;
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\file_pdf_view.xaml;;
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\file_video_view.xaml;;
-FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\splash.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\note.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\remote.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\settings_usercontrol.xaml;;
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\sidebar_btn.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\splash.xaml;;
 FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\temp.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\vote.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\vote_list_view.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\vote_result.xaml;;
+FC:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\view\vote_result_detail.xaml;;
 

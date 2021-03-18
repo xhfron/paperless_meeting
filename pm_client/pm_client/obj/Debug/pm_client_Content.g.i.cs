@@ -8,11 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/back_button.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/file.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/note.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/raise_vote.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/setting.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/vote.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/o_remote.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/remote.png")]
 
 

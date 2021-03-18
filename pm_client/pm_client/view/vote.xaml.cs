@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,20 @@ using System.Windows.Shapes;
 namespace pm_client.view
 {
     /// <summary>
-    /// logout.xaml 的交互逻辑
+    /// vote.xaml 的交互逻辑
     /// </summary>
-    public partial class logout : UserControl
+    public partial class vote : UserControl
     {
-        public logout()
+        public vote()
         {
             InitializeComponent();
+            Vote v = Vote.mock();
+            this.DataContext = v;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
