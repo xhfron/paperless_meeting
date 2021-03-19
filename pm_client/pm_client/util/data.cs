@@ -241,9 +241,10 @@ namespace pm_client.util
         }
     }
 
-    
+
     class VoteChoiceResult : INotifyPropertyChanged
     {
+        static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
@@ -281,20 +282,6 @@ namespace pm_client.util
             }
         }
 
-        private int value;
-        public int Value
-        {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Value"));
-            }
-        }
-
         private int count;
         public int Count
         {
@@ -305,7 +292,6 @@ namespace pm_client.util
             set
             {
                 count = value;
-                this.Value = 100 * count / Total;
                 OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             }
         }
@@ -313,13 +299,11 @@ namespace pm_client.util
         public static VoteChoiceResult mock()
         {
             VoteChoiceResult res = new VoteChoiceResult();
-            Random r = new Random();
 
             res.Total = r.Next();
 
             res.Text = "Text_" + r.Next();
-            res.Value = r.Next();
-            res.Count = r.Next();
+            res.Count = r.Next(0,100);
             return res;
         }
     }

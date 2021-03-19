@@ -21,6 +21,12 @@ namespace pm_client.view
     /// </summary>
     public partial class vote : UserControl
     {
+        INavigator board;
+        public void AddBoard(INavigator board)
+        {
+            this.board = board;
+        }
+
         public vote()
         {
             InitializeComponent();
@@ -30,7 +36,9 @@ namespace pm_client.view
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            vote_result t = new vote_result();
+            t.AddBoard(board);
+            board.Push(t);
         }
     }
 }

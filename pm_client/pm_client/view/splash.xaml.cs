@@ -24,5 +24,10 @@ namespace pm_client.view
         {
             InitializeComponent();
         }
+
+        private void hide(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+        }
     }
 }

@@ -6,6 +6,115 @@
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1300">
+    <UserControl.Resources>
+
+        <ControlTemplate x:Key="choice" TargetType="{x:Type CheckBox}">
+            <Grid x:Name="templateRoot" 
+                  Background="Transparent" 
+                  SnapsToDevicePixels="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border x:Name="checkBoxBorder" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        Margin="{TemplateBinding Margin}" 
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <Grid x:Name="markGrid">
+                        <Path x:Name="optionMark" 
+                              Data="F 1 M 52.7498,6.2334 L 23.4915 45.4917 22.608199999999997 45.4917 0.0 25.96655 6.3832 17.60825 21.275 30.44165 41.66655 7.6294e-05 49.874900000000004 6.116700000000001 z" 
+                              Fill="#FF212121" 
+                              Margin="1" 
+                              Opacity="0" 
+                              Stretch="None"/>
+                        <Rectangle x:Name="indeterminateMark" 
+                                   Fill="#FF212121" 
+                                   Margin="12,10" 
+                                   Opacity="0"/>
+                    </Grid>
+                </Border>
+                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasContent" Value="True">
+                    <Setter Property="FocusVisualStyle">
+                        <Setter.Value>
+                            <Style>
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Padding" Value="4,-1,0,0"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFF3F9FF"/>
+                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF5593FF"/>
+                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
+                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
+                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
+                    <Setter Property="Fill" TargetName="optionMark" Value="#FF707070"/>
+                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF707070"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFD9ECFF"/>
+                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF3C77DD"/>
+                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
+                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="{x:Null}">
+                    <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="VoteListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
+            <!--nmd wsm,加TargetType才有效？？？-->
+            <Grid HorizontalAlignment="Left" 
+                  Width="1647" 
+                  Height="100" 
+                  VerticalAlignment="Top" 
+                  Margin="40,0,0,100">
+                <ProgressBar HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch" 
+                             Value="50"  
+                             Height="100"
+                             Foreground="#777"/>
+                <TextBlock Style="{StaticResource title_48}" 
+                           Margin="0,0,40,0" HorizontalAlignment="Right" 
+                           VerticalAlignment="Center" 
+                           Text="20" />
+                <TextBlock Style="{StaticResource title_48}" 
+                           Margin="40,0,0,0" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Text="hello"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="VoteListBoxContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Template" Value="{StaticResource VoteListBoxItemTemp}"/>
+        </Style>
+
+    </UserControl.Resources>
+
+
     <Grid Background="White" >
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
@@ -15,26 +124,39 @@
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="327*"/>
-            <ColumnDefinition Width="719*"/>
-            <ColumnDefinition Width="172*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="272*"/>
+            <ColumnDefinition Width="495*"/>
+            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="214*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" Text="hahaha" VerticalAlignment="Center"  Style="{StaticResource title_64}"   />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ana" VerticalAlignment="Center"  Style="{StaticResource title_40}"  />
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left"   TextWrapping="Wrap" Text="+1s" VerticalAlignment="Center"   FontFamily="DengXian" FontWeight="Bold" FontSize="48"  />
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="2"    >
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title}" Style="{StaticResource title_48}"/>
+        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" VerticalAlignment="Center"  Style="{StaticResource title_64}" Height="68" Margin="40,24,0,24" Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
+        <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"   FontFamily="DengXian" FontSize="48" Margin="0,41"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
+            <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}" Margin="40,40,0,0"/>
         </ScrollViewer>
+
+        <ListBox Grid.Row="2" 
+                 Grid.Column="0" 
+                 Grid.ColumnSpan="5" 
+                 SelectionMode="Multiple" 
+                 ItemsSource="{Binding Choices}"  
+                 ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
+                 BorderThickness="0"
+                 x:Name="ResultList">
+        </ListBox>
+        <Button Content="开始投票" 
+                HorizontalAlignment="Center"  
+                Grid.Row="3" 
+                VerticalAlignment="Center"    
+                Grid.Column="3"  
+                Style="{StaticResource ResourceKey=normal_btn}" 
+                BorderThickness="0" 
+                Height="95" 
+                Width="300" 
+                Grid.ColumnSpan="2" Click="Button_Click"  />
         
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"  Height="334"  Grid.Row="2" VerticalAlignment="Top"   Grid.ColumnSpan="2">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20" BorderThickness="50"/>
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   Padding="8,20,0,20"/>
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20"/>
-                <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource choice2}" Template="{DynamicResource choice}"/>
-            </StackPanel>
-        </ScrollViewer>
-        <Button Content="Button" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center"    Grid.Column="2"  Style="{StaticResource ResourceKey=normal_btn}" BorderThickness="0"/>
 
     </Grid>
 </UserControl>

@@ -47,6 +47,40 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
+        <SolidColorBrush x:Key="FontColor" Color="#53606F" />
+        <ControlTemplate x:Key="VoteListListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
+            <!--nmd wsm,加TargetType才有效？？？-->
+            <Border Margin="20">
+
+                <Border Width="{Binding ElementName=VoteListViewVoteList, Path=Width}" 
+                        HorizontalAlignment="Stretch" 
+                        CornerRadius="30" 
+                        BorderBrush="{StaticResource sidebar_border}" 
+                        BorderThickness="2" 
+                        Background="{StaticResource sidebar_white}" Margin="20,10">
+                    <Grid Height="200" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="133*"/>
+                            <RowDefinition Height="67*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125*"/>
+                            <ColumnDefinition Width="562*"/>
+                            <ColumnDefinition Width="113*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
+                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
+                        <TextBlock Foreground="{StaticResource font_black}" Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
+                    </Grid>
+                </Border>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="VoteListListBoxContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Template" Value="{StaticResource VoteListListBoxItemTemp}"/>
+        </Style>
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -54,25 +88,10 @@
             <RowDefinition Height="379*"/>
         </Grid.RowDefinitions>
         <TextBlock  TextWrapping="Wrap" Text="投票表决" Style="{StaticResource title_64}"/>
-        <ListBox Grid.Row="1" Style="{DynamicResource VoteList}" x:Name="VoteListViewVoteList" SelectionChanged="VoteListViewVoteList_SelectionChanged">
+        <ListBox Grid.Row="1" Style="{DynamicResource VoteList}" ItemContainerStyle="{StaticResource VoteListListBoxContainerStyle}" x:Name="VoteListViewVoteList" SelectionChanged="toVoteDetail">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Width="{Binding ElementName=VoteListViewVoteList, Path=Width}" HorizontalAlignment="Stretch" CornerRadius="30" BorderBrush="Black" BorderThickness="2" Background="{StaticResource sidebar_white}" Margin="20,10">
-                        <Grid Height="200" VerticalAlignment="Top" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="133*"/>
-                                <RowDefinition Height="67*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="125*"/>
-                                <ColumnDefinition Width="562*"/>
-                                <ColumnDefinition Width="113*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
-                            <TextBlock HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
-                            <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
-                        </Grid>
-                    </Border>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
             

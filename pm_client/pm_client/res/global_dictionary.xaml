@@ -2,6 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="sdu_red" Color="#9C0C13"/>
     <SolidColorBrush x:Key="sidebar_white" Color="#F7F7F7"/>
+    <SolidColorBrush x:Key="sidebar_text" Color="#77899E"/>
+    <SolidColorBrush x:Key="sidebar_border" Color="#707070"/>
+    <SolidColorBrush x:Key="font_black" Color="#182c43"/>
+    <SolidColorBrush x:Key="font_grey" Color="#53606F"/>
+    <SolidColorBrush x:Key="btn_grey" Color="#707070"/>
     <Style x:Key="lbl_style_1">
         <!--设备编号-->
         <Setter Property="Control.FontFamily" Value="DengXian"/>
@@ -31,8 +36,11 @@
     </Style>
     <Style x:Key="normal_btn">
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
-        <Setter Property="Control.FontSize" Value="32"/>
-        <Setter Property="Control.Padding" Value="28,1,36,1"/>
+        <Setter Property="Control.FontSize" Value="60"/>
+        <Setter Property="Control.Padding" Value="28,20,36,20"/>
+        <Setter Property="Control.Background" Value="{StaticResource btn_grey}" />
+        <Setter Property="Control.Foreground" Value="{StaticResource font_black}"/>
+        <Setter Property="Control.BorderThickness" Value="0"/>
     </Style>
     <Style x:Key="choice1" TargetType="RadioButton">
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
@@ -43,8 +51,9 @@
     <Style x:Key="choice2" TargetType="CheckBox">
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
         <Setter Property="Control.FontSize" Value="48"/>
-        <Setter Property="Control.Margin" Value="40,0,0,0"/>
+        <Setter Property="Margin" Value="40,0,0,40"/>
         <Setter Property="Control.Padding" Value="8,20,0,20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
     <ControlTemplate  x:Key="side_button_temp">
         

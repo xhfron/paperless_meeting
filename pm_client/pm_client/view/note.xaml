@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBlock Background="White" Text="前面的区域以后再来探索吧" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" FontSize="80" />
+
+
     </Grid>
 </UserControl>

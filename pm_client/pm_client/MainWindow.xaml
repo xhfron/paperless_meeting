@@ -23,9 +23,9 @@
             <RowDefinition Height="343*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="494*"/>
-            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="168"/>
+            <ColumnDefinition Width="247*"/>
+            <ColumnDefinition Width="49*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2"  VerticalAlignment="Stretch"  Width="auto" Height="auto" HorizontalAlignment="Stretch" Background="{StaticResource sdu_red}" Orientation="Horizontal" >
             <Button  Background="{x:Null}" Click="back" BorderThickness="0">
@@ -33,75 +33,78 @@
             </Button>
             <TextBlock TextWrapping="Wrap" Text="TextBlock" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
         </StackPanel>
-        <StackPanel  Grid.Row="1" VerticalAlignment="Stretch" >
-            <RadioButton  x:Name="NoteBtn" 
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+            <StackPanel  
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     Background="{StaticResource sidebar_white}">
+                <RadioButton  x:Name="NoteBtn" 
                           Style="{StaticResource side_button_1}" Click="toNote" >
-                <StackPanel>
-                    <Border Background="{Binding Source=NoteBtn, Path=Foreground}"         
+                    <StackPanel>
+                        <Border Background="{Binding Source=NoteBtn, Path=Foreground}"         
                             BorderThickness="50,20" BorderBrush="White"  >
-                        <Image Source="res/drawable/o_note.png" Width="70" ></Image>
-                    </Border>
-                    <TextBlock Text="笔记" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton  x:Name="VoteBtn" 
+                            <Image Source="res/drawable/o_note.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="笔记" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="VoteBtn" 
                           Style="{StaticResource side_button_1}" 
                           Click="toVote" >
-                <StackPanel>
-                    <Border Background="{Binding Source=VoteBtn, Path=Foreground}"         
+                    <StackPanel>
+                        <Border Background="{Binding Source=VoteBtn, Path=Foreground}"         
                             BorderThickness="50,20" BorderBrush="White"  >
-                        <Image Source="res/drawable/o_vote.png" Width="70" ></Image>
-                    </Border>
-                    <TextBlock Text="投票" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton  x:Name="RemoteBtn" 
+                            <Image Source="res/drawable/o_vote.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="投票" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="RemoteBtn" 
                           Style="{StaticResource side_button_1}" 
                           Click="toRemote" >
-                <StackPanel>
-                    <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
+                    <StackPanel>
+                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
                             BorderThickness="50,20" BorderBrush="White"  >
-                        <Image Source="res/drawable/o_remote.png" Width="70" ></Image>
-                    </Border>
-                    <TextBlock Text="应用" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                </StackPanel>
-            </RadioButton>
-            <RadioButton  x:Name="FileBtn" 
+                            <Image Source="res/drawable/o_remote.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="应用" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="FileBtn" 
                           Style="{StaticResource side_button_1}" 
                           Click="toFile" >
-                <StackPanel>
-                    <Border Background="{Binding Source=FileBtn, Path=Foreground}"         
+                    <StackPanel>
+                        <Border Background="{Binding Source=FileBtn, Path=Foreground}"         
                             BorderThickness="50,20" BorderBrush="White"  >
-                        <Image Source="res/drawable/o_file.png" Width="70" ></Image>
-                    </Border>
-                    <TextBlock Text="文件" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                </StackPanel>
-            </RadioButton>
-            <Button Content="Button" Height="52" Click="Button_Click"/>
-        </StackPanel>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="23:12" VerticalAlignment="Stretch" Background="{StaticResource sdu_red}" FontSize="64" Foreground="White"/>
-        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" CornerRadius="30" BorderBrush="Black" BorderThickness="2" Background="{StaticResource sidebar_white}" Margin="20,10">
-            <Grid Height="200" VerticalAlignment="Top" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="133*"/>
-                    <RowDefinition Height="67*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="125*"/>
-                    <ColumnDefinition Width="562*"/>
-                    <ColumnDefinition Width="113*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
-                <TextBlock HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
-                <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
-            </Grid>
+                            <Image Source="res/drawable/o_file.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="文件" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
         </Border>
-        <Grid Grid.Column="1" HorizontalAlignment="Left" Width="1647" Height="100" Margin="210,254,0,0" Grid.Row="1" VerticalAlignment="Top" >
-            <ProgressBar HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Value="50"  Height="100"/>
-            <TextBlock Style="{StaticResource title_48}" Margin="0,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="20" />
-            <TextBlock Style="{StaticResource title_48}" Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="hello"/>
-        </Grid>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="442,278,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+            <StackPanel  
+                     VerticalAlignment="Bottom" 
+                     HorizontalAlignment="Stretch" 
+                     Background="{StaticResource sidebar_white}">
+                
+                <RadioButton  x:Name="SettingsBtn" 
+                          Style="{StaticResource side_button_1}" 
+                              Background="{StaticResource sidebar_white}"
+
+                          Click="toSettings" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_setting.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="设置" Style="{StaticResource sidebar_txt}" Foreground="#FF77899E"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="23:12" VerticalAlignment="Stretch" Background="{StaticResource sdu_red}" FontSize="64" Foreground="White"/>
 
 
 

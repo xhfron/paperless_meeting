@@ -6,20 +6,28 @@
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="FileListTemp" TargetType="{x:Type ListBoxItem}" >
+            <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource sidebar_border}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
+                    <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
+                    <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="FileListStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.Background" Value="{StaticResource sidebar_white}"/>
+            <Setter Property="Template" Value="{StaticResource FileListTemp}"/>
+        </Style>
+        
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
             <RowDefinition Height="389*"/>
         </Grid.RowDefinitions>
-        <ListBox HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                        <Image Source="/res/drawable/note.png"></Image>
-                        <TextBlock Text="hi"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <ListBox HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}">
+
             <ListBoxItem>
                 <Border BorderThickness="0,0,0,2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">

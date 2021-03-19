@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="util\data.cs" />
+    <Compile Include="util\INavigator.cs" />
     <Compile Include="view\file_view.xaml.cs">
       <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>

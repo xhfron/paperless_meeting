@@ -40,3 +40,4 @@ C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\obj\Debu
 C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\obj\Debug\view\vote_result_detail.g.cs
 C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\obj\Debug\view\vote_result.baml
 C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\obj\Debug\view\vote_result_detail.baml
+C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\pm_client\obj\Debug\pm_client.csprojAssemblyReference.cache

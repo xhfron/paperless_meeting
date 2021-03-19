@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace pm_client.view
     /// </summary>
     public partial class vote_result : UserControl
     {
+        INavigator board;
+        public void AddBoard(INavigator board)
+        {
+            this.board = board;
+        }
+
         public vote_result()
         {
             InitializeComponent();
+            ListBox l = this.FindName("ResultList") as ListBox;
+            l.ItemsSource = new List<VoteChoiceResult>(new VoteChoiceResult[] { VoteChoiceResult.mock(),VoteChoiceResult.mock()});
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            board.Push(new vote_result_detail());
         }
     }
 }

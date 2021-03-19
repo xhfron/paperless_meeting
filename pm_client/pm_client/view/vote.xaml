@@ -7,17 +7,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="1159.082" d:DesignWidth="1218.45">
     <UserControl.Resources>
-        
+
         <ControlTemplate x:Key="choice" TargetType="{x:Type CheckBox}">
-            <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+            <Grid x:Name="templateRoot" 
+                  Background="Transparent" 
+                  SnapsToDevicePixels="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Margin}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                <Border x:Name="checkBoxBorder" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        Margin="{TemplateBinding Margin}" 
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                     <Grid x:Name="markGrid">
-                        <Path x:Name="optionMark" Data="F 1 M 99.7498,12.2334 L 46.983 90.9834 45.21639999999999 90.9834 0.0 51.9331 12.7664 35.2165 42.55 60.8833 83.3331 0.000152588 99.74980000000001 12.233400000000001 z" Fill="#FF212121" Margin="1" Opacity="0" Stretch="None"/>
-                        <Rectangle x:Name="indeterminateMark" Fill="#FF212121" Margin="20" Opacity="0"/>
+                        <Path x:Name="optionMark" 
+                              Data="F 1 M 52.7498,6.2334 L 23.4915 45.4917 22.608199999999997 45.4917 0.0 25.96655 6.3832 17.60825 21.275 30.44165 41.66655 7.6294e-05 49.874900000000004 6.116700000000001 z" 
+                              Fill="#FF212121" 
+                              Margin="1" 
+                              Opacity="0" 
+                              Stretch="None"/>
+                        <Rectangle x:Name="indeterminateMark" 
+                                   Fill="#FF212121" 
+                                   Margin="12,10" 
+                                   Opacity="0"/>
                     </Grid>
                 </Border>
                 <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -67,11 +83,26 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <ControlTemplate x:Key="ChoiceListBoxItemTemp">
-            <CheckBox Style="{StaticResource choice2}" Template="{DynamicResource choice}" VerticalAlignment="Center">
-                <ContentPresenter></ContentPresenter>
-            </CheckBox>
+
+        <ControlTemplate x:Key="VoteListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
+            <!--nmd wsm,加TargetType才有效？？？-->
+            <Border Margin="0" BorderBrush="{StaticResource sidebar_border}">
+
+                <CheckBox  Style="{StaticResource choice2}" 
+                           Template="{DynamicResource choice}" 
+                           VerticalAlignment="Center" 
+                           IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" 
+                           Margin="40,0,0,25"
+                           Foreground="{StaticResource font_black}">
+                    <ContentPresenter></ContentPresenter>
+                </CheckBox>
+            </Border>
         </ControlTemplate>
+        <Style x:Key="VoteListBoxContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Template" Value="{StaticResource VoteListBoxItemTemp}"/>
+        </Style>
+
     </UserControl.Resources>
 
 
@@ -84,27 +115,43 @@
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="327*"/>
-            <ColumnDefinition Width="719*"/>
-            <ColumnDefinition Width="172*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="272*"/>
+            <ColumnDefinition Width="495*"/>
+            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="214*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center"  Style="{StaticResource title_64}"   />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="ana" VerticalAlignment="Center"  Style="{StaticResource title_40}"  />
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left"   TextWrapping="Wrap" Text="+1s" VerticalAlignment="Center"   FontFamily="DengXian" FontWeight="Bold" FontSize="48"  />
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="2"    >
-            <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}"/>
+        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" VerticalAlignment="Center"  Style="{StaticResource title_64}" Height="68" Margin="40,24,0,24" Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
+        <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"   FontFamily="DengXian" FontSize="48" Margin="0,41"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
+            <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}" Margin="40,40,0,0"/>
         </ScrollViewer>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"  Height="334"  Grid.Row="2" VerticalAlignment="Top"   Grid.ColumnSpan="2">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20" BorderThickness="50"/>
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   Padding="8,20,0,20"/>
-                <RadioButton Content="RadioButton" Style="{StaticResource choice1}" Padding="8,20,0,20"/>
-                <CheckBox Content="CheckBox" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource choice2}" Template="{DynamicResource choice}"/>
-            </StackPanel>
-        </ScrollViewer>
-        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Choices}" ItemTemplate="{StaticResource ChoiceListBoxItemTemp}" >
+
+        <ListBox Grid.Row="2" 
+                 Grid.Column="0" 
+                 Grid.ColumnSpan="4" 
+                 SelectionMode="Multiple" 
+                 ItemsSource="{Binding Choices}"  
+                 ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
+                 BorderThickness="0">
         </ListBox>
-        <Button Content="Button" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center"    Grid.Column="2"  Style="{StaticResource ResourceKey=normal_btn}" Click="Button_Click" BorderThickness="0"/>
+        <Button Content="开始投票" 
+                HorizontalAlignment="Center"  
+                Grid.Row="3" 
+                VerticalAlignment="Center"    
+                Grid.Column="3"  
+                Style="{StaticResource ResourceKey=normal_btn}" 
+                Click="Button_Click" 
+                BorderThickness="0" 
+                Height="95" 
+                Width="300" 
+                Grid.ColumnSpan="2"  />
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2"  >
+            <CheckBox Style="{StaticResource title_48}" Template="{StaticResource choice}" >倒计时：</CheckBox>
+            <TextBox Style="{StaticResource title_48}" Width="150"></TextBox>
+            <TextBlock Style="{StaticResource title_48}">s</TextBlock>
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,12 @@ namespace pm_client.view
     /// </summary>
     public partial class vote_list_view : UserControl
     {
+        INavigator board;
+        public void AddBoard(INavigator board)
+        {
+            this.board = board;
+        }
+
         public vote_list_view()
         {
             InitializeComponent();
@@ -30,6 +37,13 @@ namespace pm_client.view
             foreach(object k in e.AddedItems){
                 System.Console.WriteLine(k);
             }
+        }
+
+        private void toVoteDetail(object sender, SelectionChangedEventArgs e)
+        {
+            vote v = new vote();
+            v.AddBoard(this.board);
+            board.Push(v);
         }
     }
 }
