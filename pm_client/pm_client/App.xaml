@@ -1,0 +1,9 @@
+﻿<Application x:Class="pm_client.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:pm_client"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary Source="res/global_dictionary.xaml"/>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,112 @@
+﻿<Window x:Class="pm_client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pm_client"
+        mc:Ignorable="d"
+        Title="山东大学无纸化会议系统" 
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}" 
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}" 
+        ResizeMode="NoResize" WindowStyle="None" Left="0" IsTabStop="True" Top="0" Initialized="Window_Initialized">
+    <Window.Resources>
+        <Style x:Key="sidebar_txt" TargetType="TextBlock">
+            <Setter Property="Control.FontFamily" Value="DengXian"/>
+            <Setter Property="Control.FontSize" Value="32"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="container" Background="Black" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="343*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="168"/>
+            <ColumnDefinition Width="247*"/>
+            <ColumnDefinition Width="49*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2"  VerticalAlignment="Stretch"  Width="auto" Height="auto" HorizontalAlignment="Stretch" Background="{StaticResource sdu_red}" Orientation="Horizontal" >
+            <Button  Background="{x:Null}" Click="back" BorderThickness="0">
+                <Image Source="res/drawable/back_button.png" Margin="40,12"/>
+            </Button>
+            <TextBlock TextWrapping="Wrap" Text="TextBlock" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+            <StackPanel  
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     Background="{StaticResource sidebar_white}">
+                <RadioButton  x:Name="NoteBtn" 
+                          Style="{StaticResource side_button_1}" Click="toNote" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=NoteBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_note.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="笔记" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="VoteBtn" 
+                          Style="{StaticResource side_button_1}" 
+                          Click="toVote" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=VoteBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_vote.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="投票" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="RemoteBtn" 
+                          Style="{StaticResource side_button_1}" 
+                          Click="toRemote" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_remote.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="应用" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="FileBtn" 
+                          Style="{StaticResource side_button_1}" 
+                          Click="toFile" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=FileBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_file.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="文件" Style="{StaticResource sidebar_txt}" ></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+            <StackPanel  
+                     VerticalAlignment="Bottom" 
+                     HorizontalAlignment="Stretch" 
+                     Background="{StaticResource sidebar_white}">
+                
+                <RadioButton  x:Name="SettingsBtn" 
+                          Style="{StaticResource side_button_1}" 
+                              Background="{StaticResource sidebar_white}"
+
+                          Click="toSettings" >
+                    <StackPanel>
+                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
+                            BorderThickness="50,20" BorderBrush="White"  >
+                            <Image Source="res/drawable/o_setting.png" Width="70" ></Image>
+                        </Border>
+                        <TextBlock Text="设置" Style="{StaticResource sidebar_txt}" Foreground="#FF77899E"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="23:12" VerticalAlignment="Stretch" Background="{StaticResource sdu_red}" FontSize="64" Foreground="White"/>
+
+
+
+    </Grid>
+</Window>
