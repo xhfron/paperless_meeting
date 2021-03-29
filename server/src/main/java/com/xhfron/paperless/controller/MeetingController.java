@@ -49,8 +49,8 @@ public class MeetingController {
      * @apiSuccessExample 响应结果示例
      * {"code":200,"obj":{},"message":"ok"}
      */
-    @GetMapping("get")
-    Msg getMeetingList(){
+    @GetMapping("getMeetingList")
+    Msg getMeetingList(@RequestParam int type){
         return new Msg();
     }
 

@@ -1,0 +1,9 @@
+spring:
+  security:
+    user:
+      name: root
+      password: root
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/meeting
+    username: root
+    password: root

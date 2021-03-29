@@ -17,10 +17,6 @@ public class VoteController {
         return new Msg();
     }
 
-    @PostMapping("deviceVote")
-    Msg deviceVote(@RequestParam int voteId, @RequestParam int deviceId, @RequestParam int optionId){
-        return new Msg();
-    }
 
     @GetMapping("voteInfo")
     Msg voteInfo(@RequestParam int voteId){
