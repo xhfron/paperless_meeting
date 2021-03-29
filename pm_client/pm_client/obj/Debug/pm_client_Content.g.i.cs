@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/o_remote.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/remote.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("res/drawable/mp4test.mp4")]
 
 
