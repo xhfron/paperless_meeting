@@ -1,7 +1,7 @@
 {
-  "name": "example",
-  "version": "0.1.0",
-  "description": "apiDoc basic example",
-  "title": "Custom apiDoc browser title",
-  "url" : "https://api.github.com/v1"
+  "name": "Paperless",
+  "version": "1.0.0",
+  "description": "无纸化会议服务",
+  "url" : "http://192.168.0.1"
 }
+

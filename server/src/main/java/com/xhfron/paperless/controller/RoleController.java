@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class RoleController {
     /**
@@ -25,4 +27,14 @@ public class RoleController {
     Msg  addRole(@RequestParam String roleName){
         return new Msg();
     }
+
+    Msg filePermission(@RequestParam int roleId, @RequestParam List<Integer> files){
+        return new Msg();
+    }
+
+    Msg memberAdd(@RequestParam int roleId, @RequestParam List<Integer> deivces){
+        return new Msg();
+    }
+
+
 }
