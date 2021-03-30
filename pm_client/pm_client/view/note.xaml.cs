@@ -24,5 +24,43 @@ namespace pm_client.view
         {
             InitializeComponent();
         }
+
+        private void btnerase_Click(object sender, RoutedEventArgs e)
+        {
+            inkcanvas1.EditingMode = System.Windows.Controls.InkCanvasEditingMode.EraseByStroke;
+        }
+
+        private void rectred_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            inkcanvas1.DefaultDrawingAttributes.Color = System.Windows.Media.Colors.Red;
+        }
+
+        private void btndraw_Click(object sender, RoutedEventArgs e)
+        {
+            inkcanvas1.EditingMode = System.Windows.Controls.InkCanvasEditingMode.Ink;
+        }
+
+        private void rectgreen_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            inkcanvas1.DefaultDrawingAttributes.Color = System.Windows.Media.Colors.Green;
+        }
+
+        private void rectblue_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            inkcanvas1.DefaultDrawingAttributes.Color = System.Windows.Media.Colors.Blue;
+        }
+
+        private void rectyellow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            inkcanvas1.DefaultDrawingAttributes.Color = System.Windows.Media.Colors.Yellow;
+            ;
+        }
+
+        private void btnselection_Click(object sender, RoutedEventArgs e)
+        {
+            inkcanvas1.EditingMode = System.Windows.Controls.InkCanvasEditingMode.Select;
+        }
+
+
     }
 }

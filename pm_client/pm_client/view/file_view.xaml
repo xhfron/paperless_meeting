@@ -6,38 +6,50 @@
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1300">
+    
     <UserControl.Resources>
+        
         <ControlTemplate x:Key="FileListTemp" TargetType="{x:Type ListBoxItem}" >
             <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource sidebar_border}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
                     <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
-                    <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Text="MP4Test.mp4" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </Border>
         </ControlTemplate>
+        
         <Style x:Key="FileListStyle" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Control.Background" Value="{StaticResource sidebar_white}"/>
             <Setter Property="Template" Value="{StaticResource FileListTemp}"/>
         </Style>
         
     </UserControl.Resources>
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="61*"/>
-            <RowDefinition Height="389*"/>
-        </Grid.RowDefinitions>
-        <ListBox HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}">
 
-            <ListBoxItem>
-                <Border BorderThickness="0,0,0,2">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
-                        <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
-                        <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
-                    </StackPanel>
-                </Border>
-            </ListBoxItem>
-        </ListBox>
-        <TextBlock HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="会议文件" VerticalAlignment="Center" Style="{StaticResource title_64}" />
+    <Grid  x:Name="f_view">
+        
+        <Grid Background="White"  x:Name="f_sub_view">
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="61*"/>
+                <RowDefinition Height="389*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="file_title" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="会议文件" VerticalAlignment="Center" Style="{StaticResource title_64}" />
+
+            <ListBox x:Name="file_list" HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}">
+
+                <ListBoxItem x:Name="item1" PreviewMouseDown="item1_PreviewMouseDown">
+                    <Border BorderThickness="0,0,0,2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
+                            <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
+                            <TextBlock Text="MP4Test.mp4" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </ListBoxItem>
+
+            </ListBox>
+
+        </Grid>
+        
     </Grid>
 </UserControl>

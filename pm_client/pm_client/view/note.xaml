@@ -6,9 +6,32 @@
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Background="White" Text="前面的区域以后再来探索吧" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextAlignment="Center" FontSize="80" />
 
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Auto">
+            <InkCanvas x:Name="inkcanvas1" EditingMode="Ink" ClipToBounds="True"></InkCanvas>
+        </ScrollViewer>
+
+        <StackPanel Grid.Column="1" Background="Gray">
+            <TextBlock HorizontalAlignment="Center" FontSize="15">editing mode</TextBlock>
+            <Button x:Name="btnselection" Margin="5" Click="btnselection_Click" FontSize="15">selection</Button>
+            <Button x:Name="btndraw" Margin="5" Click="btndraw_Click" FontSize="15">draw</Button>
+            <Button x:Name="btnerase" Margin="5" Click="btnerase_Click" FontSize="15">erase</Button>
+
+            <TextBlock HorizontalAlignment="Center" FontSize="15">choss color:</TextBlock>
+            <Ellipse x:Name="rectred" Fill="Red" MinHeight="25" Margin="2.5" MouseDown="rectred_MouseDown"></Ellipse>
+            <Ellipse x:Name="rectgreen" Fill="Green" MinHeight="25" Margin="2.5" MouseDown="rectgreen_MouseDown"></Ellipse>
+            <Ellipse x:Name="rectblue" Fill="Blue" MinHeight="25" Margin="2.5" MouseDown="rectblue_MouseDown"></Ellipse>
+            <Ellipse x:Name="rectyellow" Fill="Yellow" MinHeight="25" Margin="2.5" MouseDown="rectyellow_MouseDown"></Ellipse>
+        </StackPanel>
 
     </Grid>
+
+
 </UserControl>
