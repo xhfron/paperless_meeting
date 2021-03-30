@@ -9,37 +9,60 @@ import org.springframework.web.bind.annotation.RestController;
 public class VoteController {
 
     /**
-     * @api {POST} /getVoteList getVoteList
+     * @api {POST} /vote/getVoteList getVoteList
      * @apiVersion 1.0.0
-     * @apiGroup VoteController
+     * @apiGroup Vote
      * @apiName getVoteList
      * @apiParam (请求参数) {Number} deviceId
+     * @apiParam {Number} meetingId
      * @apiParamExample 请求参数示例
-     * deviceId=7725
+     * {
+     *     "deviceId":1,
+     *     "meetingId":2
+     * }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":7749,"obj":{},"message":"tqSCJQW"}
+     * {"code":200,"message":"ok","obj":{
+     *     "voteList":[
+     *      {
+     *          "id":1,
+     *          "name":"eat or not!"
+     *          "meetingId":2
+     *      }
+     * }}
      */
     @PostMapping("getVoteList")
-    Msg getVoteList(@RequestParam int deviceId){
+    Msg getVoteList(@RequestParam int deviceId, int meetingId){
         return  new Msg();
     }
 
+
+
     /**
-     * @api {POST} /getVoteInfo getVoteInfo
+     * @api {POST} /vote/getVoteInfo getVoteInfo
      * @apiVersion 1.0.0
-     * @apiGroup VoteController
+     * @apiGroup Vote
      * @apiName getVoteInfo
      * @apiParam (请求参数) {Number} voteId
      * @apiParamExample 请求参数示例
-     * voteId=355
+     * {
+     *     "voteId":2
+     * }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":9506,"obj":{},"message":"K"}
+     * {"code":200,"message":"ok","obj":{
+     *     "id":2,
+     *     "name":"eat ot not",
+     *     "content":"something about voting",
+     *     "type":1,
+     *     "anonymous":1,
+     *     "meetingId":23,
+     *     "options":[{"id":2,"content":"food"}]
+     * }}
      */
     @PostMapping("getVoteInfo")
     Msg getVoteInfo(@RequestParam int voteId){
@@ -47,20 +70,24 @@ public class VoteController {
     }
 
     /**
-     * @api {POST} /submitOptions submitOption
+     * @api {POST} /vote/submitOptions submitOption
      * @apiVersion 1.0.0
-     * @apiGroup VoteController
+     * @apiGroup Vote
      * @apiName submitOption
      * @apiParam (请求参数) {Number} voteId
      * @apiParam (请求参数) {Number} optionId
      * @apiParam (请求参数) {Number} deviceId
      * @apiParamExample 请求参数示例
-     * optionId=4086&voteId=1464&deviceId=6886
+     * {
+     *     "optionId":1,
+     *     "voteId":4008,
+     *     "deviceId":2
+     * }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":4076,"obj":{},"message":"vKp"}
+     * {"code":200,"message":"ok","obj":{}}
      */
     @PostMapping("submitOptions")
     Msg submitOption(@RequestParam int voteId, @RequestParam int optionId, @RequestParam int deviceId){

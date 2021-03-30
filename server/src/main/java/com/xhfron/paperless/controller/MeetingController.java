@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 public class MeetingController {
 
     /**
-     * @api {POST} /info info
+     * @api {POST} /meeting/info info
      * @apiVersion 1.0.0
-     * @apiGroup MeetingController
+     * @apiGroup Meeting
      * @apiName info
      * @apiParam (请求参数) {Number} meetingId
      * @apiParamExample 请求参数示例

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class FileController {
 
     /**
-     * @api {POST} /getFileList getFileList
+     * @api {POST} /file/getFileList getFileList
      * @apiVersion 1.0.0
      * @apiGroup File
      * @apiName getFileList
@@ -29,7 +29,7 @@ public class FileController {
 
 
     /**
-     * @api {POST} /download downloadFile
+     * @api {POST} /file/download downloadFile
      * @apiVersion 1.0.0
      * @apiGroup File
      * @apiName downloadFile
