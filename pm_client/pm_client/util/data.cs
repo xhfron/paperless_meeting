@@ -241,7 +241,89 @@ namespace pm_client.util
         }
     }
 
+    class BtnData : INotifyPropertyChanged
+    {
+        static Random r = new Random();
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
+        }
 
+        private string text;
+        public string Text
+        {
+            get
+            {
+                return text;
+            }
+            set
+            {
+                text = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Text"));
+            }
+        }
+
+        private string picdefault;
+        public string picDefault
+        {
+            get
+            {
+                return picdefault;
+            }
+            set
+            {
+                picdefault = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("picDefault"));
+            }
+        }
+
+        private string picchecked;
+        public string picChecked
+        {
+            get
+            {
+                return picchecked;
+            }
+            set
+            {
+                picchecked = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("picChecked"));
+            }
+        }
+
+        private string piccurrent;
+        public string picCurrent
+        {
+            get
+            {
+                return piccurrent;
+            }
+            set
+            {
+                piccurrent = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("picCurrent"));
+            }
+        }
+
+        public static BtnData mock()
+        {
+            BtnData res = new BtnData();
+
+
+            res.Text = "Text_" + r.Next();
+
+            res.picDefault = "picDefault_" + r.Next();
+
+            res.picChecked = "picChecked_" + r.Next();
+
+            res.picCurrent = "picCurrent_" + r.Next();
+            return res;
+        }
+    }
     class VoteChoiceResult : INotifyPropertyChanged
     {
         static Random r = new Random();

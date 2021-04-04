@@ -130,7 +130,13 @@
             <ColumnDefinition Width="145*"/>
             <ColumnDefinition Width="214*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" VerticalAlignment="Center"  Style="{StaticResource title_64}" Height="68" Margin="40,24,0,24" Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
+        <TextBlock 
+            TextWrapping="Wrap" 
+            Margin="32,40,0,40"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+            Style="{StaticResource title_64}"
+            Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
         <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"   FontFamily="DengXian" FontSize="48" Margin="0,41"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >

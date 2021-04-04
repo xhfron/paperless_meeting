@@ -3,6 +3,8 @@ using pm_client.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -69,43 +72,44 @@ namespace pm_client
             Grid.SetZIndex(newView, 1288);
             g.Children.Add(newView);
         }
-        
-        private void toFile(object sender,RoutedEventArgs e)
+        RadioButton lastOne;
+
+        private void toFile(object sender, RoutedEventArgs e)
         {
-            replaceBy( ui["file"]);
+            (FindName("SettingsBtn") as RadioButton).IsChecked = false;
+            
+            replaceBy(ui["file"]);
         }
         private void toSettings(object sender, RoutedEventArgs e)
         {
-            replaceBy( ui["settings"]);
+            (FindName("RemoteBtn") as RadioButton).IsChecked = false;
+            (FindName("FileBtn") as RadioButton).IsChecked = false;
+            (FindName("VoteBtn") as RadioButton).IsChecked = false;
+            (FindName("NoteBtn") as RadioButton).IsChecked = false;
+            replaceBy(ui["settings"]);
         }
         private void toVote(object sender, RoutedEventArgs e)
         {
-            replaceBy( ui["vote"]);
+            (FindName("SettingsBtn") as RadioButton).IsChecked = false;
+            replaceBy(ui["vote"]);
         }
         private void toNote(object sender, RoutedEventArgs e)
         {
-            replaceBy( ui["note"]);
+            (FindName("SettingsBtn") as RadioButton).IsChecked = false;
+            replaceBy(ui["note"]);
         }
         private void toRemote(object sender, RoutedEventArgs e)
         {
-            replaceBy( ui["remote"]);
+            (FindName("SettingsBtn") as RadioButton).IsChecked = false;
+            replaceBy(ui["remote"]);
         }
-        private void back(object sender, RoutedEventArgs e)
-        {
-            if (current.Count >= 2)
-            {
-                removeFromShowing();
-                current.Pop();
-                addToShow(current.Peek());
-            }
-            
-        }
+       
         private void replaceBy(Stack<UserControl> next)
         {
             removeFromShowing();
             current = next;
             addToShow(next.Peek());
-            
+
         }
         private void removeFromShowing()
         {
@@ -124,11 +128,7 @@ namespace pm_client
             g.Children.Add(newView);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Environment.Exit(0);
-        }
-
+       
         private void Window_Initialized(object sender, EventArgs e)
         {
             ui.Add("file", new Stack<UserControl>());
@@ -151,6 +151,18 @@ namespace pm_client
             ui["remote"].Push(new view.remote());
 
             replaceBy(ui["file"]);
+
+
+        }
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            System.Console.WriteLine("hello");
+            if (msg == 0x0400 + 7)
+            {
+                int proId = lParam.ToInt32();
+                System.Console.WriteLine("" + proId + ":started");
+            }
+            return IntPtr.Zero;
         }
 
         public void Push(UserControl newView)
@@ -158,6 +170,21 @@ namespace pm_client
             removeFromShowing();
             current.Push(newView);
             addToShow(newView);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           //you never got where it crashed
+        }
+
+        private void back(object sender, TouchEventArgs e)
+        {
+            if (current.Count >= 2)
+            {
+                removeFromShowing();
+                current.Pop();
+                addToShow(current.Peek());
+            }
         }
     }
 }

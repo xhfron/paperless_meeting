@@ -84,9 +84,12 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-        <ControlTemplate x:Key="VoteListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
+        <ControlTemplate x:Key="VoteListBoxItemTemp" 
+                         TargetType="{x:Type ListBoxItem}" >
             <!--nmd wsm,加TargetType才有效？？？-->
-            <Border Margin="0" BorderBrush="{StaticResource sidebar_border}">
+            <Border 
+                Margin="0,0,0,45" 
+                BorderBrush="{StaticResource sidebar_border}">
 
                 <CheckBox  Style="{StaticResource choice2}" 
                            Template="{DynamicResource choice}" 
@@ -94,7 +97,7 @@
                            IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" 
                            Margin="40,0,0,25"
                            Foreground="{StaticResource font_black}">
-                    <ContentPresenter></ContentPresenter>
+                    <ContentPresenter Margin="36,0,0,0"></ContentPresenter>
                 </CheckBox>
             </Border>
         </ControlTemplate>
@@ -108,11 +111,12 @@
 
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="244*"/>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="37*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="206*"/>
+            <RowDefinition Height="629*"/>
+            <RowDefinition Height="113*"/>
+            <RowDefinition Height="95*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="93*"/>
@@ -121,36 +125,75 @@
             <ColumnDefinition Width="145*"/>
             <ColumnDefinition Width="214*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Stretch"      TextWrapping="Wrap" VerticalAlignment="Center"  Style="{StaticResource title_64}" Height="68" Margin="40,24,0,24" Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
-        <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"   FontFamily="DengXian" FontSize="48" Margin="0,41"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
-            <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}" Margin="40,40,0,0"/>
+        <StackPanel Grid.ColumnSpan="3" 
+                    Orientation="Horizontal"
+                    Background="Transparent" 
+                    Grid.RowSpan="1">
+            <TextBlock 
+                   TextWrapping="Wrap" 
+                   Style="{StaticResource title_64}" 
+                    Padding="32,40,0,40"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Text="早饭吃什么"
+                    Background="Transparent"></TextBlock>
+        </StackPanel>
+            <TextBlock HorizontalAlignment="Left" 
+                       Style="{StaticResource title_40}"  
+                       Text="匿名投票"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       VerticalAlignment="Bottom"
+                       Background="Transparent"
+                       Padding="32,40,0,0">
+                
+            </TextBlock>
+
+
+        <TextBlock Grid.Column="4" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"   
+                   FontFamily="DengXian" 
+                   FontSize="48" 
+                   Margin="0,25,-66,18.5" FontWeight="Bold"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
+        <ScrollViewer 
+            VerticalScrollBarVisibility="Auto" 
+            HorizontalAlignment="Stretch"   
+            Grid.Row="2"  
+            VerticalAlignment="Stretch" 
+            Grid.ColumnSpan="4"    
+            Padding="160,40,0,0">
+            <TextBlock 
+                TextWrapping="Wrap" 
+                Text="what the hell" 
+                Padding="0"
+                Style="{StaticResource title_48}" Margin="0" 
+                />
         </ScrollViewer>
 
-        <ListBox Grid.Row="2" 
+        <ListBox Grid.Row="3" 
                  Grid.Column="0" 
                  Grid.ColumnSpan="4" 
                  SelectionMode="Multiple" 
-                 ItemsSource="{Binding Choices}"  
+                 ItemsSource="{Binding Choices}" 
+                 Margin="40,40,0,0"
                  ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
                  BorderThickness="0">
         </ListBox>
         <Button Content="开始投票" 
                 HorizontalAlignment="Center"  
-                Grid.Row="3" 
+                Grid.Row="4" 
                 VerticalAlignment="Center"    
                 Grid.Column="3"  
                 Style="{StaticResource ResourceKey=normal_btn}" 
-                Click="Button_Click" 
                 BorderThickness="0" 
                 Height="95" 
                 Width="300" 
-                Grid.ColumnSpan="2"  />
-        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2"  >
-            <CheckBox Style="{StaticResource title_48}" Template="{StaticResource choice}" >倒计时：</CheckBox>
-            <TextBox Style="{StaticResource title_48}" Width="150"></TextBox>
-            <TextBlock Style="{StaticResource title_48}">s</TextBlock>
+                Grid.ColumnSpan="2" TouchUp="Button_Click" Margin="29,10,30,10"  />
+        <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="4" VerticalAlignment="Top" Grid.ColumnSpan="2"  >
+            <CheckBox Style="{StaticResource title_48}" Template="{StaticResource choice}" FontFamily="DengXian" >倒计时：</CheckBox>
+            <TextBox Style="{StaticResource title_48}" Width="150" Margin="0"></TextBox>
+            <TextBlock Style="{StaticResource title_48}" FontFamily="DengXian" Margin="4,0,0,0">s</TextBlock>
         </StackPanel>
 
     </Grid>

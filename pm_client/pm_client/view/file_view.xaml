@@ -8,10 +8,20 @@
              d:DesignHeight="800" d:DesignWidth="1300">
     <UserControl.Resources>
         <ControlTemplate x:Key="FileListTemp" TargetType="{x:Type ListBoxItem}" >
-            <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource sidebar_border}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
-                    <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
-                    <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+            <Border BorderThickness="0,0,0,2" 
+                    BorderBrush="{StaticResource sidebar_border}">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Stretch" 
+                            Background="{StaticResource sidebar_white}"
+                            Margin="0,36">
+                    <Image Source="/res/drawable/note.png" 
+                           Margin="20,0,0,0"
+                           Width="37" 
+                           Height="37"></Image>
+                    <TextBlock Text="hi" 
+                               Style="{StaticResource title_48}" 
+                               VerticalAlignment="Center"
+                               Padding="40,0,0,0"></TextBlock>
                 </StackPanel>
             </Border>
         </ControlTemplate>
@@ -19,25 +29,49 @@
             <Setter Property="Control.Background" Value="{StaticResource sidebar_white}"/>
             <Setter Property="Template" Value="{StaticResource FileListTemp}"/>
         </Style>
-        
+
     </UserControl.Resources>
     <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="104"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="61*"/>
-            <RowDefinition Height="389*"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListBox HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}">
+        <ListBox HorizontalAlignment="Stretch"   
+                 Grid.Row="1" 
+                 Background="{StaticResource sidebar_white}"
+                 VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}" Grid.ColumnSpan="2">
 
             <ListBoxItem>
-                <Border BorderThickness="0,0,0,2">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
-                        <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
-                        <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+                <Border BorderThickness="0,0,0,2"
+                        Background="{StaticResource sidebar_border}">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch" 
+                                 Margin="0,36"
+                                >
+                        <Image Source="/res/drawable/note.png" Margin="20,0,0,0" Width="37" Height="37"></Image>
+                        <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center" Padding="40,0,0,0"></TextBlock>
                     </StackPanel>
                 </Border>
             </ListBoxItem>
         </ListBox>
-        <TextBlock HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="会议文件" VerticalAlignment="Center" Style="{StaticResource title_64}" />
+        <TextBlock 
+            HorizontalAlignment="Stretch"
+            TextWrapping="Wrap"
+            Margin="32,0,0,0"
+            Text="会议文件"
+            VerticalAlignment="Top" 
+            Style="{StaticResource title_64}" Grid.ColumnSpan="2" Padding="0,40,40,0" />
+        <Image 
+            x:Name="loadingImg"
+            Source="res/drawable/loading.jpg"
+            Width="70"
+            Height="70"
+            Grid.Column="1">
 
+        </Image>
     </Grid>
 </UserControl>

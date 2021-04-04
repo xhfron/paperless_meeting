@@ -24,6 +24,11 @@ namespace pm_client.view
     {
         InitializeComponent();
     }
-}
+
+        private void exit(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+    }
      
 }
