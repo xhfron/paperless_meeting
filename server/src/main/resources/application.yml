@@ -1,5 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql:/127.0.0.1:3306/meeting
+    url: jdbc:mysql://127.0.0.1:3306/meeting
     username: root
     password: root
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

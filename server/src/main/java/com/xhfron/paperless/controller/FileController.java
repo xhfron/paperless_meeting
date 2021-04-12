@@ -1,10 +1,14 @@
 package com.xhfron.paperless.controller;
 
 import com.xhfron.paperless.bean.Msg;
+import com.xhfron.paperless.service.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class FileController {
+    @Autowired
+    private FileService fileService;
 
     /**
      * @api {POST} /file/getFileList getFileList
@@ -23,10 +27,9 @@ public class FileController {
      * {"code":200,"message":"ok","obj":{"fileList":[{"id":1,"name":"1.pdf","address":"meeting1/1.pdf"}]}}
      */
     @PostMapping("getFileList")
-    Msg getFileList(@RequestParam int meetingId, int roleId){
-        return new Msg();
+    Msg getFileList(@RequestParam int meetingId, int roleId) {
+        return new Msg(200, "ok", fileService.getFileList(roleId, meetingId));
     }
-
 
     /**
      * @api {POST} /file/download downloadFile
@@ -34,14 +37,14 @@ public class FileController {
      * @apiGroup File
      * @apiName downloadFile
      * @apiDescription 文件下载
-     * @apiParam  {Number} fileId
+     * @apiParam {Number} fileId
      * @apiParamExample 请求参数示例
      * {
-     *     "fileId":"209"
+     * "fileId":"209"
      * }
      */
     @PostMapping("download")
-    Msg downloadFile(@RequestParam int fileId){
+    Msg downloadFile(@RequestParam int fileId) {
         return new Msg();
     }
 

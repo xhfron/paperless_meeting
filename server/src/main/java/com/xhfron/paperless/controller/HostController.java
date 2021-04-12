@@ -1,12 +1,18 @@
 package com.xhfron.paperless.controller;
 
 import com.xhfron.paperless.bean.Msg;
+import com.xhfron.paperless.bean.State;
+import com.xhfron.paperless.bean.VoteResultVO;
+import com.xhfron.paperless.service.HostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("host")
 public class HostController {
+    @Autowired
+    private HostService hostService;
     /**
      * @api {POST} /host/beginMeeting beginMeeting
      * @apiVersion 1.0.0
@@ -25,7 +31,10 @@ public class HostController {
      */
     @PostMapping("beginMeeting")
     Msg beginMeeting(int meetingId) {
-        return new Msg();
+        if(hostService.startMeeting(meetingId)){
+            return new Msg(200,"ok",null);
+        }
+        return new Msg(200, "something wrong, please reboot system",null);
     }
 
     /**
@@ -46,7 +55,10 @@ public class HostController {
      */
     @PostMapping("beginVote")
     Msg beginVote(@RequestParam int voteId) {
-        return new Msg();
+        if(hostService.startVote(voteId)){
+            return new Msg(200,"ok",null);
+        }
+        return new Msg(200, "something wrong, please reboot system",null);
     }
 
     /**
@@ -67,7 +79,8 @@ public class HostController {
      */
     @PostMapping("programLimit")
     Msg programLimit(@RequestParam int mode) {
-        return new Msg();
+        State state = hostService.changeMode(mode);
+        return new Msg(200,"ok",state);
     }
 
     /**
@@ -86,6 +99,6 @@ public class HostController {
      */
     @PostMapping("getVoteRes")
     Msg getVoteRes(@RequestParam int voteId) {
-        return new Msg();
+        return hostService.getVoteRes(voteId);
     }
 }

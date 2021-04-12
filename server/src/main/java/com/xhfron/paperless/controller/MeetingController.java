@@ -1,12 +1,19 @@
 package com.xhfron.paperless.controller;
 
+import com.xhfron.paperless.bean.MeetingDO;
+import com.xhfron.paperless.bean.MeetingVO;
 import com.xhfron.paperless.bean.Msg;
+import com.xhfron.paperless.dao.MeetingDao;
+import com.xhfron.paperless.service.MeetingService;
 import org.apache.ibatis.ognl.ObjectElementsAccessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("meeting")
 public class MeetingController {
 
+    @Autowired
+    private MeetingService meetingService;
     /**
      * @api {POST} /meeting/info info
      * @apiVersion 1.0.0
@@ -41,6 +48,10 @@ public class MeetingController {
      */
     @PostMapping(value = "/info")
     Msg info(@RequestParam int meetingId, int deviceId){
-        return new Msg();
+        MeetingVO meetingVO = meetingService.getMeetingInfo(meetingId, deviceId);
+        if(meetingVO==null){
+            return new Msg(200,"会议不存在",null);
+        }
+        return new Msg(200,"ok",meetingVO);
     }
 }

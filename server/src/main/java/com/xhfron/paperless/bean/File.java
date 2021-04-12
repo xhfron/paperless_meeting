@@ -3,27 +3,20 @@ package com.xhfron.paperless.bean;
 import org.springframework.context.annotation.Bean;
 
 
-public class FileVO {
+public class File {
     int id;
     String name;
     String address;
 
-    public FileVO() {
+    public File() {
     }
 
-    public FileVO(int id, String name, String address) {
+    public File(int id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

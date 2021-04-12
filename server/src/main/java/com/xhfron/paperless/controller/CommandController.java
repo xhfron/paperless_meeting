@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Controller
 public class CommandController {
 
-    @MessageMapping("cmd")
+    @MessageMapping("/cmd")
     @SendTo("/cmdQueue")
     Command sendCommand(Command cmd){
         return new Command(cmd);
