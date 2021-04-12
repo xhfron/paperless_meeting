@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid MouseWheel="Grid_MouseWheel">
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -58,11 +58,11 @@
             </StatusBarItem>
 
             <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
-                <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" />
+                <Slider Name="sliProgress" IsMoveToPointEnabled="True" Thumb.DragStarted="sliProgress_DragStarted" Thumb.DragCompleted="sliProgress_DragCompleted" PreviewMouseDown="sliProgress_PreviewMouseDown" PreviewMouseUp="sliProgress_PreviewMouseUp" ValueChanged="sliProgress_ValueChanged"/>
             </StatusBarItem>
 
             <StatusBarItem Grid.Column="2">
-                <ProgressBar Name="pbVolume" Width="50" Height="12" Maximum="1" Value="{Binding ElementName=mePlayer, Path=Volume}" />
+                <TextBlock Name="totalTimeView">00:00:00</TextBlock>
             </StatusBarItem>
 
         </StatusBar>

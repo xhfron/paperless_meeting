@@ -9,6 +9,7 @@
     
     <UserControl.Resources>
         
+        <!--
         <ControlTemplate x:Key="FileListTemp" TargetType="{x:Type ListBoxItem}" >
             <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource sidebar_border}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
@@ -17,10 +18,13 @@
                 </StackPanel>
             </Border>
         </ControlTemplate>
+        -->
         
         <Style x:Key="FileListStyle" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Control.Background" Value="{StaticResource sidebar_white}"/>
+            <!--
             <Setter Property="Template" Value="{StaticResource FileListTemp}"/>
+            -->
         </Style>
         
     </UserControl.Resources>
@@ -46,6 +50,16 @@
                         </StackPanel>
                     </Border>
                 </ListBoxItem>
+
+                <ListBoxItem x:Name="item2" PreviewMouseDown="item2_PreviewMouseDown">
+                    <Border BorderThickness="0,0,0,2">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
+                            <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
+                            <TextBlock Text="PDFTest.pdf" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                </ListBoxItem>
+
 
             </ListBox>
 
