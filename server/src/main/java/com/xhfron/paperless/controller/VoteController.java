@@ -5,12 +5,14 @@ import com.xhfron.paperless.bean.VoteVO;
 import com.xhfron.paperless.service.VoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("vote")
+@RestController()
+@RequestMapping("vote")
 public class VoteController {
     @Autowired
     private VoteService voteService;

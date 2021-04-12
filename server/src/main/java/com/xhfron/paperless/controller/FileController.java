@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("file")
 public class FileController {
     @Autowired
     private FileService fileService;
@@ -24,7 +25,8 @@ public class FileController {
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":200,"message":"ok","obj":{"fileList":[{"id":1,"name":"1.pdf","address":"meeting1/1.pdf"}]}}
+     * {"code":200,"message":"ok","obj":[{"name":"typora-setup-x64.exe","address":"C:\\Files\\13\\typora-setup-x64.exe"},
+     * {"name":"VSCodeUserSetup-x64-1.51.1.exe","address":"13\\VSCodeUserSetup-x64-1.51.1.exe"}]}
      */
     @PostMapping("getFileList")
     Msg getFileList(@RequestParam int meetingId, int roleId) {

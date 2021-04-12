@@ -5,11 +5,10 @@ import com.xhfron.paperless.bean.State;
 import com.xhfron.paperless.bean.VoteResultVO;
 import com.xhfron.paperless.service.HostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("host")
+@RestController()
+@RequestMapping("host")
 public class HostController {
     @Autowired
     private HostService hostService;
@@ -27,7 +26,7 @@ public class HostController {
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":200,"message":"ok","obj":{}}
+     * {"code":200,"message":"ok","obj":null}
      */
     @PostMapping("beginMeeting")
     Msg beginMeeting(int meetingId) {
@@ -95,7 +94,7 @@ public class HostController {
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
-     * {"code":200,"message":"ok","obj":{"voteId":2,"res" : [{"optionId":1,"number":2,"devices":["sdu1", "sdu2"]}]}}
+     * {"code":200,"message":"ok","obj":{"voteId":1,"res":[{"optionId":1,"number":1,"devices":["SDUPAD1（doge)"]},{"optionId":2,"number":1,"devices":["SDUPAD1（doge)"]},{"optionId":3,"number":0,"devices":[]}]}}
      */
     @PostMapping("getVoteRes")
     Msg getVoteRes(@RequestParam int voteId) {

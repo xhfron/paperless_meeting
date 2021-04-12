@@ -9,7 +9,8 @@ import org.apache.ibatis.ognl.ObjectElementsAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("meeting")
+@RestController()
+@RequestMapping("meeting")
 public class MeetingController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class MeetingController {
      * @apiParam (请求参数) {Number} meetingId
      * @apiParamExample 请求参数示例
      *  {
-     *      "meetingId":22
+     *      "meetingId":1
      *  }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
@@ -37,7 +38,7 @@ public class MeetingController {
      *         "content":"会议简介",
      *         "beginTime":"2021-08-08 22:00",
      *         "endTime":"2021-08-08 22:00",
-     *         "deviceId":22,
+     *         "deviceId":1,
      *         "role":{
      *             "id":1,
      *             "name":"主持人"
@@ -46,8 +47,8 @@ public class MeetingController {
      *
      * }
      */
-    @PostMapping(value = "/info")
-    Msg info(@RequestParam int meetingId, int deviceId){
+    @PostMapping(value = "info")
+    Msg info(@RequestParam int meetingId,@RequestParam int deviceId){
         MeetingVO meetingVO = meetingService.getMeetingInfo(meetingId, deviceId);
         if(meetingVO==null){
             return new Msg(200,"会议不存在",null);
