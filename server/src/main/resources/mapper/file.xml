@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhfron.paperless.dao.FileDao">
+    <insert id="createFileRecord" parameterType="com.xhfron.paperless.bean.FileDO"
+            keyProperty="uid" useGeneratedKeys="true">
+        insert into `file`
+        (`uid`, `name`, `address`, `meeting_id`)
+        values(uid, #{name}, #{address}, #{meetingId})
+    </insert>
+
+    <select id="getFilesByMeetingId" resultType="com.xhfron.paperless.bean.FileDO">
+        select * from file where `meeting_id` = #{meetingId}
+    </select>
+
+</mapper>

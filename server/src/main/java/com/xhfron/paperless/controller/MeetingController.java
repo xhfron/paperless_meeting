@@ -1,14 +1,20 @@
 package com.xhfron.paperless.controller;
 
+import com.xhfron.paperless.bean.MeetingDO;
 import com.xhfron.paperless.bean.Msg;
+import com.xhfron.paperless.service.MeetingService;
 import org.apache.ibatis.ognl.ObjectElementsAccessor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.*;
 import reactor.util.annotation.NonNull;
 
-@RestController("meeting")
+@RestController
+@RequestMapping("/meeting")
 public class MeetingController {
 
+    @Autowired
+    private MeetingService meetingService;
 
     /**
      * @api {POST} /meeting/create createMeeting
@@ -33,13 +39,13 @@ public class MeetingController {
                       @RequestParam String content,
                       @RequestParam String beginTime,
                       @RequestParam String endTime){
-
-        return new Msg();
+        MeetingDO meetingData = new MeetingDO(title, content, beginTime, endTime);
+        return meetingService.createMeeting(meetingData);
     }
 
 
     /**
-     * @api {GET} /meeting/get getMeetingList
+     * @api {GET} /meeting/get getMeetingList 本接口尝试按照会议是否结束进行区分，故暂时搁置
      * @apiVersion 1.0.0
      * @apiGroup Meeting
      * @apiName getMeetingList
