@@ -1,5 +1,6 @@
 package com.xhfron.paperless.service;
 
+import com.xhfron.paperless.bean.Command;
 import com.xhfron.paperless.bean.Msg;
 import com.xhfron.paperless.bean.Option;
 import com.xhfron.paperless.bean.State;
@@ -18,26 +19,27 @@ public class HostService {
     @Autowired
     private SimpMessageSendingOperations simpMessageSendingOperations;
 
-    public String sendMessage(String message){
-        simpMessageSendingOperations.convertAndSend("/cmdQueue", message);
-        return message;
+    public void sendMessage(Command cmd){
+        simpMessageSendingOperations.convertAndSend("/topic/cmd", cmd);
     }
 
     public boolean startMeeting(int meetingId){
-        sendMessage("aaaaa");
+        sendMessage(new Command(0,"开始会议id: "+meetingId));
         return true;
     }
 
     public boolean startVote(int voteId){
-        return  true;
+        sendMessage(new Command(4,"开始投票id: "+voteId));
+        return true;
     }
 
     public State changeMode(int mode){
         if(mode==0){
             state.setState("open");
-
+            sendMessage(new Command(1,"腾讯会议开启"));
         }else{
             state.setState("close");
+            sendMessage(new Command(2,"腾讯会议关闭"));
         }
         return state;
     }
@@ -45,7 +47,6 @@ public class HostService {
     public Msg getVoteRes(int voteId){
         //倒计时再说
         return new Msg(200,"ok",voteService.getResultByVoteId(voteId));
-
     }
 
 }

@@ -12,6 +12,11 @@ public class Command {
         this.cmd = cmd.cmd;
     }
 
+    public Command(int code, String cmd) {
+        this.cmd = cmd;
+        this.code = code;
+    }
+
     public String getCmd() {
         return cmd;
     }
