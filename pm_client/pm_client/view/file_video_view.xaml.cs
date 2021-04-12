@@ -23,16 +23,21 @@ namespace pm_client.view
     public partial class file_video_view : UserControl
     {
 
+		private string filepath;
 		private Grid f_view;
 		private Grid f_sub_view;
+
+
 		private bool mediaPlayerIsPlaying = false;
-		private bool userIsDraggingSlider = false;
+		private bool userIsDraggingSlider = false;//是否正在拖动滑块
+		private bool userIsClickingSlider = false;//是否正在点击进度条
 
 
-		public file_video_view(Grid f_view, Grid f_sub_view)
+		public file_video_view(string filepath, Grid f_view, Grid f_sub_view)
 		{
 			InitializeComponent();
 
+			this.filepath = filepath;
 			this.f_view = f_view;
 			this.f_sub_view = f_sub_view;
 
@@ -45,21 +50,26 @@ namespace pm_client.view
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
-			if ((mePlayer.Source != null) && (mePlayer.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider))
+			if ((mePlayer.Source != null) && (mePlayer.NaturalDuration.HasTimeSpan) && (!userIsDraggingSlider) && (!userIsClickingSlider))
 			{
+
+				//设置进度条的最大值和最小值
 				sliProgress.Minimum = 0;
 				sliProgress.Maximum = mePlayer.NaturalDuration.TimeSpan.TotalSeconds;
+
+				//显示视频的总时间
+				totalTimeView.Text = TimeSpan.FromSeconds(sliProgress.Maximum).ToString(@"hh\:mm\:ss");
+
 				sliProgress.Value = mePlayer.Position.TotalSeconds;
+
 			}
 		}
 
 		private void mePlayer_Loaded(object sender, RoutedEventArgs e)
 		{
 
-			string path = AppDomain.CurrentDomain.BaseDirectory;
-			string rootpath = path.Substring(0, path.LastIndexOf("bin"));
-
-			mePlayer.Source = new Uri(rootpath + "res\\drawable\\MP4Test.mp4");
+			//开始播放视频
+			mePlayer.Source = new Uri(filepath);
 
 			mePlayer.Play();
 
@@ -99,26 +109,34 @@ namespace pm_client.view
 
 		private void sliProgress_DragCompleted(object sender, DragCompletedEventArgs e)
 		{
+			//拖动进度条改变播放进度
 			userIsDraggingSlider = false;
 			mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
 		}
 
+
+
+		private void sliProgress_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+		{
+			userIsClickingSlider = true;
+		}
+
+		private void sliProgress_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			//点击进度条改变播放进度	
+			userIsClickingSlider = false;
+			mePlayer.Position = TimeSpan.FromSeconds(sliProgress.Value);
+		}
+
+
+
 		private void sliProgress_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
+			//显示的时间随着进度条的改变而改变
 			lblProgressStatus.Text = TimeSpan.FromSeconds(sliProgress.Value).ToString(@"hh\:mm\:ss");
 		}
 
 
-
-		private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
-		{
-			mePlayer.Volume += (e.Delta > 0) ? 0.1 : -0.1;
-		}
-
-
-
-
-        
 
         
     }
