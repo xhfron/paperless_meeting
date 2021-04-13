@@ -1,6 +1,34 @@
 define({ "api": [
   {
-    "type": "POST",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "../src/main/java/doc/main.js",
+    "group": "/mnt/d/study/projectTrain/paperless_meeting/server/src/main/java/doc/main.js",
+    "groupTitle": "/mnt/d/study/projectTrain/paperless_meeting/server/src/main/java/doc/main.js",
+    "name": ""
+  },
+  {
+    "type": "GET",
     "url": "/file/download",
     "title": "downloadFile",
     "version": "1.0.0",
@@ -22,12 +50,12 @@ define({ "api": [
       "examples": [
         {
           "title": "请求参数示例",
-          "content": "{\n    \"fileId\":\"209\"\n}",
+          "content": "{\n\"fileId\":\"209\"\n}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/FileController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/FileController.java",
     "groupTitle": "File"
   },
   {
@@ -94,12 +122,12 @@ define({ "api": [
       "examples": [
         {
           "title": "响应结果示例",
-          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\"fileList\":[{\"id\":1,\"name\":\"1.pdf\",\"address\":\"meeting1/1.pdf\"}]}}",
+          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":[{\"name\":\"typora-setup-x64.exe\",\"address\":\"C:\\\\Files\\\\13\\\\typora-setup-x64.exe\"},\n{\"name\":\"VSCodeUserSetup-x64-1.51.1.exe\",\"address\":\"13\\\\VSCodeUserSetup-x64-1.51.1.exe\"}]}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/FileController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/FileController.java",
     "groupTitle": "File"
   },
   {
@@ -158,12 +186,12 @@ define({ "api": [
       "examples": [
         {
           "title": "响应结果示例",
-          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{}}",
+          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":null}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/HostController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/HostController.java",
     "groupTitle": "Host"
   },
   {
@@ -227,7 +255,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "../paperless/controller/HostController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/HostController.java",
     "groupTitle": "Host"
   },
   {
@@ -286,12 +314,12 @@ define({ "api": [
       "examples": [
         {
           "title": "响应结果示例",
-          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\"voteId\":2,\"res\" : [{\"optionId\":1,\"number\":2,\"devices\":[\"sdu1\", \"sdu2\"]}]}}",
+          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\"voteId\":1,\"res\":[{\"optionId\":1,\"number\":1,\"devices\":[\"SDUPAD1（doge)\"]},{\"optionId\":2,\"number\":1,\"devices\":[\"SDUPAD1（doge)\"]},{\"optionId\":3,\"number\":0,\"devices\":[]}]}}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/HostController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/HostController.java",
     "groupTitle": "Host"
   },
   {
@@ -355,7 +383,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "../paperless/controller/HostController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/HostController.java",
     "groupTitle": "Host"
   },
   {
@@ -380,7 +408,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求参数示例",
-          "content": "{\n    \"meetingId\":22\n}",
+          "content": "{\n    \"meetingId\":1\n}",
           "type": "json"
         }
       ]
@@ -414,77 +442,13 @@ define({ "api": [
       "examples": [
         {
           "title": "响应结果示例",
-          "content": "{\n    \"code\": 200,\n    \"message\": \"ok\",\n    \"obj\": {\n        \"meetingId\":1,\n        \"title\":\"会议名称\",\n        \"content\":\"会议简介\",\n        \"beginTime\":\"2021-08-08 22:00\",\n        \"endTime\":\"2021-08-08 22:00\",\n        \"deviceId\":22,\n        \"role\":{\n            \"id\":1,\n            \"name\":\"主持人\"\n        }\n    }\n\n}",
+          "content": "{\n    \"code\": 200,\n    \"message\": \"ok\",\n    \"obj\": {\n        \"meetingId\":1,\n        \"title\":\"会议名称\",\n        \"content\":\"会议简介\",\n        \"beginTime\":\"2021-08-08 22:00\",\n        \"endTime\":\"2021-08-08 22:00\",\n        \"deviceId\":1,\n        \"role\":{\n            \"id\":1,\n            \"name\":\"主持人\"\n        }\n    }\n\n}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/MeetingController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/MeetingController.java",
     "groupTitle": "Meeting"
-  },
-  {
-    "type": "POST",
-    "url": "/vote/getVoteInfo",
-    "title": "getVoteInfo",
-    "version": "1.0.0",
-    "group": "Vote",
-    "name": "getVoteInfo",
-    "parameter": {
-      "fields": {
-        "请求参数": [
-          {
-            "group": "请求参数",
-            "type": "Number",
-            "optional": false,
-            "field": "voteId",
-            "description": ""
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "请求参数示例",
-          "content": "{\n    \"voteId\":2\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "响应结果": [
-          {
-            "group": "响应结果",
-            "type": "Number",
-            "optional": false,
-            "field": "code",
-            "description": ""
-          },
-          {
-            "group": "响应结果",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": ""
-          },
-          {
-            "group": "响应结果",
-            "type": "Object",
-            "optional": false,
-            "field": "obj",
-            "description": ""
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "响应结果示例",
-          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\n    \"id\":2,\n    \"name\":\"eat ot not\",\n    \"content\":\"something about voting\",\n    \"type\":1,\n    \"anonymous\":1,\n    \"meetingId\":23,\n    \"options\":[{\"id\":2,\"content\":\"food\"}]\n}}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "../paperless/controller/VoteController.java",
-    "groupTitle": "Vote"
   },
   {
     "type": "POST",
@@ -517,7 +481,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求参数示例",
-          "content": "{\n    \"deviceId\":1,\n    \"meetingId\":2\n}",
+          "content": "{\n\"deviceId\":1,\n\"meetingId\":2\n}",
           "type": "json"
         }
       ]
@@ -551,17 +515,17 @@ define({ "api": [
       "examples": [
         {
           "title": "响应结果示例",
-          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\n    \"voteList\":[\n     {\n         \"id\":1,\n         \"name\":\"eat or not!\"\n         \"meetingId\":2\n     }\n}}",
+          "content": "{\"code\":200,\"message\":\"ok\",\"obj\":{\n\"voteList\":[\n{\n{\n\"id\":2,\n\"name\":\"eat ot not\",\n\"content\":\"something about voting\",\n\"type\":1,\n\"anonymous\":1,\n\"meetingId\":23,\n\"options\":[{\"id\":2,\"content\":\"food\"},\n{\n\"id\":2,\n\"name\":\"eat ot not\",\n\"content\":\"something about voting\",\n\"type\":1,\n\"anonymous\":1,\n\"meetingId\":23,\n\"options\":[{\"id\":2,\"content\":\"food\"}\n}\n}}",
           "type": "json"
         }
       ]
     },
-    "filename": "../paperless/controller/VoteController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/VoteController.java",
     "groupTitle": "Vote"
   },
   {
     "type": "POST",
-    "url": "/vote/submitOptions",
+    "url": "/vote/submitOption",
     "title": "submitOption",
     "version": "1.0.0",
     "group": "Vote",
@@ -595,7 +559,7 @@ define({ "api": [
       "examples": [
         {
           "title": "请求参数示例",
-          "content": "{\n    \"optionId\":1,\n    \"voteId\":4008,\n    \"deviceId\":2\n}",
+          "content": "{\n\"optionId\":1,\n\"voteId\":4008,\n\"deviceId\":2\n}",
           "type": "json"
         }
       ]
@@ -634,7 +598,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "../paperless/controller/VoteController.java",
+    "filename": "../src/main/java/com/xhfron/paperless/controller/VoteController.java",
     "groupTitle": "Vote"
   }
 ] });
