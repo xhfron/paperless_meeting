@@ -15,4 +15,13 @@ public class FileService {
     public List<File> getFileList(int roleId, int meetingId) {
         return fileDao.getFileList(roleId, meetingId);
     }
+
+    public java.io.File getFileById(int fileId){
+        String path  = fileDao.getAddressById(fileId);
+        if(path!=null){
+            java.io.File file = new java.io.File(path);
+            return file;
+        }
+        return null;
+    }
 }

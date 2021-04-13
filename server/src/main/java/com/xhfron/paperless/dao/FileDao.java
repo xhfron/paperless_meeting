@@ -11,5 +11,7 @@ public interface FileDao {
     @Select("select * from `file` where meeting_id = #{meetingId} and uid in (select file_id from role_file where role_id = #{roleId})")
     List<File> getFileList(int roleId, int meetingId);
 
+    @Select("select address from `file` where uid = #{fileId} limit 1")
+    String getAddressById(int filedId);
 
 }

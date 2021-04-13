@@ -5,6 +5,9 @@ import com.xhfron.paperless.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
 @RestController
 @RequestMapping("file")
 public class FileController {
@@ -34,7 +37,7 @@ public class FileController {
     }
 
     /**
-     * @api {POST} /file/download downloadFile
+     * @api {GET} /file/download downloadFile
      * @apiVersion 1.0.0
      * @apiGroup File
      * @apiName downloadFile
@@ -45,10 +48,29 @@ public class FileController {
      * "fileId":"209"
      * }
      */
-    @PostMapping("download")
-    Msg downloadFile(@RequestParam int fileId) {
-        return new Msg();
+    @GetMapping("download")
+    Msg downloadFile(HttpServletResponse response, @RequestParam int fileId) {
+        File file = fileService.getFileById(fileId);
+        if(!file.exists()){
+            return new Msg(200,"下载文件不存在",null);
+        }
+        response.reset();
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("utf-8");
+        response.setContentLength((int) file.length());
+        response.setHeader("Content-Disposition", "attachment;filename=" +file.getName());
+
+        try(BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));) {
+            byte[] buff = new byte[1024];
+            OutputStream os  = response.getOutputStream();
+            int i = 0;
+            while ((i = bis.read(buff)) != -1) {
+                os.write(buff, 0, i);
+                os.flush();
+            }
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        return new Msg(200,"ok",null);
     }
-
-
 }
