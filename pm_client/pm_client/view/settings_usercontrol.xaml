@@ -10,7 +10,7 @@
 
     <Canvas Background="White">
 
-        
+
         <Grid Width="500" Height="200" Canvas.Left="300" Canvas.Top="160">
 
 
@@ -62,12 +62,8 @@
                Canvas.Bottom="0" Canvas.Right="0" Click="exit"
                 Template="{DynamicResource normalbtn}"
                 />
-        
+
 
 
     </Canvas>
-    
-
-    
-
 </UserControl>

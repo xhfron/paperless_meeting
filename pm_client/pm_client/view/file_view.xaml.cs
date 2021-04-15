@@ -57,7 +57,17 @@ namespace pm_client.view
 
         }
 
-
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs re)
+        {
+            Image e = (Image)this.FindName("loading_img");
+            RotateTransform rotateTransform = new RotateTransform();
+            DoubleAnimation ani = new DoubleAnimation();
+            ani.From = 0;
+            ani.To = 720;
+            ani.RepeatBehavior = RepeatBehavior.Forever;
+            ani.Duration = TimeSpan.FromSeconds(10);
+            e.RenderTransform = rotateTransform;
+            rotateTransform.BeginAnimation(RotateTransform.AngleProperty, ani);
+        }
     }
 }
