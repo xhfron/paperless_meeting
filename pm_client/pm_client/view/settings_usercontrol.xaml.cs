@@ -21,8 +21,52 @@ namespace pm_client.view
     public partial class logout : UserControl
     {
         public logout()
-    {
-        InitializeComponent();
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button btn = e.OriginalSource as Button;
+                if (btn.Name == "delete")
+                {
+                    //删除一个数字
+                    txtValue.Text = txtValue.Text.Substring(0, txtValue.Text.Length - 1);
+                }
+                else if (btn.Name == "sure")
+                {
+                    //点击确定隐藏数字键盘
+                    number_keyboard.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    //键入数字
+                    txtValue.Text += btn.Content;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+
+        private void TextBox_GetFocus(object sender, RoutedEventArgs e)
+        {
+            //文本框获得焦点弹出键盘(使键盘可见)
+            number_keyboard.Visibility = Visibility.Visible;
+
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //文本框失去焦点隐藏键盘(使键盘不可见)
+            //number_keyboard.Visibility = Visibility.Hidden;
+
+        }
+
+
     }
 
         private void exit(object sender, RoutedEventArgs e)

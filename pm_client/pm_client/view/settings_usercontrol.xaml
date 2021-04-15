@@ -5,57 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
-             d:DesignHeight="450" 
-             d:DesignWidth="2000">
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="158*"/>
-            <RowDefinition Height="87*"/>
-            <RowDefinition Height="142*"/>
-            <RowDefinition Height="63*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="96*"/>
-            <ColumnDefinition Width="201*"/>
-            <ColumnDefinition Width="103*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.ColumnSpan="2" 
-                     Grid.Row="1" 
-                     Grid.Column="1" 
-                     Grid.RowSpan="3" 
-              VerticalAlignment="Top"
-              HorizontalAlignment="Left" Height="99" Width="877">
+             d:DesignHeight="450" d:DesignWidth="2000">
 
-            <TextBox HorizontalAlignment="Left" 
-                 Height="99" 
-                 TextWrapping="Wrap" 
-                 Text="" 
-                 VerticalAlignment="Top"
-                 Width="877" 
-                 ToolTip="hello" 
-                 
-                    FontFamily="黑体" 
-                    FontSize="48" 
-                    VerticalContentAlignment="Center" Padding="28,0,0,0" 
-                    />
-            <TextBlock Text="输入密码退出系统" 
-                       Background="Transparent"
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Left"
-                       FontFamily="黑体" 
-                       FontSize="48"
-                       Foreground="#777" Padding="28,0,0,0"
-                       ></TextBlock>
+
+    <Canvas Background="White">
+
+        
+        <Grid Width="500" Height="200" Canvas.Left="300" Canvas.Top="160">
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition  Height="0.8*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="txtValue" GotFocus="TextBox_GetFocus" LostFocus="TextBox_LostFocus"  BorderThickness="2" BorderBrush="Black" 
+                     Background="Transparent" VerticalAlignment="Center"  HorizontalAlignment="Left" FontFamily="黑体" FontSize="36" Foreground="#777"
+                     Width="500"/>
+
+            <Grid x:Name="number_keyboard" Button.Click="Button_Click" Grid.Row="1" Background="GhostWhite" Visibility="Hidden">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="1" x:Name="btn" FontSize="20" />
+                <Button Content="2" Grid.Row="0" Grid.Column="1" FontSize="20"/>
+                <Button Content="3" Grid.Row="0" Grid.Column="2" FontSize="20"/>
+                <Button Content="4" Grid.Row="1" Grid.Column="0" FontSize="20"/>
+                <Button Content="5" Grid.Row="1" Grid.Column="1" FontSize="20"/>
+                <Button Content="6" Grid.Row="1" Grid.Column="2" FontSize="20"/>
+                <Button Content="7" Grid.Row="2" Grid.Column="0" FontSize="20"/>
+                <Button Content="8" Grid.Row="2" Grid.Column="1" FontSize="20"/>
+                <Button Content="9" Grid.Row="2" Grid.Column="2" FontSize="20"/>
+                <Button Content="×" x:Name="delete" Grid.Row="3" Grid.Column="0" FontSize="15"/>
+                <Button Content="0" Grid.Row="3" Grid.Column="1" FontSize="20"/>
+                <Button Content="确定" x:Name="sure"  Grid.Row="3" Grid.Column="2" FontSize="20"/>
+
+            </Grid>
+
 
         </Grid>
+
         <Button Content="确认" 
                 Style="{StaticResource normal_btn}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Grid.Column="2" 
-                Grid.Row="3" Click="exit"
+               Canvas.Bottom="0" Canvas.Right="0" Click="exit"
                 Template="{DynamicResource normalbtn}"
                 />
+        
 
-    </Grid>
+
+    </Canvas>
+    
+
+    
+
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 </UserControl>
