@@ -50,8 +50,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-<<<<<<< HEAD
-=======
   <PropertyGroup>
     <ManifestCertificateThumbprint>040841800F9D72777B3B0A3DA2F238A20ACF48B5</ManifestCertificateThumbprint>
   </PropertyGroup>
@@ -67,7 +65,6 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
->>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -95,13 +92,11 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="MoonPdfLib, Version=0.2.3.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Lenovo\Desktop\MoonPdf-0.2.3-x64\MoonPdfLib.dll</HintPath>
+    <Reference Include="MoonPdfLib">
+      <HintPath>libs\MoonPdfLib.dll</HintPath>
     </Reference>
-    <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.29759, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Lenovo\Desktop\MoonPdf-0.2.3-x64\MouseKeyboardActivityMonitor.dll</HintPath>
+    <Reference Include="MouseKeyboardActivityMonitor">
+      <HintPath>libs\MouseKeyboardActivityMonitor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -279,30 +274,19 @@
     <Resource Include="res\drawable\vote.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\drawable\o_back_button.png" />
-    <Resource Include="res\drawable\o_file.png" />
-    <Resource Include="res\drawable\o_note.png" />
-    <Resource Include="res\drawable\o_setting.png" />
-    <Resource Include="res\drawable\o_vote.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="res\drawable\o_remote.png" />
     <Resource Include="res\drawable\remote.png" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Resource Include="res\drawable\file_checked.png" />
     <Resource Include="res\drawable\vote_checked.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\drawable\loading.jpg" />
-=======
     <Resource Include="res\drawable\Pausebutton.png" />
     <Resource Include="res\drawable\playbutton.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\drawable\exitbutton.png" />
-    <Content Include="res\drawable\MP4Test.mp4" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -315,7 +299,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
->>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
