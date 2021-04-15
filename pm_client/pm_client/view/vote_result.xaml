@@ -117,7 +117,8 @@
 
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="80*"/>
             <RowDefinition Height="244*"/>
             <RowDefinition Height="44*"/>
@@ -132,18 +133,31 @@
         </Grid.ColumnDefinitions>
         <TextBlock 
             TextWrapping="Wrap" 
-            Margin="32,40,0,40"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-            Style="{StaticResource title_64}"
-            Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
-        <TextBlock Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center"   FontFamily="DengXian" FontSize="48" Margin="0,41"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch"   Grid.Row="1"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
+            Style="{StaticResource big_title}"
+            Text="早饭吃什么"
+            Grid.ColumnSpan="2"   ></TextBlock>
+        
+        <TextBlock 
+            Grid.Column="4" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"   
+                   FontFamily="DengXian" 
+                   FontSize="48" 
+                   Margin="0,25,-66,18.5" 
+                   FontWeight="Bold"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
+        <TextBlock Grid.Row="1" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"  
+                   Style="{StaticResource title_40}"  
+                   Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
+        <ScrollViewer 
+            VerticalScrollBarVisibility="Auto"
+            HorizontalAlignment="Stretch"   
+            Grid.Row="2"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
             <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}" Margin="40,40,0,0"/>
         </ScrollViewer>
 
-        <ListBox Grid.Row="2" 
+        <ListBox Grid.Row="3" 
                  Grid.Column="0" 
                  Grid.ColumnSpan="5" 
                  SelectionMode="Multiple" 

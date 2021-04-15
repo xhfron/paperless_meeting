@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" 
+             d:DesignWidth="2000">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="158*"/>
@@ -21,9 +22,9 @@
         <Grid Grid.ColumnSpan="2" 
                      Grid.Row="1" 
                      Grid.Column="1" 
-                     Grid.RowSpan="2" 
+                     Grid.RowSpan="3" 
               VerticalAlignment="Top"
-              HorizontalAlignment="Left" Height="99" Width="608">
+              HorizontalAlignment="Left" Height="99" Width="877">
 
             <TextBox HorizontalAlignment="Left" 
                  Height="99" 
@@ -33,16 +34,17 @@
                  Width="877" 
                  ToolTip="hello" 
                  
-                     FontFamily="黑体" 
-                     FontSize="48" VerticalContentAlignment="Center" Margin="28,0,0,0"
-                     />
+                    FontFamily="黑体" 
+                    FontSize="48" 
+                    VerticalContentAlignment="Center" Padding="28,0,0,0" 
+                    />
             <TextBlock Text="输入密码退出系统" 
                        Background="Transparent"
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Left"
                        FontFamily="黑体" 
                        FontSize="48"
-                       Foreground="#777" Margin="28,0,0,0"
+                       Foreground="#777" Padding="28,0,0,0"
                        ></TextBlock>
 
         </Grid>
@@ -51,7 +53,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Grid.Column="2" 
-                Grid.Row="3" Click="exit" 
+                Grid.Row="3" Click="exit"
+                Template="{DynamicResource normalbtn}"
                 />
 
     </Grid>

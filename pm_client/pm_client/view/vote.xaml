@@ -111,7 +111,7 @@
 
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="206*"/>
             <RowDefinition Height="629*"/>
@@ -125,19 +125,14 @@
             <ColumnDefinition Width="145*"/>
             <ColumnDefinition Width="214*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="3" 
-                    Orientation="Horizontal"
-                    Background="Transparent" 
-                    Grid.RowSpan="1">
+        
             <TextBlock 
                    TextWrapping="Wrap" 
-                   Style="{StaticResource title_64}" 
-                    Padding="32,40,0,40"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Text="早饭吃什么"
-                    Background="Transparent"></TextBlock>
-        </StackPanel>
+                   Style="{StaticResource big_title}" 
+                   Text="早饭吃什么"
+                Grid.ColumnSpan="3"
+                
+                    ></TextBlock>
             <TextBlock HorizontalAlignment="Left" 
                        Style="{StaticResource title_40}"  
                        Text="匿名投票"
@@ -155,7 +150,8 @@
                    VerticalAlignment="Center"   
                    FontFamily="DengXian" 
                    FontSize="48" 
-                   Margin="0,25,-66,18.5" FontWeight="Bold"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
+                   Margin="0,25,-66,18.5" 
+                   FontWeight="Bold"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
         <ScrollViewer 
             VerticalScrollBarVisibility="Auto" 
             HorizontalAlignment="Stretch"   

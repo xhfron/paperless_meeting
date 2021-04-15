@@ -7,6 +7,11 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            if (true)
+            {
+
+                return;
+            }
             Console.WriteLine("Hello World!");
             Console.Title="pm_client";
             ProcessManager m=new ProcessManager();

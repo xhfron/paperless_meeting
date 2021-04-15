@@ -6,7 +6,7 @@
     <SolidColorBrush x:Key="sidebar_border" Color="#707070"/>
     <SolidColorBrush x:Key="font_black" Color="#182c43"/>
     <SolidColorBrush x:Key="font_grey" Color="#53606F"/>
-    <SolidColorBrush x:Key="btn_grey" Color="#707070"/>
+    <SolidColorBrush x:Key="btn_grey" Color="#77899E"/>
     <Style x:Key="lbl_style_1">
         <!--设备编号-->
         <Setter Property="Control.FontFamily" Value="DengXian"/>
@@ -24,6 +24,14 @@
         <Setter Property="Control.FontSize" Value="64"/>
         <Setter Property="Control.Margin" Value="40,0,0,0"/>
     </Style>
+    <Style x:Key="big_title" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="DengXian"/>
+        <Setter Property="Control.FontSize" Value="64"/>
+        <Setter Property="Control.Margin" Value="32,0,0,0"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Control.VerticalAlignment" Value="Top"/>
+        <Setter Property="Padding" Value="0,40,40,0"/>
+    </Style>
     <Style x:Key="title_40">
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
         <Setter Property="Control.FontSize" Value="40"/>
@@ -34,16 +42,7 @@
         <Setter Property="Control.FontSize" Value="48"/>
         <Setter Property="Control.Margin" Value="40,0,0,0"/>
     </Style>
-    <Style x:Key="normal_btn">
-        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
-        <Setter Property="Control.FontSize" Value="60"/>
-        <Setter Property="Control.Padding" Value="28,20,36,20"/>
-        <Setter Property="Control.Background" Value="{StaticResource btn_grey}" />
-        <Setter Property="Control.Foreground" Value="{StaticResource font_black}"/>
-        <Setter Property="Control.BorderThickness" Value="0"/>
-        <Setter Property="Control.Width" Value="300"/>
-        <Setter Property="Control.Height" Value="95"/>
-    </Style>
+    
     <Style x:Key="choice1" TargetType="RadioButton">
         <Setter Property="Control.FontFamily" Value="DengXian Light"/>
         <Setter Property="Control.FontSize" Value="48"/>
@@ -94,6 +93,32 @@
     <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="#FF3C77DD"/>
     <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="#FF212121"/>
     <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF212121"/>
-    
 
+    <ControlTemplate x:Key="normalbtn" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" TargetName="border" Value="#FFC4E5F6"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="normal_btn">
+        <Setter Property="Control.FontFamily" Value="DengXian Light"/>
+        <Setter Property="Control.FontSize" Value="60"/>
+        <Setter Property="Control.Padding" Value="28,20,36,20"/>
+        <Setter Property="Control.Background" Value="{StaticResource btn_grey}" />
+        <Setter Property="Control.Foreground" Value="{StaticResource font_black}"/>
+        <Setter Property="Control.BorderThickness" Value="0"/>
+        <Setter Property="Control.Width" Value="300"/>
+        <Setter Property="Control.Height" Value="95"/>
+    </Style>
 </ResourceDictionary>

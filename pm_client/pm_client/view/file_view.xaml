@@ -64,7 +64,9 @@
             Margin="32,0,0,0"
             Text="会议文件"
             VerticalAlignment="Top" 
-            Style="{StaticResource title_64}" Grid.ColumnSpan="2" Padding="0,40,40,0" />
+            Style="{StaticResource title_64}" 
+            Grid.ColumnSpan="2" 
+            Padding="0,40,40,0" />
         <Image 
             x:Name="loadingImg"
             Source="res/drawable/loading.jpg"
