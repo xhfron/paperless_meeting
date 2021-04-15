@@ -15,10 +15,11 @@ import java.util.List;
 public class FileService {
     @Autowired
     private FileDao fileDao;
-    public boolean uploadFile(MultipartFile file, int meetingId){
+    public FileDO uploadFile(MultipartFile file, int meetingId){
         if (file.isEmpty()) {
-            return false;
+            return null;
         }
+        FileDO fileDO = null;
         File dir = new File(Integer.toString(meetingId));
         if(!dir.exists()){
             System.out.println(dir.mkdir());
@@ -26,12 +27,12 @@ public class FileService {
         File dest = new File(dir.getPath() +"/"+ file.getOriginalFilename());
         try {
             file.transferTo(dest);
-            fileDao.createFileRecord(new FileDO(file.getOriginalFilename(),dest.getPath(),meetingId));
-            return  true;
+            fileDO = new FileDO(file.getOriginalFilename(),dest.getPath(),meetingId);
+            fileDao.createFileRecord(fileDO);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return fileDO;
     }
 
     public List<FileDO> getFileList(int meetingId){

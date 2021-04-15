@@ -60,5 +60,4 @@ public class MeetingController {
         return new Msg();
     }
 
-
 }

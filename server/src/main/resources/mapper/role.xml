@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhfron.paperless.dao.RoleDao">
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="uid">
+        insert into `role` values (#{uid}, #{name})
+    </insert>
+
+    <insert id="addDeviceToRole">
+        insert into `device_role` values (#{roleId},#{deviceId},#{meetingId})
+    </insert>
+
+    <insert id="addFileToRole">
+        insert into `role_file` values(#{roleId},#{fileId})
+    </insert>
+
+</mapper>

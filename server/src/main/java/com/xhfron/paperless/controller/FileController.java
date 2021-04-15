@@ -34,10 +34,11 @@ public class FileController {
 
     @PostMapping("/upload")
     public Msg upload(@RequestParam MultipartFile file, int meetingId) {
-        if (fileService.uploadFile(file, meetingId)) {
-            return new Msg("yes");
+        FileDO fileDO = fileService.uploadFile(file, meetingId);
+        if (fileDO!=null) {
+            return new Msg(200,"ok",fileDO);
         }
-        return new Msg("nono");
+        return new Msg("上传失败");
 
     }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhfron.paperless.dao.VoteDao">
+    <insert id="createVote" useGeneratedKeys="true" keyProperty="uid" parameterType="com.xhfron.paperless.bean.Vote">
+        insert into `vote`
+        values(uid, #{name}, #{content}, #{anonymous}, #{type},#{meetingId})
+    </insert>
+
+    <insert id="addOption" useGeneratedKeys="true" keyProperty="uid" parameterType="com.xhfron.paperless.bean.Option">
+        insert into `option`
+        values(uid,#{content},#{belongs})
+    </insert>
+
+</mapper>

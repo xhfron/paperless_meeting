@@ -14,6 +14,6 @@ public class MeetingService{
 
     public Msg createMeeting(MeetingDO meetingData){
         meetingDao.createMeeting(meetingData);
-        return new Msg("miaomiaomiao");
+        return new Msg(200,"ok",meetingData);
     }
 }
