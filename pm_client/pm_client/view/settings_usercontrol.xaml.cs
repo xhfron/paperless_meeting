@@ -67,6 +67,11 @@ namespace pm_client.view
         }
 
 
+
+        private void exit(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
     }
      
 }

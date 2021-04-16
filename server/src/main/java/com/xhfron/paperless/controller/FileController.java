@@ -1,6 +1,12 @@
 package com.xhfron.paperless.controller;
 
 import com.xhfron.paperless.bean.Msg;
+<<<<<<< HEAD
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class FileController {
+=======
 import com.xhfron.paperless.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +19,7 @@ import java.io.*;
 public class FileController {
     @Autowired
     private FileService fileService;
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 
     /**
      * @api {POST} /file/getFileList getFileList
@@ -28,6 +35,18 @@ public class FileController {
      * @apiSuccess (响应结果) {String} message
      * @apiSuccess (响应结果) {Object} obj
      * @apiSuccessExample 响应结果示例
+<<<<<<< HEAD
+     * {"code":200,"message":"ok","obj":{"fileList":[{"id":1,"name":"1.pdf","address":"meeting1/1.pdf"}]}}
+     */
+    @PostMapping("getFileList")
+    Msg getFileList(@RequestParam int meetingId, int roleId){
+        return new Msg();
+    }
+
+
+    /**
+     * @api {POST} /file/download downloadFile
+=======
      * {"code":200,"message":"ok","obj":[{"name":"typora-setup-x64.exe","address":"C:\\Files\\13\\typora-setup-x64.exe"},
      * {"name":"VSCodeUserSetup-x64-1.51.1.exe","address":"13\\VSCodeUserSetup-x64-1.51.1.exe"}]}
      */
@@ -38,10 +57,25 @@ public class FileController {
 
     /**
      * @api {GET} /file/download downloadFile
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
      * @apiVersion 1.0.0
      * @apiGroup File
      * @apiName downloadFile
      * @apiDescription 文件下载
+<<<<<<< HEAD
+     * @apiParam  {Number} fileId
+     * @apiParamExample 请求参数示例
+     * {
+     *     "fileId":"209"
+     * }
+     */
+    @PostMapping("download")
+    Msg downloadFile(@RequestParam int fileId){
+        return new Msg();
+    }
+
+
+=======
      * @apiParam {Number} fileId
      * @apiParamExample 请求参数示例
      * {
@@ -73,4 +107,5 @@ public class FileController {
         }
         return new Msg(200,"ok",null);
     }
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 }

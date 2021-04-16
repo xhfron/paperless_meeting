@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="2000">
 
 
     <Canvas Background="White">
 
-        
+
         <Grid Width="500" Height="200" Canvas.Left="300" Canvas.Top="160">
 
 
@@ -55,14 +55,15 @@
 
         </Grid>
 
-        
-        <Button Content="确认" Style="{StaticResource normal_btn}" HorizontalAlignment="Left" VerticalAlignment="Top"
-                Canvas.Bottom="0" Canvas.Right="0"/>
+        <Button Content="确认" 
+                Style="{StaticResource normal_btn}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+               Canvas.Bottom="0" Canvas.Right="0" Click="exit"
+                Template="{DynamicResource normalbtn}"
+                />
+
 
 
     </Canvas>
-    
-
-    
-
 </UserControl>

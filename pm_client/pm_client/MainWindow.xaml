@@ -3,83 +3,146 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:pm_client"
+        xmlns:local="clr-namespace:pm_client" 
+        xmlns:util="clr-namespace:pm_client.util"
         mc:Ignorable="d"
-        Title="山东大学无纸化会议系统" 
+        Title="pm_client" 
         Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}" 
         Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}" 
-        ResizeMode="NoResize" WindowStyle="None" Left="0" IsTabStop="True" Top="0" Initialized="Window_Initialized">
+        ResizeMode="NoResize" 
+        WindowStyle="None" 
+        Left="0" 
+        IsTabStop="True" 
+        Top="0" 
+        Initialized="Window_Initialized" 
+        Loaded="Window_Loaded">
     <Window.Resources>
+        <util:BtnData x:Key="file_data" Text="文件" picDefault="res/drawable/file.png" picChecked="res/drawable/file_checked.png"/>
+        <util:BtnData x:Key="remote_data" Text="应用" picDefault="res/drawable/remote.png" picChecked="res/drawable/remote.png"/>
+        <util:BtnData x:Key="note_data" Text="笔记" picDefault="res/drawable/note.png" picChecked="res/drawable/note.png"/>
+        <util:BtnData x:Key="vote_data" Text="投票" picDefault="res/drawable/vote.png" picChecked="res/drawable/vote_checked.png"/>
+        <util:BtnData x:Key="settings_data" Text="设置" picDefault="res/drawable/setting.png" picChecked="res/drawable/setting.png"/>
+        
         <Style x:Key="sidebar_txt" TargetType="TextBlock">
             <Setter Property="Control.FontFamily" Value="DengXian"/>
             <Setter Property="Control.FontSize" Value="32"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="side_button_1" TargetType="{x:Type RadioButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="Transparent"  />
+            <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+            <Setter Property="Foreground" Value="#FF77899E" />
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="BorderThickness" Value="5,1,1,1"/>
+            <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid x:Name="templateRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        <Image Width="0" Height="0" Source="res/drawable/file_checked.png"></Image>
+                        <Image Width="0" Height="0" Source="res/drawable/vote_checked.png"></Image>
+                            <Border x:Name="radioButtonBorder" 
+                                    BorderBrush="White"  
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" 
+                                    CornerRadius="0" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    Margin="1,1,2,1" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid" 
+                                      Margin="0">
+                                    <Ellipse x:Name="optionMark" Fill="#00ff00" MinWidth="0" MinHeight="143" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <StackPanel>
+                                <Border Background="#00000000"         
+                                        BorderThickness="50,20" BorderBrush="#00000000"  >
+                                    <Image 
+                                        x:Name="icon"
+                                        Source="{Binding Path=picDefault}" 
+                                        Width="70" >
+                                    </Image>
+                                </Border>
+                                <TextBlock 
+                                    Text="{Binding Text}"
+                                    Background="Transparent"
+                                    Style="{StaticResource sidebar_txt}" ></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter  Property="BorderBrush"  TargetName="radioButtonBorder" Value="{StaticResource sdu_red}"/>
+                                <Setter  Property="Foreground"     Value="{StaticResource sdu_red }"/>
+                                <Setter Property="Source" TargetName="icon" Value="{Binding picChecked}"/>
+                                
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Source" TargetName="icon" Value="{Binding picDefault}"/>
+                                <Setter  Property="BorderBrush"  TargetName="radioButtonBorder" Value="white"/>
+                                <Setter  Property="Foreground"     Value="#FF77899E" />
+                                <!--Setter Property="Opacity" TargetName="optionMark" Value="0.0"/-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid x:Name="container" Background="Black" >
+    <Grid x:Name="container" 
+          Background="{StaticResource sdu_red}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="343*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="168"/>
-            <ColumnDefinition Width="247*"/>
-            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="501*"/>
+            <ColumnDefinition Width="98*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2"  VerticalAlignment="Stretch"  Width="auto" Height="auto" HorizontalAlignment="Stretch" Background="{StaticResource sdu_red}" Orientation="Horizontal" >
-            <Button  Background="{x:Null}" Click="back" BorderThickness="0">
+        <Button Grid.Row="0" Background="{x:Null}" BorderThickness="0" Template="{DynamicResource normalbtn}" TouchUp="back">
                 <Image Source="res/drawable/back_button.png" Margin="40,12"/>
             </Button>
+        <StackPanel Grid.ColumnSpan="2"  
+                    VerticalAlignment="Stretch"  
+                    Width="auto" 
+                    Height="auto" 
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch" 
+                    Background="{StaticResource sdu_red}" Orientation="Horizontal" >
             <TextBlock TextWrapping="Wrap" Text="TextBlock" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
         </StackPanel>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" >
+        <Border BorderBrush="Black" 
+                BorderThickness="1" 
+                Grid.Row="1" >
             <StackPanel  
                      VerticalAlignment="Stretch"
                      HorizontalAlignment="Stretch"
                      Background="{StaticResource sidebar_white}">
-                <RadioButton  x:Name="NoteBtn" 
-                          Style="{StaticResource side_button_1}" Click="toNote" >
-                    <StackPanel>
-                        <Border Background="{Binding Source=NoteBtn, Path=Foreground}"         
-                            BorderThickness="50,20" BorderBrush="White"  >
-                            <Image Source="res/drawable/o_note.png" Width="70" ></Image>
-                        </Border>
-                        <TextBlock Text="笔记" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton  x:Name="VoteBtn" 
-                          Style="{StaticResource side_button_1}" 
-                          Click="toVote" >
-                    <StackPanel>
-                        <Border Background="{Binding Source=VoteBtn, Path=Foreground}"         
-                            BorderThickness="50,20" BorderBrush="White"  >
-                            <Image Source="res/drawable/o_vote.png" Width="70" ></Image>
-                        </Border>
-                        <TextBlock Text="投票" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                    </StackPanel>
-                </RadioButton>
-                <RadioButton  x:Name="RemoteBtn" 
-                          Style="{StaticResource side_button_1}" 
-                          Click="toRemote" >
-                    <StackPanel>
-                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
-                            BorderThickness="50,20" BorderBrush="White"  >
-                            <Image Source="res/drawable/o_remote.png" Width="70" ></Image>
-                        </Border>
-                        <TextBlock Text="应用" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                    </StackPanel>
-                </RadioButton>
                 <RadioButton  x:Name="FileBtn" 
+                              DataContext="{StaticResource file_data}"
                           Style="{StaticResource side_button_1}" 
                           Click="toFile" >
-                    <StackPanel>
-                        <Border Background="{Binding Source=FileBtn, Path=Foreground}"         
-                            BorderThickness="50,20" BorderBrush="White"  >
-                            <Image Source="res/drawable/o_file.png" Width="70" ></Image>
-                        </Border>
-                        <TextBlock Text="文件" Style="{StaticResource sidebar_txt}" ></TextBlock>
-                    </StackPanel>
+                </RadioButton>
+                <RadioButton  x:Name="VoteBtn" 
+                              DataContext="{StaticResource vote_data}"
+                          Style="{StaticResource side_button_1}" 
+                          Click="toVote" >
+                </RadioButton>
+                <RadioButton  x:Name="NoteBtn" 
+                              DataContext="{StaticResource note_data}"
+                              Style="{StaticResource side_button_1}" 
+                              Click="toNote" >
+                </RadioButton>
+                <RadioButton  x:Name="RemoteBtn" 
+                              DataContext="{StaticResource remote_data}"
+                          Style="{StaticResource side_button_1}" 
+                          Click="toRemote" >
                 </RadioButton>
             </StackPanel>
         </Border>
@@ -88,25 +151,22 @@
                      VerticalAlignment="Bottom" 
                      HorizontalAlignment="Stretch" 
                      Background="{StaticResource sidebar_white}">
-                
+
                 <RadioButton  x:Name="SettingsBtn" 
+                              DataContext="{StaticResource settings_data}"
                           Style="{StaticResource side_button_1}" 
                               Background="{StaticResource sidebar_white}"
-
                           Click="toSettings" >
-                    <StackPanel>
-                        <Border Background="{Binding Source=RemoteBtn, Path=Foreground}"         
-                            BorderThickness="50,20" BorderBrush="White"  >
-                            <Image Source="res/drawable/o_setting.png" Width="70" ></Image>
-                        </Border>
-                        <TextBlock Text="设置" Style="{StaticResource sidebar_txt}" Foreground="#FF77899E"></TextBlock>
-                    </StackPanel>
                 </RadioButton>
             </StackPanel>
         </Border>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="23:12" VerticalAlignment="Stretch" Background="{StaticResource sdu_red}" FontSize="64" Foreground="White"/>
-
-
-
+        <TextBlock Grid.Column="2" 
+                   HorizontalAlignment="Right"   
+                   TextWrapping="Wrap" 
+                   Text="23:12" 
+                   VerticalAlignment="Center" 
+                   Background="{StaticResource sdu_red}" 
+                   FontSize="64" 
+                   Foreground="White" Height="80" Margin="0,10" Padding="0,0,20,0"/>
     </Grid>
 </Window>

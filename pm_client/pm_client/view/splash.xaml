@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="287*"/>
@@ -55,7 +58,8 @@
                 VerticalAlignment="Top"  
                 Click="hide" 
                 Style="{StaticResource normal_btn}"
-                Margin="16,25"   />
+                Margin="16,25" 
+                Template="{DynamicResource normalbtn}"   />
 
     </Grid>
 </UserControl>

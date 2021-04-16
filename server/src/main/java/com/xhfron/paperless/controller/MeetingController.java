@@ -1,5 +1,14 @@
 package com.xhfron.paperless.controller;
 
+<<<<<<< HEAD
+import com.xhfron.paperless.bean.Msg;
+import org.apache.ibatis.ognl.ObjectElementsAccessor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController("meeting")
+public class MeetingController {
+
+=======
 import com.xhfron.paperless.bean.MeetingDO;
 import com.xhfron.paperless.bean.MeetingVO;
 import com.xhfron.paperless.bean.Msg;
@@ -15,6 +24,7 @@ public class MeetingController {
 
     @Autowired
     private MeetingService meetingService;
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
     /**
      * @api {POST} /meeting/info info
      * @apiVersion 1.0.0
@@ -23,7 +33,11 @@ public class MeetingController {
      * @apiParam (请求参数) {Number} meetingId
      * @apiParamExample 请求参数示例
      *  {
+<<<<<<< HEAD
+     *      "meetingId":22
+=======
      *      "meetingId":1
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
      *  }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
@@ -38,7 +52,11 @@ public class MeetingController {
      *         "content":"会议简介",
      *         "beginTime":"2021-08-08 22:00",
      *         "endTime":"2021-08-08 22:00",
+<<<<<<< HEAD
+     *         "deviceId":22,
+=======
      *         "deviceId":1,
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
      *         "role":{
      *             "id":1,
      *             "name":"主持人"
@@ -47,6 +65,11 @@ public class MeetingController {
      *
      * }
      */
+<<<<<<< HEAD
+    @PostMapping(value = "/info")
+    Msg info(@RequestParam int meetingId, int deviceId){
+        return new Msg();
+=======
     @PostMapping(value = "info")
     Msg info(@RequestParam int meetingId,@RequestParam int deviceId){
         MeetingVO meetingVO = meetingService.getMeetingInfo(meetingId, deviceId);
@@ -54,5 +77,6 @@ public class MeetingController {
             return new Msg(200,"会议不存在",null);
         }
         return new Msg(200,"ok",meetingVO);
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
     }
 }

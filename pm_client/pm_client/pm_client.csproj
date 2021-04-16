@@ -92,13 +92,11 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="MoonPdfLib, Version=0.2.3.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Lenovo\Desktop\MoonPdf-0.2.3-x64\MoonPdfLib.dll</HintPath>
+    <Reference Include="MoonPdfLib">
+      <HintPath>libs\MoonPdfLib.dll</HintPath>
     </Reference>
-    <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.29759, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Lenovo\Desktop\MoonPdf-0.2.3-x64\MouseKeyboardActivityMonitor.dll</HintPath>
+    <Reference Include="MouseKeyboardActivityMonitor">
+      <HintPath>libs\MouseKeyboardActivityMonitor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -128,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="util\data.cs" />
     <Compile Include="util\INavigator.cs" />
+    <Compile Include="util\ProcessManager.cs" />
     <Compile Include="view\file_view.xaml.cs">
       <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>
@@ -275,23 +274,19 @@
     <Resource Include="res\drawable\vote.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="res\drawable\o_back_button.png" />
-    <Resource Include="res\drawable\o_file.png" />
-    <Resource Include="res\drawable\o_note.png" />
-    <Resource Include="res\drawable\o_setting.png" />
-    <Resource Include="res\drawable\o_vote.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="res\drawable\o_remote.png" />
     <Resource Include="res\drawable\remote.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\drawable\file_checked.png" />
+    <Resource Include="res\drawable\vote_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\loading.jpg" />
     <Resource Include="res\drawable\Pausebutton.png" />
     <Resource Include="res\drawable\playbutton.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\drawable\exitbutton.png" />
-    <Content Include="res\drawable\MP4Test.mp4" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

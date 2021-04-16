@@ -34,7 +34,8 @@ namespace pm_client.view
             this.DataContext = v;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, TouchEventArgs e)
         {
             vote_result t = new vote_result();
             t.AddBoard(board);

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
         <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
@@ -60,7 +60,7 @@
                         BorderBrush="{StaticResource sidebar_border}" 
                         BorderThickness="2" 
                         Background="{StaticResource sidebar_white}" Margin="20,10">
-                    <Grid Height="200" VerticalAlignment="Top">
+                    <Grid Height="170" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="133*"/>
                             <RowDefinition Height="67*"/>
@@ -84,11 +84,16 @@
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="71*"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="379*"/>
         </Grid.RowDefinitions>
-        <TextBlock  TextWrapping="Wrap" Text="投票表决" Style="{StaticResource title_64}"/>
-        <ListBox Grid.Row="1" Style="{DynamicResource VoteList}" ItemContainerStyle="{StaticResource VoteListListBoxContainerStyle}" x:Name="VoteListViewVoteList" SelectionChanged="toVoteDetail">
+        <TextBlock  TextWrapping="Wrap" 
+                    Text="投票表决" 
+                    Style="{StaticResource title_64}" 
+                    Margin="32,40,0,40"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"/>
+        <ListBox Grid.Row="1" Style="{DynamicResource VoteList}" ItemContainerStyle="{StaticResource VoteListListBoxContainerStyle}" x:Name="VoteListViewVoteList" SelectionChanged="toVoteDetail" BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     

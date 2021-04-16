@@ -4,6 +4,8 @@ public class Msg<T> {
     int code;
     String message;
     T obj;
+<<<<<<< HEAD
+=======
 
     public Msg() {
     }
@@ -37,4 +39,5 @@ public class Msg<T> {
     public void setObj(T obj) {
         this.obj = obj;
     }
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 }

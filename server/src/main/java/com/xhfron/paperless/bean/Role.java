@@ -3,6 +3,8 @@ package com.xhfron.paperless.bean;
 public class Role {
     int id;
     String name;
+<<<<<<< HEAD
+=======
 
     public int getId() {
         return id;
@@ -19,4 +21,5 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 }

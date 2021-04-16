@@ -4,6 +4,8 @@ public class Option {
     int uid;
     int belongs;
     String content;
+<<<<<<< HEAD
+=======
 
     public int getUid() {
         return uid;
@@ -28,4 +30,5 @@ public class Option {
     public void setContent(String content) {
         this.content = content;
     }
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 }

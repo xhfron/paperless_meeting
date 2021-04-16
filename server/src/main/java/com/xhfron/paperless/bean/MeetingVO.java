@@ -1,5 +1,16 @@
 package com.xhfron.paperless.bean;
 
+<<<<<<< HEAD
+public class MeetingVO {
+    int id;
+    String title;
+    String content;
+    String beginTime;
+    String endTime;
+    int deviceId;
+    Role role;
+
+=======
 public class MeetingVO extends MeetingDO{
     public MeetingVO(MeetingDO obj, int deviceId) {
 
@@ -24,4 +35,5 @@ public class MeetingVO extends MeetingDO{
     public void setRole(Role role) {
         this.role = role;
     }
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
 }

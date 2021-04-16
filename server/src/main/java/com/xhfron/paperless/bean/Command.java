@@ -12,11 +12,14 @@ public class Command {
         this.cmd = cmd.cmd;
     }
 
+<<<<<<< HEAD
+=======
     public Command(int code, String cmd) {
         this.cmd = cmd;
         this.code = code;
     }
 
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
     public String getCmd() {
         return cmd;
     }

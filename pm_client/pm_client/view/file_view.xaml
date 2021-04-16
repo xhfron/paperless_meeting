@@ -5,16 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:pm_client.view"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1300">
+             d:DesignHeight="800" d:DesignWidth="1300" Loaded="UserControl_Loaded">
     
     <UserControl.Resources>
         
         <!--
         <ControlTemplate x:Key="FileListTemp" TargetType="{x:Type ListBoxItem}" >
+<<<<<<< HEAD
+            <Border BorderThickness="0,0,0,2" 
+                    BorderBrush="{StaticResource sidebar_border}">
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Stretch" 
+                            Background="{StaticResource sidebar_white}"
+                            Margin="0,36">
+                    <Image Source="/res/drawable/note.png" 
+                           Margin="20,0,0,0"
+                           Width="37" 
+                           Height="37"></Image>
+                    <TextBlock Text="hi" 
+                               Style="{StaticResource title_48}" 
+                               VerticalAlignment="Center"
+                               Padding="40,0,0,0"></TextBlock>
+=======
             <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource sidebar_border}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{StaticResource sidebar_white}">
                     <Image Source="/res/drawable/note.png" Margin="20,0,0,0"></Image>
                     <TextBlock Text="MP4Test.mp4" Style="{StaticResource title_48}" VerticalAlignment="Center"></TextBlock>
+>>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac
                 </StackPanel>
             </Border>
         </ControlTemplate>
@@ -26,19 +43,77 @@
             <Setter Property="Template" Value="{StaticResource FileListTemp}"/>
             -->
         </Style>
-        
+
     </UserControl.Resources>
+<!--<<<<<< HEAD
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="104"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListBox HorizontalAlignment="Stretch"   
+                 Grid.Row="1" 
+                 Background="{StaticResource sidebar_white}"
+                 VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}" Grid.ColumnSpan="2">
+
+            <ListBoxItem>
+                <Border BorderThickness="0,0,0,2"
+                        Background="{StaticResource sidebar_border}">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch" 
+                                 Margin="0,36"
+                                >
+                        <Image Source="/res/drawable/note.png" Margin="20,0,0,0" Width="37" Height="37"></Image>
+                        <TextBlock Text="hi" Style="{StaticResource title_48}" VerticalAlignment="Center" Padding="40,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Border>
+            </ListBoxItem>
+        </ListBox>
+        <TextBlock 
+            HorizontalAlignment="Stretch"
+            TextWrapping="Wrap"
+            Margin="32,0,0,0"
+            Text="会议文件"
+            VerticalAlignment="Top" 
+            Style="{StaticResource title_64}" 
+            Grid.ColumnSpan="2" 
+            Padding="0,40,40,0" />
+        <Image 
+            x:Name="loadingImg"
+            Source="res/drawable/loading.jpg"
+            Width="70"
+            Height="70"
+            Grid.Column="1">
+
+        </Image>
+=======-->
 
     <Grid  x:Name="f_view">
         
         <Grid Background="White"  x:Name="f_sub_view">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="61*"/>
+                <RowDefinition Height="140"/>
                 <RowDefinition Height="389*"/>
             </Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="104"/>
+			</Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="file_title" HorizontalAlignment="Stretch"  TextWrapping="Wrap" Text="会议文件" VerticalAlignment="Center" Style="{StaticResource title_64}" />
+            <TextBlock x:Name="file_title" 
+				HorizontalAlignment="Stretch"
+				TextWrapping="Wrap"
+				Margin="32,0,0,0"
+				Text="会议文件"
+				VerticalAlignment="Top" 
+				Style="{StaticResource title_64}" 
+				Grid.ColumnSpan="2" 
+				Padding="0,40,40,0" />
 
             <ListBox x:Name="file_list" HorizontalAlignment="Stretch"   Grid.Row="1" VerticalAlignment="Stretch" ItemContainerStyle="{StaticResource FileListStyle}">
 
@@ -62,8 +137,13 @@
 
 
             </ListBox>
+            <Image x:Name="loading_img"
+                Source="/res/drawable/loading.jpg" 
+                   Width="110" Height="100">
+            </Image>
 
         </Grid>
         
+<!-->>>>>>> 8b2262abedb71dd13d9ce82caaaaf077778ed9ac-->
     </Grid>
 </UserControl>

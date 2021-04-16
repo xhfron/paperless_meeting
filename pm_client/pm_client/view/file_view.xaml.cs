@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -20,6 +21,9 @@ namespace pm_client.view
     /// </summary>
     public partial class file_list_view : UserControl
     {
+        private RotateTransform rt_FanRotate = new RotateTransform();   //做旋转动
+        private DoubleAnimation da_FanRotate = new DoubleAnimation();   //数值类型
+        private Storyboard sb_FanRotate = new Storyboard();             //故事板
         public file_list_view()
         {
             InitializeComponent();
@@ -53,7 +57,17 @@ namespace pm_client.view
 
         }
 
-
-
+        private void UserControl_Loaded(object sender, RoutedEventArgs re)
+        {
+            Image e = (Image)this.FindName("loading_img");
+            RotateTransform rotateTransform = new RotateTransform();
+            DoubleAnimation ani = new DoubleAnimation();
+            ani.From = 0;
+            ani.To = 720;
+            ani.RepeatBehavior = RepeatBehavior.Forever;
+            ani.Duration = TimeSpan.FromSeconds(10);
+            e.RenderTransform = rotateTransform;
+            rotateTransform.BeginAnimation(RotateTransform.AngleProperty, ani);
+        }
     }
 }
