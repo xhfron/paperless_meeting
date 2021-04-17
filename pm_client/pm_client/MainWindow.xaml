@@ -18,10 +18,10 @@
         Loaded="Window_Loaded">
     <Window.Resources>
         <util:BtnData x:Key="file_data" Text="文件" picDefault="res/drawable/file.png" picChecked="res/drawable/file_checked.png"/>
-        <util:BtnData x:Key="remote_data" Text="应用" picDefault="res/drawable/remote.png" picChecked="res/drawable/remote.png"/>
-        <util:BtnData x:Key="note_data" Text="笔记" picDefault="res/drawable/note.png" picChecked="res/drawable/note.png"/>
+        <util:BtnData x:Key="remote_data" Text="应用" picDefault="res/drawable/remote.png" picChecked="res/drawable/remote_checked.png"/>
+        <util:BtnData x:Key="note_data" Text="笔记" picDefault="res/drawable/note.png" picChecked="res/drawable/note_checked.png"/>
         <util:BtnData x:Key="vote_data" Text="投票" picDefault="res/drawable/vote.png" picChecked="res/drawable/vote_checked.png"/>
-        <util:BtnData x:Key="settings_data" Text="设置" picDefault="res/drawable/setting.png" picChecked="res/drawable/setting.png"/>
+        <util:BtnData x:Key="settings_data" Text="设置" picDefault="res/drawable/setting.png" picChecked="res/drawable/setting_checked.png"/>
         
         <Style x:Key="sidebar_txt" TargetType="TextBlock">
             <Setter Property="Control.FontFamily" Value="DengXian"/>
