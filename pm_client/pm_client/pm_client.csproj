@@ -98,6 +98,12 @@
     <Reference Include="MouseKeyboardActivityMonitor">
       <HintPath>libs\MouseKeyboardActivityMonitor.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>libs\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -127,6 +133,9 @@
     <Compile Include="util\data.cs" />
     <Compile Include="util\INavigator.cs" />
     <Compile Include="util\ProcessManager.cs" />
+    <Compile Include="util\Settings.cs" />
+    <Compile Include="util\ViewUtil.cs" />
+    <Compile Include="util\WebUtil.cs" />
     <Compile Include="view\file_view.xaml.cs">
       <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>
@@ -135,6 +144,9 @@
     </Compile>
     <Compile Include="view\file_video_view.xaml.cs">
       <DependentUpon>file_video_view.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\Log.xaml.cs">
+      <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\note.xaml.cs">
       <DependentUpon>note.xaml</DependentUpon>
@@ -150,6 +162,9 @@
     </Compile>
     <Compile Include="view\splash.xaml.cs">
       <DependentUpon>splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SuperSplash.xaml.cs">
+      <DependentUpon>SuperSplash.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\temp.xaml.cs">
       <DependentUpon>temp.xaml</DependentUpon>
@@ -194,6 +209,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\Log.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\note.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\SuperSplash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

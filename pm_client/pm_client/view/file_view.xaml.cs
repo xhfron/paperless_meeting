@@ -1,5 +1,7 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +23,41 @@ namespace pm_client.view
     /// </summary>
     public partial class file_list_view : UserControl
     {
-        private RotateTransform rt_FanRotate = new RotateTransform();   //做旋转动
-        private DoubleAnimation da_FanRotate = new DoubleAnimation();   //数值类型
-        private Storyboard sb_FanRotate = new Storyboard();             //故事板
+        INavigator board;
+        public void AddBoard(INavigator board)
+        {
+            this.board = board;
+        }
         public file_list_view()
         {
             InitializeComponent();
+
+            DirectoryInfo d=new DirectoryInfo(Settings.fileDir);
+            List<util.File> list = new List<util.File>();
+            foreach(FileInfo dir in d.GetFiles())
+            {
+                util.File f = new util.File();
+                f.name = dir.Name;
+                list.Add(f);
+            }
+            this.file_list.ItemsSource = list;
+
+            Log.i("file", "" + list.Count);
+        }
+        void open(string name)
+        {
+            string path = System.IO.Path.Combine(Settings.fileDir, name);
+            if (name.EndsWith(".pdf"))
+            {
+                board.Push(new file_pdf_view(path));
+            }
+            else
+            {
+                ViewUtil.msg("unknown format");
+            }
         }
 
-
+        /*
         private void item1_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             //点击文件播放视频（测试）
@@ -56,11 +84,13 @@ namespace pm_client.view
             f_view.Children.Add(new file_pdf_view(filePath,f_view, f_sub_view));
 
         }
-
+        */
         private void UserControl_Loaded(object sender, RoutedEventArgs re)
         {
             Image e = (Image)this.FindName("loading_img");
             RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform.CenterX = this.loading_img.Width/2;
+            rotateTransform.CenterY = this.loading_img.Height/2;
             DoubleAnimation ani = new DoubleAnimation();
             ani.From = 0;
             ani.To = 720;

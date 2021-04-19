@@ -23,18 +23,16 @@ namespace pm_client.view
     {
 
         string filePath;
-        Grid f_view;
-        Grid f_sub_view;
+        //Grid f_view;
+        //Grid f_sub_view;
 
         private bool _isLoaded = false;
 
-        public file_pdf_view(string filePath,Grid f_view,Grid f_sub_view)
+        public file_pdf_view(string filePath)
         {
             InitializeComponent();
 
             this.filePath = filePath;
-            this.f_view = f_view;
-            this.f_sub_view = f_sub_view;
 
         }
 
@@ -148,8 +146,8 @@ namespace pm_client.view
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             //点击关闭按钮关闭PDF阅读器，返回文件列表
-            f_view.Children.Remove(this);
-            f_view.Children.Add(f_sub_view);
+            //f_view.Children.Remove(this);
+            //f_view.Children.Add(f_sub_view);
            
         }
 

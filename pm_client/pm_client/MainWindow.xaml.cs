@@ -1,4 +1,5 @@
-﻿using pm_client.util;
+﻿using Newtonsoft.Json;
+using pm_client.util;
 using pm_client.view;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,8 +46,99 @@ namespace pm_client
         public MainWindow()
         {
             InitializeComponent();
-            showBanner();
+            showBanner(new SuperSplash());
+            Log.i("hello", "hello");
+            new Thread(new ThreadStart(this.run)).Start();
+            if (false)
+            {
+                try
+                {
+
+                    /*getMeeting(1,1);
+                    getFileList(1, 1);
+                    beginMeeting(1);
+                    beginVote(1);
+                    getVoteList(1,1);*/
+                    //getVoteResult(1);
+                    //submitOption(1, 1, 1);
+                    WebUtil.downloadFile(4, "a.exe");
+                }catch(Exception e)
+                {
+                    Log.i("ca", e);
+                }
+            }
         }
+        void run()
+        {
+            Thread.CurrentThread.Name="background";
+            while (true)
+            {
+                Thread.Sleep(800);
+                var dt = DateTime.Now;
+                ViewUtil.Find<SuperInfo > (this,"superInfo").time = dt.ToLongTimeString();
+                Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
+                
+            }
+        }
+        bool getMeeting(int id,int deviceId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = id;
+            dict["deviceId"] = deviceId;
+            string s = WebUtil.post("/meeting/info", dict);
+            //Log.i("hi", JsonConvert.DeserializeObject(s));
+            return true;
+        }
+        List<File> getFileList(int meetingId,int roleId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = meetingId;
+            dict["roleId"] = roleId;
+            string str = WebUtil.post("/file/getFileList", dict);
+            return JsonConvert.DeserializeObject<List<File>>(str);
+        }
+        void beginMeeting(int meetingId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = meetingId;
+            WebUtil.post("/host/beginMeeting", dict);
+        }
+        void beginVote(int voteId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["voteId"] = voteId;
+            WebUtil.post("/host/beginVote", dict);
+        }
+        VoteResult getVoteResult(int voteId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["voteId"] = voteId;
+            string str = WebUtil.post("/host/getVoteRes", dict);
+            return JsonConvert.DeserializeObject<VoteResult>(str);
+        }
+        void remoteSwitch(int mode)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["mode"] = mode;
+            WebUtil.post("/host/programLimit", dict);
+        }
+        VoteList getVoteList(int meetingId,int deviceId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = meetingId;
+            dict["deviceId"] = deviceId;
+            string str = WebUtil.post("/host/getVoteRes", dict);
+            return JsonConvert.DeserializeObject<VoteList>(str);
+        }
+        void submitOption(int voteId,int optionId,int deviceId)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["optionId"] = optionId;
+            dict["voteId"] = voteId;
+            dict["deviceId"] = deviceId;
+            WebUtil.post("/vote/submitOption", dict);
+        }
+
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -55,15 +148,14 @@ namespace pm_client
             Grid.SetRow(k, 1);
             Grid.SetColumn(k, 1);
             pm_client.util.Meeting j = new util.Meeting();
-            j.Id = "hello";
+            j.meetingId = 20;
             g.DataContext = j;
             g.Children.Add(k);
 
         }
         splash s;
-        void showBanner()
+        void showBanner(UserControl newView)
         {
-            splash newView = new splash();
             Grid g = this.FindName("container") as Grid;
             Grid.SetRow(newView, 0);
             Grid.SetRowSpan(newView, 2);
@@ -109,7 +201,6 @@ namespace pm_client
             removeFromShowing();
             current = next;
             addToShow(next.Peek());
-
         }
         private void removeFromShowing()
         {
@@ -132,7 +223,9 @@ namespace pm_client
         private void Window_Initialized(object sender, EventArgs e)
         {
             ui.Add("file", new Stack<UserControl>());
-            ui["file"].Push(new view.file_list_view());
+            file_list_view flview = new file_list_view();
+            flview.AddBoard(this);
+            ui["file"].Push(flview);
             ui.Add("settings", new Stack<UserControl>());
             ui["settings"].Push(new view.logout());
             ui.Add("vote", new Stack<UserControl>());
@@ -141,8 +234,6 @@ namespace pm_client
             vlview.AddBoard(this);
             voteList = new List<Vote>();
             (vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
-            voteList.Add(Vote.mock());
-            voteList.Add(Vote.mock());
             ui["vote"].Push(vlview);
             //ui["vote"].Push(new view.vote());
             ui.Add("note", new Stack<UserControl>());

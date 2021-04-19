@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:util="clr-namespace:pm_client.util">
+    <util:SuperInfo x:Key="superInfo" time="haha"/>
     <SolidColorBrush x:Key="sdu_red" Color="#9C0C13"/>
     <SolidColorBrush x:Key="sidebar_white" Color="#F7F7F7"/>
     <SolidColorBrush x:Key="sidebar_text" Color="#77899E"/>

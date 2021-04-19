@@ -3,13 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:pm_client.view"
+             xmlns:local="clr-namespace:pm_client.view" xmlns:util="clr-namespace:pm_client.util"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
-        
+        <util:Meeting x:Key="meeting" 
+                      meetingId="-1" 
+                      title="会议尚未开始" 
+                      beginTime="unknown"
+                      endTime="unknown"
+                      />
     </UserControl.Resources>
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch" 
+          HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="287*"/>
             <ColumnDefinition Width="113*"/>
@@ -41,15 +47,21 @@
                  Padding="80,0,0,0" 
                  Grid.Row="1"
                  Grid.ColumnSpan="2"
-                 Grid.RowSpan="2"   >
+                 Grid.RowSpan="2"   
+                 DataContext="{StaticResource meeting}">
             <TextBlock TextWrapping="Wrap" Text="设备编号" FontFamily="DengXian" FontSize="48" Margin="0,40,0,0"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Id}" Style="{StaticResource lbl_style_2}"/>
-            <TextBlock TextWrapping="Wrap" Text="设备角色" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="TextBlock" Style="{StaticResource lbl_style_2}" />
+            <TextBlock TextWrapping="Wrap" 
+                       Text="{Binding Path=Id}" 
+                       Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" 
+                       Text="设备角色" Style="{StaticResource lbl_style_1}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Character}" Style="{StaticResource lbl_style_2}" />
             <TextBlock TextWrapping="Wrap" Text="会议主题" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="TextBlock" Style="{StaticResource lbl_style_2}"/>
-            <TextBlock TextWrapping="Wrap" Text="会议时间" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="TextBlock" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title}" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="会议开始时间" Style="{StaticResource lbl_style_1}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=TimeStart}" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="会议结束时间" Style="{StaticResource lbl_style_1}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=TimeEnd}" Style="{StaticResource lbl_style_2}"/>
         </ListBox>
         <Button Content="开始会议" 
                 Grid.Column="1" 

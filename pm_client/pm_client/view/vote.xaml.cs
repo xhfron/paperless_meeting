@@ -30,7 +30,7 @@ namespace pm_client.view
         public vote()
         {
             InitializeComponent();
-            Vote v = Vote.mock();
+            Vote v = new Vote();
             this.DataContext = v;
         }
 

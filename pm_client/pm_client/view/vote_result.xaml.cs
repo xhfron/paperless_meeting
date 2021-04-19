@@ -31,7 +31,7 @@ namespace pm_client.view
         {
             InitializeComponent();
             ListBox l = this.FindName("ResultList") as ListBox;
-            l.ItemsSource = new List<VoteChoiceResult>(new VoteChoiceResult[] { VoteChoiceResult.mock(),VoteChoiceResult.mock()});
+            l.ItemsSource = new List<VoteResult>();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

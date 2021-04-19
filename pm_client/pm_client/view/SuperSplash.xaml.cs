@@ -16,17 +16,16 @@ using System.Windows.Shapes;
 namespace pm_client.view
 {
     /// <summary>
-    /// splash.xaml 的交互逻辑
+    /// SuperSplash.xaml 的交互逻辑
     /// </summary>
-    public partial class splash : UserControl
+    public partial class SuperSplash : UserControl
     {
-        public splash()
+        public SuperSplash()
         {
             InitializeComponent();
-            Console.WriteLine("hello");
         }
 
-        private void hide(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
         }
