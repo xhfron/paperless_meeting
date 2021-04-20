@@ -26,6 +26,11 @@ namespace pm_client.view
         {
             this.board = board;
         }
+        public void setVoteList(List<util.Vote> list)
+        {
+            if (list == null) return;
+            this.VoteListViewVoteList.ItemsSource = list;
+        }
 
         public vote_list_view()
         {
@@ -42,6 +47,8 @@ namespace pm_client.view
         private void toVoteDetail(object sender, SelectionChangedEventArgs e)
         {
             vote v = new vote();
+            v.setVote((Vote)this.VoteListViewVoteList.SelectedItem);
+            this.VoteListViewVoteList.SelectedItem = null;
             v.AddBoard(this.board);
             board.Push(v);
         }

@@ -26,6 +26,12 @@ namespace pm_client.view
         {
             this.board = board;
         }
+        util.Vote _vote;
+        public void setVote(util.Vote vote)
+        {
+            this._vote = vote;
+            this.DataContext = vote;
+        }
 
         public vote()
         {

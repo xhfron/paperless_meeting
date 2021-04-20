@@ -129,7 +129,7 @@
             <TextBlock 
                    TextWrapping="Wrap" 
                    Style="{StaticResource big_title}" 
-                   Text="早饭吃什么"
+                   Text="{Binding Path=name}"
                 Grid.ColumnSpan="3"
                 
                     ></TextBlock>
@@ -161,7 +161,7 @@
             Padding="160,40,0,0">
             <TextBlock 
                 TextWrapping="Wrap" 
-                Text="what the hell" 
+                Text="{Binding Path=content}" 
                 Padding="0"
                 Style="{StaticResource title_48}" Margin="0" 
                 />
@@ -171,7 +171,7 @@
                  Grid.Column="0" 
                  Grid.ColumnSpan="4" 
                  SelectionMode="Multiple" 
-                 ItemsSource="{Binding Choices}" 
+                 ItemsSource="{Binding options}" 
                  Margin="40,40,0,0"
                  ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
                  BorderThickness="0">

@@ -121,7 +121,7 @@ namespace pm_client.util
         }
 
     }
-    class File : INotifyPropertyChanged
+    public class File : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -166,7 +166,7 @@ namespace pm_client.util
         }
 
     }
-    class VoteResult : INotifyPropertyChanged
+    public class VoteResult : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -226,7 +226,7 @@ namespace pm_client.util
         }
 
     }
-    class VoteResultCollection : INotifyPropertyChanged
+    public class VoteResultCollection : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -270,7 +270,7 @@ namespace pm_client.util
         }
 
     }
-    class RemoteState : INotifyPropertyChanged
+    public class RemoteState : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -299,7 +299,7 @@ namespace pm_client.util
         }
 
     }
-    class Role : INotifyPropertyChanged
+    public class Role : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -344,7 +344,7 @@ namespace pm_client.util
         }
 
     }
-    class Meeting : INotifyPropertyChanged
+    public class Meeting : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -469,7 +469,7 @@ namespace pm_client.util
         }
 
     }
-    class VoteOption : INotifyPropertyChanged
+    public class VoteOption : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -512,9 +512,13 @@ namespace pm_client.util
                 OnPropertyChanged(new PropertyChangedEventArgs("content"));
             }
         }
+        public override string ToString()
+        {
+            return content;
+        }
 
     }
-    class Vote : INotifyPropertyChanged
+    public class Vote : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -638,7 +642,7 @@ namespace pm_client.util
         }
 
     }
-    class VoteList : INotifyPropertyChanged
+    public class VoteList : INotifyPropertyChanged
     {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;

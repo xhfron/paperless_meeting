@@ -39,6 +39,10 @@ namespace pm_client.view
         {
             say("[loop]",name, text);
         }
+        public static void l(string name, string tip,string text)
+        {
+            say("[loop]", name, $"[{tip}]"+text);
+        }
         public static void i(string name,object obj)
         {
             if (obj == null)

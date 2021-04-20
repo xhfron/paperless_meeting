@@ -72,18 +72,20 @@ namespace pm_client.util
         }
         public static string post_(string url,Dictionary<string,object> dict)
         {
+            Log.l(name, "post");
+            Log.l(name, "url", url);
             var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
             request.AlwaysMultipartFormData = true;
             foreach(string key in dict.Keys)
             {
                 request.AddParameter(key, dict[key]);
+                Log.l(name, "param", $"{key}:{dict[key]}");
             }
-            Log.i("new post", request);
             var response = client.Post(request);
-            Log.i("new post", response.StatusCode.ToString());
+            Log.l(name, "status", response.StatusCode.ToString());
             string res = response.Content;
-            Log.i("new post", response.Content);
+            Log.l(name, "res", res);
             return res;
         }
         public static void downloadFile(int id,string localName)

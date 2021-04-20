@@ -70,7 +70,7 @@
                             <ColumnDefinition Width="562*"/>
                             <ColumnDefinition Width="113*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=Title}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
+                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=name}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
                         <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
                         <TextBlock Foreground="{StaticResource font_black}" Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
                     </Grid>
@@ -93,7 +93,10 @@
                     Margin="32,40,0,40"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"/>
-        <ListBox Grid.Row="1" Style="{DynamicResource VoteList}" ItemContainerStyle="{StaticResource VoteListListBoxContainerStyle}" x:Name="VoteListViewVoteList" SelectionChanged="toVoteDetail" BorderThickness="0">
+        <ListBox Grid.Row="1" 
+                 Style="{DynamicResource VoteList}" 
+                 ItemContainerStyle="{StaticResource VoteListListBoxContainerStyle}" 
+                 x:Name="VoteListViewVoteList" SelectionChanged="toVoteDetail" BorderThickness="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     

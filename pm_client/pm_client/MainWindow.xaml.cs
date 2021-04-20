@@ -4,6 +4,7 @@ using pm_client.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -76,7 +77,7 @@ namespace pm_client
                 Thread.Sleep(800);
                 var dt = DateTime.Now;
                 ViewUtil.Find<SuperInfo > (this,"superInfo").time = dt.ToLongTimeString();
-                Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
+                //Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
                 
             }
         }
@@ -122,13 +123,13 @@ namespace pm_client
             dict["mode"] = mode;
             WebUtil.post("/host/programLimit", dict);
         }
-        VoteList getVoteList(int meetingId,int deviceId)
+        List<util.Vote> getVoteList(int meetingId,int deviceId)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["meetingId"] = meetingId;
             dict["deviceId"] = deviceId;
-            string str = WebUtil.post("/host/getVoteRes", dict);
-            return JsonConvert.DeserializeObject<VoteList>(str);
+            string str = WebUtil.post("/vote/getVoteList", dict);
+            return JsonConvert.DeserializeObject<List<util.Vote>>(str);
         }
         void submitOption(int voteId,int optionId,int deviceId)
         {
@@ -179,6 +180,15 @@ namespace pm_client
             (FindName("VoteBtn") as RadioButton).IsChecked = false;
             (FindName("NoteBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["settings"]);
+        }
+        async void t()
+        {
+            ClientWebSocket webSocket = new ClientWebSocket();
+            await webSocket.ConnectAsync(new Uri("ws://10.10.13.140:8080/"),CancellationToken.None);
+
+            await webSocket.SendAsync(new ArraySegment<byte>(bsend), WebSocketMessageType.Binary, true, CancellationToken.None);
+            await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "1", CancellationToken.None);
+            webSocket.Dispose();
         }
         private void toVote(object sender, RoutedEventArgs e)
         {
@@ -231,9 +241,10 @@ namespace pm_client
             ui.Add("vote", new Stack<UserControl>());
 
             view.vote_list_view vlview = new view.vote_list_view();
+            vlview.setVoteList(getVoteList(1, 1));
             vlview.AddBoard(this);
-            voteList = new List<Vote>();
-            (vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
+            //voteList = new List<Vote>();
+            //(vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
             ui["vote"].Push(vlview);
             //ui["vote"].Push(new view.vote());
             ui.Add("note", new Stack<UserControl>());
