@@ -71,8 +71,8 @@
                             <ColumnDefinition Width="113*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="{Binding Path=name}" VerticalAlignment="Center"  FontFamily="DengXian Light" FontSize="48" Grid.ColumnSpan="2" Height="54" Padding="20,0,0,0"  />
-                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
-                        <TextBlock Foreground="{StaticResource font_black}" Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
+                        <TextBlock Foreground="{StaticResource font_black}" HorizontalAlignment="Stretch"   Grid.Row="1" TextWrapping="Wrap" Text=" " VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light" Padding="18,0,0,0"/>
+                        <TextBlock Foreground="{StaticResource font_black}" Grid.Column="2" HorizontalAlignment="Stretch"   TextWrapping="Wrap" Text=" " VerticalAlignment="Center"  FontSize="32" FontFamily="DengXian Light"/>
                     </Grid>
                 </Border>
             </Border>

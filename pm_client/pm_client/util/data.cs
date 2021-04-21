@@ -5,80 +5,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pm_client.util
-{
-    
+namespace pm_client.util {
 
-    class BtnData : INotifyPropertyChanged
-    {
+
+    class BtnData : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
 
         private string text;
-        public string Text
-        {
-            get
-            {
+        public string Text {
+            get {
                 return text;
             }
-            set
-            {
+            set {
                 text = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("Text"));
             }
         }
 
         private string picdefault;
-        public string picDefault
-        {
-            get
-            {
+        public string picDefault {
+            get {
                 return picdefault;
             }
-            set
-            {
+            set {
                 picdefault = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("picDefault"));
             }
         }
 
         private string picchecked;
-        public string picChecked
-        {
-            get
-            {
+        public string picChecked {
+            get {
                 return picchecked;
             }
-            set
-            {
+            set {
                 picchecked = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("picChecked"));
             }
         }
 
         private string piccurrent;
-        public string picCurrent
-        {
-            get
-            {
+        public string picCurrent {
+            get {
                 return piccurrent;
             }
-            set
-            {
+            set {
                 piccurrent = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("picCurrent"));
             }
         }
 
-        public static BtnData mock()
-        {
+        public static BtnData mock() {
             BtnData res = new BtnData();
 
 
@@ -92,58 +75,59 @@ namespace pm_client.util
             return res;
         }
     }
-    class SuperInfo : INotifyPropertyChanged
-    {
+    class SuperInfo : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private string _time;
 
 
-        public string time
-        {
+        public string time {
 
-            get
-            {
+            get {
                 return _time;
             }
-            set
-            {
+            set {
                 _time = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("time"));
             }
         }
 
     }
-    public class File : INotifyPropertyChanged
-    {
+    class File : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
+            }
+        }
+        private int _id;
+
+
+        public int id {
+
+            get {
+                return _id;
+            }
+            set {
+                _id = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("id"));
             }
         }
         private string _name;
 
 
-        public string name
-        {
+        public string name {
 
-            get
-            {
+            get {
                 return _name;
             }
-            set
-            {
+            set {
                 _name = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
@@ -151,44 +135,41 @@ namespace pm_client.util
         private string _address;
 
 
-        public string address
-        {
+        public string address {
 
-            get
-            {
+            get {
                 return _address;
             }
-            set
-            {
+            set {
                 _address = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("address"));
             }
         }
 
+        public void load(File b) {
+            this.id = b.id;
+            this.name = b.name;
+            this.address = b.address;
+
+        }
     }
-    public class VoteResult : INotifyPropertyChanged
-    {
+    public class VoteResult : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _optionId;
 
 
-        public int optionId
-        {
+        public int optionId {
 
-            get
-            {
+            get {
                 return _optionId;
             }
-            set
-            {
+            set {
                 _optionId = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("optionId"));
             }
@@ -196,132 +177,105 @@ namespace pm_client.util
         private int _number;
 
 
-        public int number
-        {
+        public int number {
 
-            get
-            {
+            get {
                 return _number;
             }
-            set
-            {
+            set {
                 _number = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("number"));
             }
         }
         private List<string> _devices;
 
-        public List<string> devices
-        {
+        public List<string> devices {
 
-            get
-            {
+            get {
                 return _devices;
             }
-            set
-            {
+            set {
                 _devices = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("devices"));
             }
         }
 
     }
-    public class VoteResultCollection : INotifyPropertyChanged
-    {
+    public class VoteResultCollection : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _voteId;
 
 
-        public int voteId
-        {
+        public int voteId {
 
-            get
-            {
+            get {
                 return _voteId;
             }
-            set
-            {
+            set {
                 _voteId = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("voteId"));
             }
         }
         private List<VoteResult> _res;
 
-        public List<VoteResult> res
-        {
+        public List<VoteResult> res {
 
-            get
-            {
+            get {
                 return _res;
             }
-            set
-            {
+            set {
                 _res = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("res"));
             }
         }
 
     }
-    public class RemoteState : INotifyPropertyChanged
-    {
+    public class RemoteState : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private string _state;
 
 
-        public string state
-        {
+        public string state {
 
-            get
-            {
+            get {
                 return _state;
             }
-            set
-            {
+            set {
                 _state = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("state"));
             }
         }
 
     }
-    public class Role : INotifyPropertyChanged
-    {
+    public class Role : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _id;
 
 
-        public int id
-        {
+        public int id {
 
-            get
-            {
+            get {
                 return _id;
             }
-            set
-            {
+            set {
                 _id = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("id"));
             }
@@ -329,76 +283,65 @@ namespace pm_client.util
         private string _name;
 
 
-        public string name
-        {
+        public string name {
 
-            get
-            {
+            get {
                 return _name;
             }
-            set
-            {
+            set {
                 _name = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
         }
+        public void load(Role b) {
+            this.id = b.id;
+            this.name = b.name;
+        }
 
     }
-    public class Meeting : INotifyPropertyChanged
-    {
+    class Meeting : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _meetingId;
 
 
-        public int meetingId
-        {
+        public int meetingId {
 
-            get
-            {
+            get {
                 return _meetingId;
             }
-            set
-            {
+            set {
                 _meetingId = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("meetingId"));
             }
         }
-        private string _title;
+        private string _name;
 
 
-        public string title
-        {
+        public string name {
 
-            get
-            {
-                return _title;
+            get {
+                return _name;
             }
-            set
-            {
-                _title = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("title"));
+            set {
+                _name = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
         }
         private string _content;
 
 
-        public string content
-        {
+        public string content {
 
-            get
-            {
+            get {
                 return _content;
             }
-            set
-            {
+            set {
                 _content = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("content"));
             }
@@ -406,15 +349,12 @@ namespace pm_client.util
         private string _beginTime;
 
 
-        public string beginTime
-        {
+        public string beginTime {
 
-            get
-            {
+            get {
                 return _beginTime;
             }
-            set
-            {
+            set {
                 _beginTime = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("beginTime"));
             }
@@ -422,15 +362,12 @@ namespace pm_client.util
         private string _endTime;
 
 
-        public string endTime
-        {
+        public string endTime {
 
-            get
-            {
+            get {
                 return _endTime;
             }
-            set
-            {
+            set {
                 _endTime = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("endTime"));
             }
@@ -438,15 +375,12 @@ namespace pm_client.util
         private int _deviceId;
 
 
-        public int deviceId
-        {
+        public int deviceId {
 
-            get
-            {
+            get {
                 return _deviceId;
             }
-            set
-            {
+            set {
                 _deviceId = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("deviceId"));
             }
@@ -454,44 +388,45 @@ namespace pm_client.util
         private Role _role;
 
 
-        public Role role
-        {
+        public Role role {
 
-            get
-            {
+            get {
                 return _role;
             }
-            set
-            {
+            set {
                 _role = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("role"));
             }
         }
 
+        public void load(Meeting b) {
+            this.meetingId = b.meetingId;
+            this.name = b.name;
+            this.content = b.content;
+            this.beginTime = b.beginTime;
+            this.endTime = b.endTime;
+            this.deviceId = b.deviceId;
+            this.role = b.role;
+
+        }
     }
-    public class VoteOption : INotifyPropertyChanged
-    {
+    public class VoteOption : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _id;
 
 
-        public int id
-        {
+        public int id {
 
-            get
-            {
+            get {
                 return _id;
             }
-            set
-            {
+            set {
                 _id = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("id"));
             }
@@ -499,48 +434,38 @@ namespace pm_client.util
         private string _content;
 
 
-        public string content
-        {
+        public string content {
 
-            get
-            {
+            get {
                 return _content;
             }
-            set
-            {
+            set {
                 _content = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("content"));
             }
         }
-        public override string ToString()
-        {
+        public override string ToString() {
             return content;
         }
 
     }
-    public class Vote : INotifyPropertyChanged
-    {
+    public class Vote : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private int _id;
 
 
-        public int id
-        {
+        public int id {
 
-            get
-            {
+            get {
                 return _id;
             }
-            set
-            {
+            set {
                 _id = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("id"));
             }
@@ -548,15 +473,12 @@ namespace pm_client.util
         private string _name;
 
 
-        public string name
-        {
+        public string name {
 
-            get
-            {
+            get {
                 return _name;
             }
-            set
-            {
+            set {
                 _name = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
@@ -564,15 +486,12 @@ namespace pm_client.util
         private string _content;
 
 
-        public string content
-        {
+        public string content {
 
-            get
-            {
+            get {
                 return _content;
             }
-            set
-            {
+            set {
                 _content = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("content"));
             }
@@ -580,15 +499,12 @@ namespace pm_client.util
         private int _type;
 
 
-        public int type
-        {
+        public int type {
 
-            get
-            {
+            get {
                 return _type;
             }
-            set
-            {
+            set {
                 _type = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("type"));
             }
@@ -596,15 +512,12 @@ namespace pm_client.util
         private int _anonymous;
 
 
-        public int anonymous
-        {
+        public int anonymous {
 
-            get
-            {
+            get {
                 return _anonymous;
             }
-            set
-            {
+            set {
                 _anonymous = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("anonymous"));
             }
@@ -612,58 +525,46 @@ namespace pm_client.util
         private int _meetingId;
 
 
-        public int meetingId
-        {
+        public int meetingId {
 
-            get
-            {
+            get {
                 return _meetingId;
             }
-            set
-            {
+            set {
                 _meetingId = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("meetingId"));
             }
         }
         private List<VoteOption> _options;
 
-        public List<VoteOption> options
-        {
+        public List<VoteOption> options {
 
-            get
-            {
+            get {
                 return _options;
             }
-            set
-            {
+            set {
                 _options = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("options"));
             }
         }
 
     }
-    public class VoteList : INotifyPropertyChanged
-    {
+    public class VoteList : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(PropertyChangedEventArgs e) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, e);
             }
         }
         private List<Vote> _voteList;
 
-        public List<Vote> voteList
-        {
+        public List<Vote> voteList {
 
-            get
-            {
+            get {
                 return _voteList;
             }
-            set
-            {
+            set {
                 _voteList = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("voteList"));
             }

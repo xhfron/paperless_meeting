@@ -15,8 +15,10 @@
         IsTabStop="True" 
         Top="0" 
         Initialized="Window_Initialized" 
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Unloaded="Window_Unloaded">
     <Window.Resources>
+        
+        
         <util:BtnData x:Key="file_data" Text="文件" picDefault="res/drawable/file.png" picChecked="res/drawable/file_checked.png"/>
         <util:BtnData x:Key="remote_data" Text="应用" picDefault="res/drawable/remote.png" picChecked="res/drawable/remote_checked.png"/>
         <util:BtnData x:Key="note_data" Text="笔记" picDefault="res/drawable/note.png" picChecked="res/drawable/note_checked.png"/>
@@ -115,7 +117,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Stretch" 
                     Background="{StaticResource sdu_red}" Orientation="Horizontal" >
-            <TextBlock TextWrapping="Wrap" Text="TextBlock" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" DataContext="{StaticResource meeting}" Text="{Binding name}" FontFamily="DengXian" FontSize="64" Foreground="White" VerticalAlignment="Center"/>
         </StackPanel>
         <Border BorderBrush="Black" 
                 BorderThickness="1" 

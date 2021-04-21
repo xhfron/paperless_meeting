@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace pm_client.view
 {
@@ -19,17 +20,23 @@ namespace pm_client.view
     /// </summary>
     public partial class Log : Window
     {
+        public static Dispatcher fuckingCSharp;
         static Log log;
         public static void say(string type,string name,string text)
         {
-            if (log == null)
+            fuckingCSharp.Invoke(() =>
             {
-                log = new Log();
-                log.Show();
-            }
-            TextBox echo = (TextBox)log.FindName("echo");
-            echo.AppendText(type+"["+name+"]"+text);
-            echo.AppendText("\n");
+
+                if (log == null)
+                {
+                    log = new Log();
+                    log.Show();
+                }
+
+                TextBox echo = (TextBox)log.FindName("echo");
+                echo.AppendText(type + "[" + name + "]" + text);
+                echo.AppendText("\n");
+            });
         }
         public static void i(string name, string text)
         {

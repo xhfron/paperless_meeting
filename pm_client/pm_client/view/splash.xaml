@@ -7,12 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
-        <util:Meeting x:Key="meeting" 
-                      meetingId="-1" 
-                      title="会议尚未开始" 
-                      beginTime="unknown"
-                      endTime="unknown"
-                      />
+        
     </UserControl.Resources>
     <Grid VerticalAlignment="Stretch" 
           HorizontalAlignment="Stretch">
@@ -48,20 +43,20 @@
                  Grid.Row="1"
                  Grid.ColumnSpan="2"
                  Grid.RowSpan="2"   
-                 DataContext="{StaticResource meeting}">
+                 DataContext="{DynamicResource meeting}">
             <TextBlock TextWrapping="Wrap" Text="设备编号" FontFamily="DengXian" FontSize="48" Margin="0,40,0,0"/>
             <TextBlock TextWrapping="Wrap" 
-                       Text="{Binding Path=Id}" 
+                       Text="{Binding Path=deviceId}" 
                        Style="{StaticResource lbl_style_2}"/>
             <TextBlock TextWrapping="Wrap" 
                        Text="设备角色" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Character}" Style="{StaticResource lbl_style_2}" />
+            <TextBlock TextWrapping="Wrap" DataContext="{DynamicResource role}" Text="{Binding Path=name}" Style="{StaticResource lbl_style_2}" />
             <TextBlock TextWrapping="Wrap" Text="会议主题" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title}" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=name}" Style="{StaticResource lbl_style_2}"/>
             <TextBlock TextWrapping="Wrap" Text="会议开始时间" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=TimeStart}" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=beginTime}" Style="{StaticResource lbl_style_2}"/>
             <TextBlock TextWrapping="Wrap" Text="会议结束时间" Style="{StaticResource lbl_style_1}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Path=TimeEnd}" Style="{StaticResource lbl_style_2}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=endTime}" Style="{StaticResource lbl_style_2}"/>
         </ListBox>
         <Button Content="开始会议" 
                 Grid.Column="1" 

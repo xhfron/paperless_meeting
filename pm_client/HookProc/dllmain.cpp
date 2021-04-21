@@ -2,6 +2,7 @@
 #include "pch.h"
 
 #include "HookProc.h"
+#include <cstdlib>
 
 extern "C"
 {
@@ -41,21 +42,41 @@ LRESULT CALLBACK ProcessClose(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	return CallNextHookEx(hThis, nCode, wParam, lParam);
 }
-
+	wchar_t ws[203];
 void StartupHook(void)
 {
-	hThis = SetWindowsHookExW(WH_GETMESSAGE, ProcessClose, GetModuleHandleW(L"ProcHook.dll"), 0);
+	DWORD dwPID;
+	HMODULE h = GetModuleHandleW(L"ProcHook.dll");
+	HINSTANCE hi= LoadLibrary(TEXT(".\\HookProc.dll"));
+	hThis = SetWindowsHookExW(WH_GETMESSAGE, ProcessClose,hi ,0 /*GetWindowThreadProcessId(FindWindow(NULL, L"pm_client"), &dwPID)*/);
+	long long n = (long long) hThis;
+	int i = 0;
+	if (n == 0) {
+		ws[i++] = L'e';
+		if (hi == NULL)ws[i++] = L'x';
+		n = GetLastError();
+	}
+	for (;n != 0;n /= 10) {
+		ws[i++] = '0' + n % 10;
+	}
+	ws[i++] = '\0';
+	
+	MessageBoxW(FindWindow(NULL, L"pm_client"), ws, L"WORLD", MB_OK);
 }
 
 void CloseHook(void)
 {
 	UnhookWindowsHookEx(hThis);
 }
-
+#include <fstream>
 void ProcessHookUp()
 {
 	DWORD proId = GetCurrentProcessId();
 	HWND hWnd = FindWindow(NULL, L"pm_client");
+	std::ofstream x("C:\\mylog.txt",std::ios::app);
+	x << proId << "\n" << hWnd << "\n" << std::endl;
+	x.flush();
+	x.close();
 	if (hWnd)
 	{
 		PostMessage(hWnd, WM_USER + 7, 0, proId);

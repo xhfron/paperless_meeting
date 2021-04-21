@@ -3,27 +3,15 @@ using pm_client.util;
 using pm_client.view;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.WebSockets;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-
-namespace pm_client
-{
+namespace pm_client {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
@@ -39,22 +27,21 @@ namespace pm_client
     /// xml，cs 大驼峰
     /// 
     /// 角色_功能_组件_状态
-    public partial class MainWindow : Window, INavigator
-    {
+    public partial class MainWindow : Window, INavigator {
         Stack<UserControl> current;
         Dictionary<string, Stack<UserControl>> ui = new Dictionary<string, Stack<UserControl>>();
-        List<Vote> voteList;
-        public MainWindow()
-        {
+        ProcessManager p;
+        public MainWindow() {
+            Log.fuckingCSharp = this.Dispatcher;
+            var t = this.Dispatcher;
             InitializeComponent();
+            showBanner(new splash());
             showBanner(new SuperSplash());
             Log.i("hello", "hello");
             new Thread(new ThreadStart(this.run)).Start();
-            if (false)
-            {
-                try
-                {
-
+            
+            if (false) {
+                try {
                     /*getMeeting(1,1);
                     getFileList(1, 1);
                     beginMeeting(1);
@@ -63,86 +50,47 @@ namespace pm_client
                     //getVoteResult(1);
                     //submitOption(1, 1, 1);
                     WebUtil.downloadFile(4, "a.exe");
-                }catch(Exception e)
-                {
+                } catch (Exception e) {
                     Log.i("ca", e);
                 }
             }
+            
         }
-        void run()
-        {
-            Thread.CurrentThread.Name="background";
-            while (true)
-            {
+        void run() {
+            Thread.CurrentThread.Name = "background";
+            while (true) {
                 Thread.Sleep(800);
                 var dt = DateTime.Now;
-                ViewUtil.Find<SuperInfo > (this,"superInfo").time = dt.ToLongTimeString();
+                ViewUtil.Find<SuperInfo>(this, "superInfo").time = dt.ToShortTimeString();
                 //Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
-                
+
             }
         }
-        bool getMeeting(int id,int deviceId)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["meetingId"] = id;
-            dict["deviceId"] = deviceId;
-            string s = WebUtil.post("/meeting/info", dict);
-            //Log.i("hi", JsonConvert.DeserializeObject(s));
-            return true;
-        }
-        List<File> getFileList(int meetingId,int roleId)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["meetingId"] = meetingId;
-            dict["roleId"] = roleId;
-            string str = WebUtil.post("/file/getFileList", dict);
-            return JsonConvert.DeserializeObject<List<File>>(str);
-        }
-        void beginMeeting(int meetingId)
-        {
+
+
+        void beginMeeting(int meetingId) {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["meetingId"] = meetingId;
             WebUtil.post("/host/beginMeeting", dict);
         }
-        void beginVote(int voteId)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["voteId"] = voteId;
-            WebUtil.post("/host/beginVote", dict);
-        }
-        VoteResult getVoteResult(int voteId)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["voteId"] = voteId;
-            string str = WebUtil.post("/host/getVoteRes", dict);
-            return JsonConvert.DeserializeObject<VoteResult>(str);
-        }
-        void remoteSwitch(int mode)
-        {
+
+
+        void remoteSwitch(int mode) {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["mode"] = mode;
             WebUtil.post("/host/programLimit", dict);
         }
-        List<util.Vote> getVoteList(int meetingId,int deviceId)
-        {
+        List<util.Vote> getVoteList(int meetingId, int deviceId) {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["meetingId"] = meetingId;
             dict["deviceId"] = deviceId;
             string str = WebUtil.post("/vote/getVoteList", dict);
             return JsonConvert.DeserializeObject<List<util.Vote>>(str);
         }
-        void submitOption(int voteId,int optionId,int deviceId)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["optionId"] = optionId;
-            dict["voteId"] = voteId;
-            dict["deviceId"] = deviceId;
-            WebUtil.post("/vote/submitOption", dict);
-        }
 
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show("hello");
             Grid g = this.FindName("container") as Grid;
             UserControl k = new pm_client.view.vote();
@@ -154,9 +102,7 @@ namespace pm_client
             g.Children.Add(k);
 
         }
-        splash s;
-        void showBanner(UserControl newView)
-        {
+        void showBanner(UserControl newView) {
             Grid g = this.FindName("container") as Grid;
             Grid.SetRow(newView, 0);
             Grid.SetRowSpan(newView, 2);
@@ -165,63 +111,54 @@ namespace pm_client
             Grid.SetZIndex(newView, 1288);
             g.Children.Add(newView);
         }
-        RadioButton lastOne;
 
-        private void toFile(object sender, RoutedEventArgs e)
-        {
+        private void toFile(object sender, RoutedEventArgs e) {
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
-            
+
             replaceBy(ui["file"]);
         }
-        private void toSettings(object sender, RoutedEventArgs e)
-        {
+        private void toSettings(object sender, RoutedEventArgs e) {
             (FindName("RemoteBtn") as RadioButton).IsChecked = false;
             (FindName("FileBtn") as RadioButton).IsChecked = false;
             (FindName("VoteBtn") as RadioButton).IsChecked = false;
             (FindName("NoteBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["settings"]);
         }
-        async void t()
-        {
+        async void t() {
             ClientWebSocket webSocket = new ClientWebSocket();
-            await webSocket.ConnectAsync(new Uri("ws://10.10.13.140:8080/"),CancellationToken.None);
+            await webSocket.ConnectAsync(new Uri("wss://echo.websocket.org"), CancellationToken.None);
 
-            await webSocket.SendAsync(new ArraySegment<byte>(bsend), WebSocketMessageType.Binary, true, CancellationToken.None);
+
+            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("hello")), WebSocketMessageType.Binary, true, CancellationToken.None);
+            //await webSocket.ReceiveAsync(null,null);
             await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "1", CancellationToken.None);
             webSocket.Dispose();
         }
-        private void toVote(object sender, RoutedEventArgs e)
-        {
+        private void toVote(object sender, RoutedEventArgs e) {
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["vote"]);
         }
-        private void toNote(object sender, RoutedEventArgs e)
-        {
+        private void toNote(object sender, RoutedEventArgs e) {
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["note"]);
         }
-        private void toRemote(object sender, RoutedEventArgs e)
-        {
+        private void toRemote(object sender, RoutedEventArgs e) {
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["remote"]);
         }
-       
-        private void replaceBy(Stack<UserControl> next)
-        {
+
+        private void replaceBy(Stack<UserControl> next) {
             removeFromShowing();
             current = next;
             addToShow(next.Peek());
         }
-        private void removeFromShowing()
-        {
-            if (current != null)
-            {
+        private void removeFromShowing() {
+            if (current != null) {
                 Grid g = this.FindName("container") as Grid;
                 g.Children.Remove(current.Peek());
             }
         }
-        private void addToShow(UserControl newView)
-        {
+        private void addToShow(UserControl newView) {
             Grid g = this.FindName("container") as Grid;
             Grid.SetRow(newView, 1);
             Grid.SetColumn(newView, 1);
@@ -229,9 +166,8 @@ namespace pm_client
             g.Children.Add(newView);
         }
 
-       
-        private void Window_Initialized(object sender, EventArgs e)
-        {
+
+        private void Window_Initialized(object sender, EventArgs e) {
             ui.Add("file", new Stack<UserControl>());
             file_list_view flview = new file_list_view();
             flview.AddBoard(this);
@@ -256,37 +192,42 @@ namespace pm_client
 
 
         }
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            System.Console.WriteLine("hello");
-            if (msg == 0x0400 + 7)
-            {
+        IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
+            //Log.l("msg", "" + msg);
+            if (msg == 0x0400 + 7) {
                 int proId = lParam.ToInt32();
-                System.Console.WriteLine("" + proId + ":started");
+                Log.i("hook", $"pid:{proId}");
             }
             return IntPtr.Zero;
         }
 
-        public void Push(UserControl newView)
-        {
+        public void Push(UserControl newView) {
             removeFromShowing();
             current.Push(newView);
             addToShow(newView);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-           //you never got where it crashed
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            //if (true) return;
+            //you never got where it crashed
+            p = new ProcessManager();
+            HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+            if (source != null) source.AddHook(WndProc); else Log.i("wndproc", "failed");
+            p.StartupHook();
         }
 
-        private void back(object sender, TouchEventArgs e)
-        {
-            if (current.Count >= 2)
-            {
+        private void back(object sender, TouchEventArgs e) {
+            //Log.l("main", "depth", "" + current.Count);
+            if (current.Count >= 2) {
                 removeFromShowing();
                 current.Pop();
                 addToShow(current.Peek());
             }
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e) {
+            //if (true) return;
+            p.CloseHook();
         }
     }
 }

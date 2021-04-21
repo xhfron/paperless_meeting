@@ -60,7 +60,7 @@
                      HorizontalAlignment="Stretch"   
                      Grid.Row="1" 
                      VerticalAlignment="Stretch" 
-                     ItemContainerStyle="{StaticResource FileListStyle}">
+                     ItemContainerStyle="{StaticResource FileListStyle}" SelectionChanged="openFile">
 
                 <!--ListBoxItem x:Name="item1" PreviewMouseDown="item1_PreviewMouseDown">
                     <Border BorderThickness="0,0,0,2">
@@ -82,10 +82,21 @@
 
 
             </ListBox>
+        <StackPanel x:Name="loading_tip" Height="110"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="20"
+                    Grid.Row="0"
+                    Grid.RowSpan="20"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0,40,200,0"
+                    Orientation="Horizontal">
+            <TextBlock x:Name="loading_text" Height="110" Style="{StaticResource title_48}" Text="???"/>
             <Image x:Name="loading_img"
                 Source="/res/drawable/loading.jpg" 
                    Width="110" Height="100">
             </Image>
+        </StackPanel>
 
         </Grid>
         

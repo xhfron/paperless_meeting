@@ -10,7 +10,8 @@ namespace pm_client.util
     {
         public static string protocol="http";
         public static string domain= "paperless.ronwhite.online";
-        public static string fileDir = @".";
+        public static string fileDir = @".\tfile";
         public static int port = 10087;
+        public static bool debug = true;
     }
 }

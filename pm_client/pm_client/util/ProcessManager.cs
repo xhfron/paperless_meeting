@@ -40,10 +40,14 @@ namespace pm_client.util
             pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
             closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
         }
+        public void test() {
+            pDll = LoadLibrary(@"C:\Users\Administrator\_____Desktop\ct\paperless_meeting\pm_client\x64\Debug\HookProc.dll");
+
+        }
 
         static ProcessManager()
         {
-            pDll = LoadLibrary(@"C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\x64\Debug\HookProc.dll");
+            pDll = LoadLibrary(@".\HookProc.dll");
             Console.WriteLine(pDll);
         }
     }
