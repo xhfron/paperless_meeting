@@ -49,11 +49,8 @@ public class FileController {
      * }
      */
     @GetMapping("download")
-    Msg downloadFile(HttpServletResponse response, @RequestParam int fileId) {
+    void downloadFile(HttpServletResponse response, @RequestParam int fileId) {
         File file = fileService.getFileById(fileId);
-        if(!file.exists()){
-            return new Msg(200,"下载文件不存在",null);
-        }
         response.reset();
         response.setContentType("application/octet-stream");
         response.setCharacterEncoding("utf-8");
@@ -71,6 +68,5 @@ public class FileController {
         } catch (IOException e) {
            e.printStackTrace();
         }
-        return new Msg(200,"ok",null);
     }
 }
