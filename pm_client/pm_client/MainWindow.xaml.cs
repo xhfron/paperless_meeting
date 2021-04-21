@@ -208,7 +208,7 @@ namespace pm_client {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            //if (true) return;
+            if (true) return;
             //you never got where it crashed
             p = new ProcessManager();
             HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
@@ -226,7 +226,7 @@ namespace pm_client {
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e) {
-            //if (true) return;
+            if (true) return;
             p.CloseHook();
         }
     }
