@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>无纸化会议管理系统</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/create.css" />
+		<link rel="stylesheet" type="text/css" href="css/role0.css" />
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/create.js"></script>
+		<script type="text/javascript" src="js/role0.js"></script>
+		
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+	</head>
+	
+	<body>
+		
+		<div id="page" class="page">
+			
+			<div class="left">
+				<div class="item"></div>
+				<div id="create_meeting" class="item">
+					<a onclick="create_meeting()">创建会议</a>
+				</div>
+				<div id="meeting_record" class="item">
+					<a>会议记录</a>
+				</div>
+				<div id="device_manage" class="item">
+					<a>设备管理</a>
+				</div>
+				<div style="border:1px solid gray; height: 58%"></div>
+			</div>
+			
+			<div class="right">
+				
+				<div class="title">
+					<a>无纸化会议管理系统</a>
+				</div>
+				
+				<div class="mainarea">
+					
+					<div id="porgress_bar" class="progressbar">
+						<div id="step1" class="progressitem" style="margin-left: 5%;">
+							<a>①会议信息</a>
+						</div>
+						<div class="progressitem" style="margin-left: 21%;">
+							<a>></a>
+						</div>
+						<div id="step2" class="progressitem" style="margin-left: 32%;">
+							<a>②step2</a>
+						</div>
+						<div class="progressitem" style="margin-left: 48%;">
+							<a>></a>
+						</div>
+						<div id="step3" class="progressitem" style="margin-left: 59%;">
+							<a>③step3</a>
+						</div>
+						<div class="progressitem" style="margin-left: 76%;">
+							<a>></a>
+						</div>
+						<div id="step4" class="progressitem" style="margin-left: 88%;">
+							<a>④step4</a>
+						</div>
+					</div>
+					
+					<div id="meeting_information2" class="meetinginformation2">
+						
+						<div class="rolebar">
+							<div id="create_meeting" class="role" style="background: #abcefc;">
+								<a>主持人</a>
+							</div>
+							<div id="meeting_record" class="role" style="background: #8aa7cc;">
+								<a>后勤</a>
+							</div>
+							<div id="device_manage" class="role" style="background: #8aa7cc;">
+								<a>人事</a>
+							</div>
+							<div style="background: #F5F7FA; height: 58%"></div>
+							<div id="device_manage" class="role" style="background: #8aa7cc;">
+								<a @click="newrole">新角色</a>
+							</div>
+						</div>
+			
+						<div class="jurisdictionarea">
+							
+							<div class="filelist">
+								<!--                               	                             
+								<table>
+									<tr>
+										<td width="25%">
+											<a class="gray">文件</a>
+										</td>
+										<td width="25%">
+											<a class="gray">状态</a>
+										</td>
+										<td width="25%">
+											<input type="text" placeholder="输入关键字搜索"/>
+										</td>
+									</tr>
+									<tr>
+										<td width="25%">
+											<a class="gray">巴啦啦能量.pdf</a>
+										</td>
+										<td width="25%">
+											<a class="gray">可见</a>
+										</td>
+										<td width="25%">
+											<button class="revocation">撤销授权</button>
+										</td>
+									</tr>
+									<tr>
+										<td width="25%">
+											<a class="gray">巴啦啦能量.pdf</a>
+										</td>
+										<td width="25%">
+											<a class="gray">不可见</a>
+										</td>
+										<td width="25%">
+											<button class="revocation">撤销授权</button>
+										</td>
+									</tr>
+								</table>
+								-->
+								
+								<el-table :data="tableData" style="width: 100%">
+      								<el-table-column prop="filename" label="文件" width="180"></el-table-column>
+      								<el-table-column prop="status" label="状态" width="180"></el-table-column>
+      								<el-table-column>
+      									<template slot="header" slot-scope="scope">
+      										<el-input v-model="search" size="mini" placeholder="输入关键字搜索"/>
+      									</template>
+      									<template slot-scope="scope">
+      										<el-button style="margin-left: 72%;" size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">撤销授权</el-button>
+      									</template>
+      								</el-table-column>
+								</el-table>
+								
+							</div>
+							
+							<div class="padlist">
+								
+								<div class="pad" style="margin-left: 1%;">
+									<a style="position: absolute; margin-top: 10%; margin-left: 12%;">SCPAD1</a>
+									<button class="deletebutton">删除</button>
+								</div>
+								
+								<div class="pad" style="margin-left: 12%;">
+									<a style="position: absolute; margin-top: 10%; margin-left: 12%;">SCPAD1</a>
+									<button class="deletebutton">删除</button>
+								</div>
+								
+								<div class="pad" style="margin-left: 23%;">
+									<a style="position: absolute; margin-top: 10%; margin-left: 12%;">SCPAD1</a>
+									<button class="deletebutton">删除</button>
+								</div>
+								
+								<div class="adddevice">
+									<button class="addbutton" @click="adddevice">添加设备</button>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+					</div>
+				
+					<div class="submit">
+						<button class="submitbutton" @click="submit">提交</button>
+					</div>
+					
+				</div>
+			
+			</div>
+			
+		</div>
+		
+	</body>
+	
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+  	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  	<script>
+    	new Vue({
+      		el: '#page',
+      		data: {
+      				tableData: [{
+          				filename: '巴啦啦能量.pdf',
+          				status: '可见',
+        			}, {
+          				filename: '巴啦啦能量.pdf',
+          				status: '不可见',
+        			}],
+        			search: ''
+      		},
+      		methods: {
+      			
+      			handleDelete(index, row) {
+        			console.log(index, row);
+      			},
+      			
+      			submit() {
+        			this.$message({
+          				message: '创建会议成功!',
+          				type: 'success'
+        			});
+        			setTimeout(function(){window.location.href="base.html"},1000);
+        			
+      			},
+      			
+      			newrole(){
+      				this.$alert('<div style="text-align: center;">'+
+					'<div><a>新角色名称</a></div>'+
+					'<div><input /></div>'+
+					'</div>', {
+          				dangerouslyUseHTMLString: true
+        			});
+      			},
+      			
+      			adddevice(){
+      				this.$alert('<div style="text-align: center;">'+
+      							'<div style="margin-left: 80px; width: 200px;">'+
+								'<div style="margin-top: 10px;">'+
+									'<a>设备</a>'+
+									'<a style="margin-left: 53px;">角色</a>'+
+									'</div><hr />'+
+									'<div style="margin-top: 10px;">'+
+									'<a">SCPAD1</a>'+
+									'<a style="margin-left: 20px;">未分配</a>'+
+									'</div><hr />'+
+									'<div style="margin-top: 10px;">'+
+									'<a>SCPAD1</a>'+
+									'<a style="margin-left: 20px;">注册人</a>'+
+									'</div><hr />'+
+									'<div style="margin-top: 10px;">'+
+									'<a>SCPAD1</a>'+
+									'<a style="margin-left: 20px;">未分配</a>'+
+									'</div><hr />'+
+									'</div></div>', '添加设备' , {
+          				dangerouslyUseHTMLString: true
+        			});
+      			}
+      			
+      			
+    		}
+      		
+      		
+    		})
+  	</script>
+	
+</html>

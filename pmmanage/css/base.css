@@ -1,0 +1,50 @@
+.page{
+	position: absolute;
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}
+
+
+
+.left{
+	position: absolute;
+	height: 100%;
+	width: 18%;
+	background: linear-gradient(#5b83bc,#aeaeb1);
+	box-shadow:2px 2px 6px gray;
+}
+
+.item{
+	height: 10%;
+	border:1px solid gray;
+	font-family: "agency fb";
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	line-height:300%;
+}
+
+
+
+.right{
+	position: absolute;
+	margin-left: 18%;
+	height: 100%;
+	width: 80%;
+}
+
+.title{
+	height: 10%;
+	background-color: #5b82bd;
+	border:1px solid gray;
+	font-family: "agency fb";
+	font-size: 30px;
+	color: white;
+	text-align: center;
+	line-height:200%;
+}
+
+.mainarea{
+	height: 90%;
+}

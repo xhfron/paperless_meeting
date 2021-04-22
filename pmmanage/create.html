@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>无纸化会议管理系统</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/create.css" />
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/create.js"></script>
+		
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	</head>
+	
+	<body>
+		
+		<div id="page" class="page">
+			
+			<div class="left">
+				<div class="item"></div>
+				<div id="create_meeting" class="item">
+					<a>创建会议</a>
+				</div>
+				<div id="meeting_record" class="item">
+					<a>会议记录</a>
+				</div>
+				<div id="device_manage" class="item">
+					<a>设备管理</a>
+				</div>
+				<div style="border:1px solid gray; height: 58%"></div>
+			</div>
+			
+			<div class="right">
+				<div class="title">
+					<a>无纸化会议管理系统</a>
+				</div>
+				<div class="mainarea">
+					
+					<div id="porgress_bar" class="progressbar">
+						<div id="step1" class="progressitem" style="margin-left: 5%;">
+							<a>①会议信息</a>
+						</div>
+						<div class="progressitem" style="margin-left: 21%;">
+							<a>></a>
+						</div>
+						<div id="step2" class="progressitem" style="margin-left: 32%;">
+							<a>②step2</a>
+						</div>
+						<div class="progressitem" style="margin-left: 48%;">
+							<a>></a>
+						</div>
+						<div id="step3" class="progressitem" style="margin-left: 59%;">
+							<a>③step3</a>
+						</div>
+						<div class="progressitem" style="margin-left: 76%;">
+							<a>></a>
+						</div>
+						<div id="step4" class="progressitem" style="margin-left: 88%;">
+							<a>④step4</a>
+						</div>
+					</div>
+					
+					<div id="meeting_information" class="meetinginformation">
+						
+						<div id="meeting_name" class="mitem">
+							<a>会议名称</a>
+							<input style="width: 200px;"/>
+						</div>
+						
+						<div id="start_time" class="mitem">
+							<a>开始时间</a>
+							<el-date-picker placeholder="选择开始日期" v-model="start_date"></el-date-picker>
+							<el-time-select placeholder="选择开始时间" v-model="start_time"></el-time-select>
+						</div>
+						
+						<div id="end_time" class="mitem">
+							<a>结束时间</a>
+							<el-date-picker placeholder="选择结束日期" v-model="end_date"></el-date-picker>
+							<el-time-select placeholder="选择结束时间" v-model="end_time"></el-time-select>
+						</div>
+						
+						<div id="meeting_briefintroduction" class="mitem">
+							<a>会议简介</a>
+							<textarea rows="6" cols="50" style="border-color: dodgerblue;"></textarea>
+						</div>
+						
+						<div id="next_step" class="btn">
+							<button class="nextstep" onclick="to_create_vote()">下一步</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		
+		
+	</body>
+	
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#page',
+      data: {
+      	start_date:'',
+      	start_time:'',
+      	end_date:'',
+      	end_time:''
+      }
+    })
+  </script>
+	
+</html>

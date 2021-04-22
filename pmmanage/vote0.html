@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>无纸化会议管理系统</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/create.css" />
+		<link rel="stylesheet" type="text/css" href="css/vote.css" />
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/create.js"></script>
+		<script type="text/javascript" src="js/vote.js"></script>
+		
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	</head>
+	
+	<body>
+		
+		<div id="page" class="page">
+			
+			<div class="left">
+				<div class="item"></div>
+				<div id="create_meeting" class="item">
+					<a onclick="create_meeting()">创建会议</a>
+				</div>
+				<div id="meeting_record" class="item">
+					<a>会议记录</a>
+				</div>
+				<div id="device_manage" class="item">
+					<a>设备管理</a>
+				</div>
+				<div style="border:1px solid gray; height: 58%"></div>
+			</div>
+			
+			<div class="right">
+				
+				<div class="title">
+					<a>无纸化会议管理系统</a>
+				</div>
+				
+				<div class="mainarea">
+					
+					<div id="porgress_bar" class="progressbar">
+						<div id="step1" class="progressitem" style="margin-left: 5%;">
+							<a>①会议信息</a>
+						</div>
+						<div class="progressitem" style="margin-left: 21%;">
+							<a>></a>
+						</div>
+						<div id="step2" class="progressitem" style="margin-left: 32%;">
+							<a>②step2</a>
+						</div>
+						<div class="progressitem" style="margin-left: 48%;">
+							<a>></a>
+						</div>
+						<div id="step3" class="progressitem" style="margin-left: 59%;">
+							<a>③step3</a>
+						</div>
+						<div class="progressitem" style="margin-left: 76%;">
+							<a>></a>
+						</div>
+						<div id="step4" class="progressitem" style="margin-left: 88%;">
+							<a>④step4</a>
+						</div>
+					</div>
+					
+					<div class="createvote">
+						<button class="createvotebutton" @click="create_vote">创建投票</button>
+					</div>
+					
+					<div class="votelist">
+						<a>暂无投票</a>
+					</div>
+					
+					<div class="lastnext">
+						<button class="lastbutton" onclick="to_create_meeting()">上一步</button>
+						<button class="nextbutton" onclick="to_uploadfile()">下一步</button>
+					</div>
+					
+					
+				</div>
+			
+			</div>
+			
+		</div>
+		
+	</body>
+	
+	  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#page',
+      data: {
+      	
+      },
+      
+      methods: {
+      	
+      	
+      create_vote() {
+        this.$alert('<div>'+
+			'<div style="margin-left: 20px; margin-top: 20px;">'+
+				'<a>投票主题</a>'+
+				'<input style="margin-left: 10px;" />'+
+			'</div>'+
+			'<div style="margin-left: 20px; margin-top: 20px;">'+
+				'<a>投票内容</a>'+
+				'<textarea rows="3" cols="40" style="margin-left: 10px;"></textarea>'+
+			'</div>'+
+			'<div style="margin-left: 20px; margin-top: 20px;">'+
+				'<a>投票方式</a>'+
+				'<input type="radio" /><a>多选</a>'+
+				'<input type="radio" /><a>单选</a>'+
+			'</div>'+
+			'<div style="margin-left: 20px; margin-top: 20px;">'+
+				'<a>匿名投票</a>'+
+				'<input type="radio" /><a>是</a>'+
+				'<input type="radio" /><a>否</a>'+
+			'</div>'+
+			'<div style="margin-left: 20px; margin-top: 20px;">'+
+				'<a>投票选项</a>'+
+				'<button style="background: white; border: 1px solid gray; margin-left: 10px;">添加选项</button>'+
+			'</div>'+
+		'</div>', '添加投票', {
+          dangerouslyUseHTMLString: true
+        });
+      }
+      
+      
+    }
+      
+    })
+  </script>
+	
+</html>

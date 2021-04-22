@@ -1,0 +1,111 @@
+.meetinginformation2{
+	position: absolute;
+	margin-left: 5%;
+	margin-top: 7%;
+	width: 85%;
+	height: 60%;
+}
+
+.rolebar{
+	position: absolute;
+	height: 100%;
+	width: 18%;
+}
+
+.role{
+	height: 10%;
+	font-family: "agency fb";
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	line-height:180%;
+}
+
+.jurisdictionarea{
+	position: absolute;
+	margin-left: 18%;
+	height: 100%;
+	width: 80%;
+}
+
+.filelist{
+	position: absolute;
+	height: 70%;
+	width: 100%;
+}
+
+.revocation{
+	margin-left: 47%;
+	height: 100%;
+	background: #f56c6c;
+	color: white;
+	border: none;
+}
+
+.gray{
+	color: gray;
+}
+
+
+.padlist{
+	position: absolute;
+	display: inline-block;
+	margin-top: 36.5%;
+	height: 28%;
+	width: 100%;
+	background: #F5F7FA;
+}
+
+.pad{
+	position: absolute;
+	width: 10%;
+	height: 80%;
+	margin-top: 1.5%;
+	background: linear-gradient(#5b83bc,#aeaeb1);
+	border-radius: 5px;
+	color: white; 
+	font-size: 12px;
+}
+
+.adddevice{
+	position: absolute;
+	width: 13%;
+	height: 30%;
+	margin-top: 5%;
+	margin-left: 87%;
+}
+
+.addbutton{
+	background:#9ab7ce; 
+	color: white; 
+	border: none;
+	height: 100%;
+}
+
+.deletebutton{
+	position: absolute;
+	margin-top: 70%;
+	margin-left: 15%;
+	width: 70%;
+	background: transparent;
+	color: dodgerblue;
+	border:1px solid white;
+	border-radius: 3px;
+}
+
+.submit{
+	position: absolute;
+	margin-top: 43%;
+	margin-left: 18%;
+	height: 7%;
+	width: 70%;
+}
+
+.submitbutton{
+	margin-left: 90%;
+	width: 10%;
+	height: 80%;
+	background: #5B82BD;
+	color: white;
+	border: none;
+}

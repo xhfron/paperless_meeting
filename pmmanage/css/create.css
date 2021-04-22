@@ -1,0 +1,39 @@
+.progressbar{
+	position: absolute;
+	display: inline-block;
+	height: 5%;
+	width: 100%;
+	background: #f5f7fa;
+	margin-left: 1.5px;
+}
+
+.progressitem{
+	position: absolute;
+	margin-top: 0.5%;
+}
+
+.meetinginformation{
+	position: absolute;
+	margin-top: 3%;
+	height: 85%;
+	width: 100%;
+}
+
+.mitem{
+	margin-top: 30px;
+	margin-left: 20%;
+}
+
+.btn{
+	margin-top: 80px;
+	margin-left: 80%;
+}
+
+.nextstep{
+    width: 80px;
+    height: 35px;
+	background: #5b82bd;
+	color: white;
+	border: none
+}
+

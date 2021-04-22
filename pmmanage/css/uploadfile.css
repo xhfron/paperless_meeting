@@ -1,0 +1,58 @@
+.upload{
+	position: absolute;
+	margin-top: 5%;
+	margin-left: 20%;
+	width: 60%;
+	height: 5%;
+	text-align: center;
+}
+
+.uploadbutton{
+	width: 100%;
+	height: 100%;
+	background: #e6f1fc;
+	text-align: center;
+	color: #218dfa;
+	border: 1px solid #a8d3fd;
+	border-radius: 3px;
+}
+
+.filelist{
+	position: absolute;
+	margin-top: 12%;
+	margin-left: 15%;
+	width: 70%;
+	height: 50%;
+	background: #f8f8f8;
+	text-align: center;
+	line-height:1500%;
+	color: #464647;
+	border: 1px solid #8f8f8f;
+	border-radius: 3px;
+}
+
+.lastnext{
+	position: absolute;
+	margin-top: 45%;
+	margin-left: 75%;
+	width: 20%;
+	height: 6%;
+}
+
+.lastbutton{
+	width: 35%;
+	height: 85%;
+	background: #F8F8F8;
+	color: #1d3a56;
+	border: 1px solid #218DFA;
+	border-radius: 3px;
+}
+
+.nextbutton{
+	width: 35%;
+	height: 85%;
+	background: #5b82bd;
+	color: white;
+	border: none;
+	border-radius: 3px;
+}
