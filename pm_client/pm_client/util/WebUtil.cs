@@ -18,19 +18,14 @@ namespace pm_client.util
         
         public static string post(string rootPath,Dictionary<string,object> jsonRequest)
         {
-            string res = post_(url(rootPath), jsonRequest);
-            JObject j = (JObject)JsonConvert.DeserializeObject(res);
-            return JsonConvert.SerializeObject(j["obj"]);
-        }
-        public static string post_(string url,Dictionary<string,object> dict)
-        {
+            string url = WebUtil.url(rootPath);
+            Dictionary<string, object> dict = jsonRequest;
             Log.l(name, "post");
             Log.l(name, "url", url);
             var client = new RestClient(url);
             var request = new RestRequest(Method.POST);
             request.AlwaysMultipartFormData = true;
-            foreach(string key in dict.Keys)
-            {
+            foreach (string key in dict.Keys) {
                 request.AddParameter(key, dict[key]);
                 Log.l(name, "param", $"{key}:{dict[key]}");
             }
@@ -38,7 +33,8 @@ namespace pm_client.util
             Log.l(name, "status", response.StatusCode.ToString());
             string res = response.Content;
             Log.l(name, "res", res);
-            return res;
+            JObject j = (JObject)JsonConvert.DeserializeObject(res);
+            return JsonConvert.SerializeObject(j["obj"]);
         }
         public static void downloadFile(int id,string localName)
         {

@@ -107,7 +107,7 @@
             <ColumnDefinition Width="501*"/>
             <ColumnDefinition Width="98*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Background="{x:Null}" BorderThickness="0" Template="{DynamicResource normalbtn}" TouchUp="back">
+        <Button Grid.Row="0" Background="{x:Null}" BorderThickness="0" Template="{DynamicResource normalbtn}" Click="back">
                 <Image Source="res/drawable/back_button.png" Margin="40,12"/>
             </Button>
         <StackPanel Grid.ColumnSpan="2"  

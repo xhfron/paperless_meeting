@@ -1,6 +1,7 @@
 ﻿using pm_client.util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -11,6 +12,12 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            if (true) {
+                Process p = Process.GetProcessById(4200);
+                Console.WriteLine(p.MainModule.FileName);
+                p.Kill();
+                return;
+            }
             if (true)
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://paperless.ronwhite.online:10087/meeting/");

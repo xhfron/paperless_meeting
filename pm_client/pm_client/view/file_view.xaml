@@ -59,6 +59,7 @@
             <ListBox x:Name="file_list" 
                      HorizontalAlignment="Stretch"   
                      Grid.Row="1" 
+                     Grid.ColumnSpan="2"
                      VerticalAlignment="Stretch" 
                      ItemContainerStyle="{StaticResource FileListStyle}" SelectionChanged="openFile">
 

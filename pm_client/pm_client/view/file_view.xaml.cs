@@ -29,18 +29,7 @@ namespace pm_client.view
         }
         void open(string name)
         {
-            string path = System.IO.Path.Combine(Settings.fileDir, name);
-            if (name.EndsWith(".pdf"))
-            {
-                board.Push(new file_pdf_view(path));
-            }else if (name.EndsWith(".mp4"))
-            {
-                board.Push(new file_video_view(path));
-            }
-            else
-            {
-                ViewUtil.msg("unknown format");
-            }
+            
         }
         string name = "FileListView";
 
@@ -57,6 +46,7 @@ namespace pm_client.view
                 d.Create();
             }
             List<util.File> list = getFileList(1, 1);
+            //List<util.File> list = new List<util.File>();
             total = list.Count;
             this.loading_text .Text= $"正在同步:{current}/{total}";
             foreach(var file in list)
@@ -87,7 +77,7 @@ namespace pm_client.view
             rotateTransform.CenterY = this.loading_img.Height/2;
             DoubleAnimation ani = new DoubleAnimation();
             ani.From = 0;
-            ani.To = 720;
+            ani.To = -720;
             ani.RepeatBehavior = RepeatBehavior.Forever;
             ani.Duration = TimeSpan.FromSeconds(10);
             e.RenderTransform = rotateTransform;
@@ -100,7 +90,17 @@ namespace pm_client.view
             Log.i("file", this.file_list.SelectedItem);
             if (f==null) return;
             this.file_list.SelectedItem = null;
-            open(f.name);
+            Log.i(name, new FileInfo(f.name).FullName);
+
+            string path = System.IO.Path.Combine(Settings.fileDir, f.name);
+            if (path.EndsWith(".pdf")) {
+                board.Push(new file_pdf_view(path));
+            } else if (path.EndsWith(".mp4")) {
+                path = new FileInfo(path).FullName;
+                board.Push(new file_video_view(path));
+            } else {
+                ViewUtil.msg("unknown format");
+            }
         }
         List<util.File> getFileList(int meetingId, int roleId)
         {

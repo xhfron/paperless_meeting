@@ -49,6 +49,7 @@ namespace pm_client.view {
                 c.total = total;
                 list.Add(c);
             }
+            this.DataContext = vote;
             this.ResultList.ItemsSource = list;
         }
         VoteResultCollection getVoteResult(int voteId) {

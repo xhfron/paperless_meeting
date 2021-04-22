@@ -3,6 +3,7 @@ using pm_client.util;
 using pm_client.view;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -197,6 +198,8 @@ namespace pm_client {
             if (msg == 0x0400 + 7) {
                 int proId = lParam.ToInt32();
                 Log.i("hook", $"pid:{proId}");
+                Process p = Process.GetProcessById(proId);
+                Log.i("hook", p.MainModule.FileName);
             }
             return IntPtr.Zero;
         }
@@ -216,18 +219,19 @@ namespace pm_client {
             p.StartupHook();
         }
 
-        private void back(object sender, TouchEventArgs e) {
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e) {
+            if (true) return;
+            p.CloseHook();
+        }
+
+        private void back(object sender, RoutedEventArgs e) {
             //Log.l("main", "depth", "" + current.Count);
             if (current.Count >= 2) {
                 removeFromShowing();
                 current.Pop();
                 addToShow(current.Peek());
             }
-        }
-
-        private void Window_Unloaded(object sender, RoutedEventArgs e) {
-            if (true) return;
-            p.CloseHook();
         }
     }
 }

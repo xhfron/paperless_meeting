@@ -163,17 +163,18 @@
                 TextWrapping="Wrap" 
                 Text="{Binding Path=content}" 
                 Padding="0"
-                Style="{StaticResource title_48}" Margin="0" 
+                Style="{StaticResource title_48}" 
+                Margin="0" 
                 />
         </ScrollViewer>
 
         <ListBox Grid.Row="3" 
                  Grid.Column="0" 
-                 Grid.ColumnSpan="4" 
+                 Grid.ColumnSpan="5" 
                  Name="choiceListBox"
                  SelectionMode="Multiple" 
                  ItemsSource="{Binding options}" 
-                 Margin="40,40,0,0"
+                 Margin="90,40,0,0"
                  ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
                  BorderThickness="0">
         </ListBox>

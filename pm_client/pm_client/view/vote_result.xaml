@@ -8,81 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="1300">
     <UserControl.Resources>
 
-        <!--ControlTemplate x:Key="choice" TargetType="{x:Type CheckBox}">
-            <Grid x:Name="templateRoot" 
-                  Background="Transparent" 
-                  SnapsToDevicePixels="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border x:Name="checkBoxBorder" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        Background="{TemplateBinding Background}" 
-                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                        Margin="{TemplateBinding Margin}" 
-                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                    <Grid x:Name="markGrid">
-                        <Path x:Name="optionMark" 
-                              Data="F 1 M 52.7498,6.2334 L 23.4915 45.4917 22.608199999999997 45.4917 0.0 25.96655 6.3832 17.60825 21.275 30.44165 41.66655 7.6294e-05 49.874900000000004 6.116700000000001 z" 
-                              Fill="#FF212121" 
-                              Margin="1" 
-                              Opacity="0" 
-                              Stretch="None"/>
-                        <Rectangle x:Name="indeterminateMark" 
-                                   Fill="#FF212121" 
-                                   Margin="12,10" 
-                                   Opacity="0"/>
-                    </Grid>
-                </Border>
-                <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="HasContent" Value="True">
-                    <Setter Property="FocusVisualStyle">
-                        <Setter.Value>
-                            <Style>
-                                <Setter Property="Control.Template">
-                                    <Setter.Value>
-                                        <ControlTemplate>
-                                            <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Padding" Value="4,-1,0,0"/>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFF3F9FF"/>
-                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF5593FF"/>
-                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
-                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
-                </Trigger>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
-                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
-                    <Setter Property="Fill" TargetName="optionMark" Value="#FF707070"/>
-                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF707070"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFD9ECFF"/>
-                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FF3C77DD"/>
-                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
-                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
-                </Trigger>
-                <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
-                </Trigger>
-                <Trigger Property="IsChecked" Value="{x:Null}">
-                    <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
-                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        /-->
+        
 
         <ControlTemplate x:Key="VoteListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
             <!--nmd wsm,加TargetType才有效？？？-->
@@ -134,7 +60,7 @@
         <TextBlock 
             TextWrapping="Wrap" 
             Style="{StaticResource big_title}"
-            Text="早饭吃什么"
+            Text="{Binding Path= name}"
             Grid.ColumnSpan="2"   ></TextBlock>
         
         <TextBlock 
@@ -144,19 +70,21 @@
                    FontFamily="DengXian" 
                    FontSize="48" 
                    Margin="0,25,-66,18.5" 
-                   FontWeight="Bold"    ><Run Text="倒计时：30s"/> <Run/></TextBlock>
-        <TextBlock Grid.Row="1" 
+                   FontWeight="Bold"    ><Run Text="倒计时：∞"/> <Run/></TextBlock>
+        <TextBlock Grid.Row="1"
+                   Grid.ColumnSpan="2"
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center"  
+                   Text="匿名投票"
                    Style="{StaticResource title_40}"  
-                   Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
+                   Padding="32,40,0,0"></TextBlock>
         <ScrollViewer 
             VerticalScrollBarVisibility="Auto"
             HorizontalAlignment="Stretch"   
             Grid.Row="2"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
             <TextBlock 
                 TextWrapping="Wrap" 
-                Text="what the hell" 
+                Text="{Binding Path=content}" 
                 Style="{StaticResource title_48}" 
                 Margin="40,40,0,0"/>
         </ScrollViewer>

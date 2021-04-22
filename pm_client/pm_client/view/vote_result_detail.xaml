@@ -117,11 +117,12 @@
 
     <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="244*"/>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="37*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="231*"/>
+            <RowDefinition Height="705*"/>
+            <RowDefinition Height="127*"/>
+            <RowDefinition Height="107*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="93*"/>
@@ -132,19 +133,22 @@
         </Grid.ColumnDefinitions>
         <TextBlock 
             TextWrapping="Wrap" 
-            Margin="32,40,0,40"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left" 
-            Style="{StaticResource title_64}" 
-            
-            Grid.ColumnSpan="2"   ><Run Text="早饭吃什么"/> <Run/></TextBlock>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource title_40}"  Margin="40,37,0,37"   ><Run Text="匿名投票"/> <Run/></TextBlock>
+            Style="{StaticResource big_title}"
+            Text="{Binding Path= name}"
+            Grid.ColumnSpan="2"   ></TextBlock>
+        <TextBlock Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center"  
+                   Text="匿名投票"
+                   Style="{StaticResource title_40}"  
+                   Padding="32,40,0,0"></TextBlock>
         <Grid HorizontalAlignment="Left" 
                   Width="1647" 
                   Height="100" 
                   VerticalAlignment="Top" 
-                  Margin="40,0,0,100"
-                  Grid.Row="1" 
+                  Margin="40,0,0,0"
+                  Grid.Row="2" 
                   Grid.Column="0" 
                   Grid.ColumnSpan="5" >
             <ProgressBar HorizontalAlignment="Stretch" 
@@ -163,7 +167,7 @@
                            Text="hello"/>
         </Grid>
 
-        <ListBox Grid.Row="2" 
+        <ListBox Grid.Row="3" 
                  Grid.Column="0" 
                  Grid.ColumnSpan="4" 
                  SelectionMode="Multiple" 
@@ -174,16 +178,16 @@
         </ListBox>
         <WrapPanel Orientation="Horizontal"
                    Margin="50"
-                   Grid.Row="2" 
+                   Grid.Row="3" 
                    Grid.Column="0" 
                    Grid.ColumnSpan="5">
             <Border BorderThickness="2" Margin="0,0,47,9" BorderBrush="#13227A">
-                
-            <TextBlock Text="PAD1" Style="{StaticResource title_48}"
+
+                <TextBlock Text="PAD1" Style="{StaticResource title_48}"
                        Margin="0"
                        Padding="40,19" Foreground="{StaticResource font_black}" Background="{StaticResource btn_grey}" ></TextBlock>
             </Border>
         </WrapPanel>
-        
+
     </Grid>
 </UserControl>
