@@ -49,6 +49,11 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/ch.ethz.ganymed/ganymed-ssh2 -->
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+        </dependency>
 
     </dependencies>
 
