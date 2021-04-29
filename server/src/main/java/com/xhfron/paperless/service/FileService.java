@@ -4,6 +4,7 @@ import com.xhfron.paperless.bean.FileDO;
 import com.xhfron.paperless.bean.Msg;
 import com.xhfron.paperless.dao.FileDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,17 +16,21 @@ import java.util.List;
 public class FileService {
     @Autowired
     private FileDao fileDao;
+
+    @Value("${spring.servlet.multipart.location}")
+    private String ROOT_PATH;
+
     public FileDO uploadFile(MultipartFile file, int meetingId){
-        if (file.isEmpty()) {
-            return null;
-        }
         FileDO fileDO = null;
-        File dir = new File(Integer.toString(meetingId));
+        File dir = new File(ROOT_PATH+"/"+Integer.toString(meetingId));
         if(!dir.exists()){
-            System.out.println(dir.mkdir());
+           dir.mkdir();
         }
-        File dest = new File(dir.getPath() +"/"+ file.getOriginalFilename());
         try {
+            File dest = new File(dir.getAbsoluteFile()+file.getOriginalFilename());
+            if(!dest.exists()){
+                dest.createNewFile();
+            }
             file.transferTo(dest);
             fileDO = new FileDO(file.getOriginalFilename(),dest.getPath(),meetingId);
             fileDao.createFileRecord(fileDO);

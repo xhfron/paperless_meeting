@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 import java.util.List;
 
 @Component
@@ -27,16 +28,23 @@ public class DeviceService {
     final private String routerDeviceBlockUrl = "http://192.168.8.1/cgi-bin/api/client/block";
     final private String routerPassword = "admin";
     final private String deviceRegisterMacPre= "iptables -I INPUT -m mac --mac-source ";
+    final String host = "192.168.8.1";
+    final String username = "root";
+    final String passwd = "admin";
     //注意顺序嗷
     //iptables -I INPUT -m mac --mac-source 7c:76:35:e7:13:05 -j ACCEPT
     //iptables -I INPUT -m mac ! --mac-source 7c:76:35:e7:13:05 -j DROP
     private String token;
     @Autowired
-    private DeviceDao dao;
+    private DeviceDao deviceDao;
+    private boolean getOutput = true;
 
+    public int addDevice(String name, String mac){
+        return deviceDao.addDevice(name, mac);
+    }
 
     public List<DeviceDO> getDeviceList() {
-        return dao.getDevices();
+        return deviceDao.getDevices();
     }
 
     private String getToken() {
@@ -72,36 +80,81 @@ public class DeviceService {
         return info;
     }
 
-    public String sshConnect(String cmd){
-        String host = "192.168.8.1";
-        String username = "root";
-        String passwd = "admin";
-
+    private Connection getConnection(){
         try{
             Connection connection = new Connection(host);
             connection.connect();
             if(!connection.authenticateWithPassword(username, passwd)){
-                throw new Exception("登录失败！");
+                throw new Exception("登录失败");
+            }
+            return connection;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
+    private void exeCmds(List<String> cmds){
+        try {
+            Connection connection = getConnection();
+            for(String cmd: cmds){
+                Session session = connection.openSession();
+                session.execCommand(cmd);
+                if(getOutput){
+                    InputStream stdout = new StreamGobbler(session.getStdout());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
+                    while (true) {
+                        String line = br.readLine();
+                        if (line == null)
+                            break;
+                        System.out.println(line);
+                    }
+                }
+                session.close();
             }
 
-            Session session = connection.openSession();
-            session.execCommand(cmd);
-            InputStream stdout = new StreamGobbler(session.getStdout());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
-            StringBuffer stringBuffer = new StringBuffer();
-            while (true) {
-                String line = br.readLine();
-                if (line == null)
-                    break;
-                stringBuffer.append(line+"\n");
-                System.out.println(line);
+    }
+
+    public Boolean blockNewDevice(){
+        try{
+            List<DeviceDO> devices = deviceDao.getDevices();
+            List<String> cmds = new LinkedList<>();
+            for(DeviceDO device : devices){
+               cmds.add("iptables -I INPUT -m mac --mac-source "
+                        +device.getMac()+" -j ACCEPT");
             }
-            return stringBuffer.toString();
+            //测试用管理，上线时mac替换为超管设备
+            cmds.add("iptables -I INPUT -m mac ! --mac-source 7c:76:35:e7:13:05 -j DROP");
+            exeCmds(cmds);
+            return true;
+
          }catch (Exception e){
             e.printStackTrace();
         }
-        return "false";
+        return false;
     }
+
+   public Boolean allowDeviceConnect() {
+       try{
+           List<DeviceDO> devices = deviceDao.getDevices();
+           List<String> cmds = new LinkedList<>();
+           for(DeviceDO device : devices){
+               cmds.add("iptables -I INPUT -m mac --mac-source "
+                       +device.getMac()+" -j ACCEPT");
+           }
+           //测试用管理，上线时mac替换为超管设备
+           cmds.add("iptables -I INPUT -m mac ! --mac-source 7c:76:35:e7:13:05 -j DROP");
+           exeCmds(cmds);
+           return true;
+
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return false;
+   }
+
 
 }

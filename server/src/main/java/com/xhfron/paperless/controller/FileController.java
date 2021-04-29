@@ -4,10 +4,7 @@ import com.xhfron.paperless.bean.FileDO;
 import com.xhfron.paperless.bean.Msg;
 import com.xhfron.paperless.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -20,7 +17,7 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping("getFileList")
+    @GetMapping("getFileList")
     Msg getFileList(@RequestParam int meetingId) {
         List<FileDO> files = fileService.getFileList(meetingId);
         if (files != null && files.size() > 0) {

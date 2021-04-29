@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("vote")
+@RestController()
 @RequestMapping(value = "/vote")
 public class VoteController {
 
