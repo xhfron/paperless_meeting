@@ -23,6 +23,7 @@ namespace pm_client.view
         public splash()
         {
             InitializeComponent();
+            Console.WriteLine("hello");
         }
 
         private void hide(object sender, RoutedEventArgs e)

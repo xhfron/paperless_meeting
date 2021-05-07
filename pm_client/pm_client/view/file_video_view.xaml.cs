@@ -24,22 +24,17 @@ namespace pm_client.view
     {
 
 		private string filepath;
-		private Grid f_view;
-		private Grid f_sub_view;
-
 
 		private bool mediaPlayerIsPlaying = false;
 		private bool userIsDraggingSlider = false;//是否正在拖动滑块
 		private bool userIsClickingSlider = false;//是否正在点击进度条
 
 
-		public file_video_view(string filepath, Grid f_view, Grid f_sub_view)
+		public file_video_view(string filepath)
 		{
 			InitializeComponent();
 
 			this.filepath = filepath;
-			this.f_view = f_view;
-			this.f_sub_view = f_sub_view;
 
 			DispatcherTimer timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(1);
@@ -68,11 +63,14 @@ namespace pm_client.view
 		private void mePlayer_Loaded(object sender, RoutedEventArgs e)
 		{
 
-			//开始播放视频
-			mePlayer.Source = new Uri(filepath);
+				//开始播放视频
+				string path = AppDomain.CurrentDomain.BaseDirectory;
+				string rootpath = path.Substring(0, path.LastIndexOf("bin"));
+				string completePath = rootpath + "bin\\x64\\Debug"+filepath.Remove(0,1);
 
-			mePlayer.Play();
+				mePlayer.Source = new Uri(completePath);
 
+				mePlayer.Play();
 
 		}
 
@@ -95,9 +93,6 @@ namespace pm_client.view
 		private void Exitbutton_Click(object sender, RoutedEventArgs e)
 		{
 			//点击退出按钮退出视频，返回文件列表
-			f_view.Children.Remove(this);
-			f_view.Children.Add(f_sub_view);
-
 		}
 
 

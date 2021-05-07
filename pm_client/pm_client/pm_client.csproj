@@ -98,6 +98,12 @@
     <Reference Include="MouseKeyboardActivityMonitor">
       <HintPath>libs\MouseKeyboardActivityMonitor.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>libs\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -106,6 +112,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -126,7 +133,15 @@
     </ApplicationDefinition>
     <Compile Include="util\data.cs" />
     <Compile Include="util\INavigator.cs" />
+    <Compile Include="util\NetworkException.cs" />
+    <Compile Include="util\PersistentData.cs" />
     <Compile Include="util\ProcessManager.cs" />
+    <Compile Include="util\Settings.cs" />
+    <Compile Include="util\ViewUtil.cs" />
+    <Compile Include="util\WebUtil.cs" />
+    <Compile Include="view\DiyMessageBox.xaml.cs">
+      <DependentUpon>DiyMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\file_view.xaml.cs">
       <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>
@@ -135,6 +150,9 @@
     </Compile>
     <Compile Include="view\file_video_view.xaml.cs">
       <DependentUpon>file_video_view.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\Log.xaml.cs">
+      <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\note.xaml.cs">
       <DependentUpon>note.xaml</DependentUpon>
@@ -150,6 +168,9 @@
     </Compile>
     <Compile Include="view\splash.xaml.cs">
       <DependentUpon>splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SuperSplash.xaml.cs">
+      <DependentUpon>SuperSplash.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\temp.xaml.cs">
       <DependentUpon>temp.xaml</DependentUpon>
@@ -182,6 +203,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="view\DiyMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="view\file_view.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\file_video_view.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\Log.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="view\splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\SuperSplash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,6 +332,21 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\note_checked.png" />
+    <Resource Include="res\drawable\remote_checked.png" />
+    <Resource Include="res\drawable\setting_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\mbIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\Error.png" />
+    <Resource Include="res\drawable\Question.png" />
+    <Resource Include="res\drawable\Success.png" />
+    <Resource Include="res\drawable\Tips.png" />
+    <Resource Include="res\drawable\Warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

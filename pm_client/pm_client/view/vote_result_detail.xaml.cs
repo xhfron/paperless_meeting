@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace pm_client.view
         public vote_result_detail()
         {
             InitializeComponent();
+        }
+        void setVoteResultDetail(util.VoteResult voteResult,Vote vote,ChoiceResult r) {
+            
         }
     }
 }

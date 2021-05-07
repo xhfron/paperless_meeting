@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,10 +41,14 @@ namespace pm_client.util
             pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
             closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
         }
+        public void test() {
+            Process p=Process.GetProcessById(20);
+            p.Kill();
+        }
 
         static ProcessManager()
         {
-            pDll = LoadLibrary(@"C:\Users\Administrator\Desktop\ct\paperless_meeting\pm_client\x64\Debug\HookProc.dll");
+            pDll = LoadLibrary(@".\HookProc.dll");
             Console.WriteLine(pDll);
         }
     }

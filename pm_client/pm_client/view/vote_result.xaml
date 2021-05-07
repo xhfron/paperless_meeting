@@ -8,7 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="1300">
     <UserControl.Resources>
 
-        <ControlTemplate x:Key="choice" TargetType="{x:Type CheckBox}">
+        <!--ControlTemplate x:Key="choice" TargetType="{x:Type CheckBox}">
             <Grid x:Name="templateRoot" 
                   Background="Transparent" 
                   SnapsToDevicePixels="True">
@@ -82,7 +82,7 @@
                     <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
                 </Trigger>
             </ControlTemplate.Triggers>
-        </ControlTemplate>
+        /-->
 
         <ControlTemplate x:Key="VoteListBoxItemTemp" TargetType="{x:Type ListBoxItem}" >
             <!--nmd wsm,加TargetType才有效？？？-->
@@ -93,18 +93,18 @@
                   Margin="40,0,0,100">
                 <ProgressBar HorizontalAlignment="Stretch" 
                              VerticalAlignment="Stretch" 
-                             Value="50"  
+                             Value="{Binding Path=percent}"  
                              Height="100"
                              Foreground="#777"/>
                 <TextBlock Style="{StaticResource title_48}" 
                            Margin="0,0,40,0" HorizontalAlignment="Right" 
                            VerticalAlignment="Center" 
-                           Text="20" />
+                           Text="{Binding Path=number}" />
                 <TextBlock Style="{StaticResource title_48}" 
                            Margin="40,0,0,0" 
                            HorizontalAlignment="Left" 
                            VerticalAlignment="Center" 
-                           Text="hello"/>
+                           Text="{Binding Path=option}"/>
             </Grid>
         </ControlTemplate>
         <Style x:Key="VoteListBoxContainerStyle" TargetType="{x:Type ListBoxItem}">
@@ -154,7 +154,11 @@
             VerticalScrollBarVisibility="Auto"
             HorizontalAlignment="Stretch"   
             Grid.Row="2"  VerticalAlignment="Stretch" Grid.ColumnSpan="4"    >
-            <TextBlock TextWrapping="Wrap" Text="what the hell" Style="{StaticResource title_48}" Margin="40,40,0,0"/>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                Text="what the hell" 
+                Style="{StaticResource title_48}" 
+                Margin="40,40,0,0"/>
         </ScrollViewer>
 
         <ListBox Grid.Row="3" 
@@ -164,7 +168,7 @@
                  ItemsSource="{Binding Choices}"  
                  ItemContainerStyle="{StaticResource VoteListBoxContainerStyle}"
                  BorderThickness="0"
-                 x:Name="ResultList">
+                 x:Name="ResultList" SelectionChanged="checkDetail">
         </ListBox>
         <Button Content="开始投票" 
                 HorizontalAlignment="Center"  
