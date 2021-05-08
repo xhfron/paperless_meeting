@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\pm_client\pm_client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="websocket-sharp">
+      <HintPath>..\pm_client\libs\websocket-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

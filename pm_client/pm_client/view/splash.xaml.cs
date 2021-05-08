@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,17 +19,40 @@ namespace pm_client.view
     /// <summary>
     /// splash.xaml 的交互逻辑
     /// </summary>
-    public partial class splash : UserControl
+    public partial class splash : UserControl,MessageListener
     {
         public splash()
         {
             InitializeComponent();
-            Console.WriteLine("hello");
+            ViewUtil.Find<STOMPClient>(this, "STOMPClient").addJsonListener(this);
+            characterize();
+        }
+        void beginMeeting(int meetingId) {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = meetingId;
+            WebUtil.post("/host/beginMeeting", dict);
         }
 
         private void hide(object sender, RoutedEventArgs e)
         {
+            beginMeeting(1);
             this.Visibility = Visibility.Collapsed;
+        }
+        private void characterize() {
+
+            if (ViewUtil.Find<Role>(this,"role").name == "主持人") {
+
+            } else {
+                this.beginMeetingBtn.Visibility = Visibility.Collapsed;
+                
+            }
+        }
+
+        public void onMessage(Dictionary<string, object> json) {
+            string cmd = json["cmd"] as string;
+            if (cmd.StartsWith("开始会议")) {
+                hide(null, null);
+            }
         }
     }
 }

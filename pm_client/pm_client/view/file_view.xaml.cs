@@ -45,8 +45,8 @@ namespace pm_client.view
                 Log.i(name, "dir created");
                 d.Create();
             }
-            List<util.File> list = getFileList(1, 1);
-            //List<util.File> list = new List<util.File>();
+            //List<util.File> list = getFileList(1, 1);
+            List<util.File> list = new List<util.File>();
             total = list.Count;
             this.loading_text .Text= $"正在同步:{current}/{total}";
             foreach(var file in list)

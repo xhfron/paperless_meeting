@@ -122,6 +122,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>libs\websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -132,11 +135,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="util\data.cs" />
+    <Compile Include="util\FileUtil.cs" />
     <Compile Include="util\INavigator.cs" />
     <Compile Include="util\NetworkException.cs" />
     <Compile Include="util\PersistentData.cs" />
     <Compile Include="util\ProcessManager.cs" />
     <Compile Include="util\Settings.cs" />
+    <Compile Include="util\STOMPClient.cs" />
     <Compile Include="util\ViewUtil.cs" />
     <Compile Include="util\WebUtil.cs" />
     <Compile Include="view\file_view.xaml.cs">

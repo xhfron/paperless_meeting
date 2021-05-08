@@ -59,6 +59,7 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding Path=endTime}" Style="{StaticResource lbl_style_2}"/>
         </ListBox>
         <Button Content="开始会议" 
+                Name="beginMeetingBtn"
                 Grid.Column="1" 
                 HorizontalAlignment="Center" 
                 Grid.Row="2" 

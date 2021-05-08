@@ -69,11 +69,7 @@ namespace pm_client {
         }
 
 
-        void beginMeeting(int meetingId) {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["meetingId"] = meetingId;
-            WebUtil.post("/host/beginMeeting", dict);
-        }
+        
 
 
         void remoteSwitch(int mode) {
@@ -166,9 +162,16 @@ namespace pm_client {
             Grid.SetColumnSpan(newView, 2);
             g.Children.Add(newView);
         }
+        
 
 
         private void Window_Initialized(object sender, EventArgs e) {
+            /*this.Resources["STOMPClient"] = new STOMPClient();
+            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
+            s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
+            s.connect();
+            s.subscribe("/topic/cmd");*/
+
             ui.Add("file", new Stack<UserControl>());
             file_list_view flview = new file_list_view();
             flview.AddBoard(this);

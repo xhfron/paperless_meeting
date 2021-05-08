@@ -90,13 +90,25 @@ namespace pm_client.util
 
         }
     }
-    class RemoteApp : INotifyPropertyChanged
-    {
+    class RemoteApp : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e) {
             if (PropertyChanged != null) {
                 PropertyChanged(this, e);
+            }
+        }
+        private string _absolutePath;
+
+
+        public string absolutePath {
+
+            get {
+                return _absolutePath;
+            }
+            set {
+                _absolutePath = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("absolutePath"));
             }
         }
         private string _name;
@@ -112,23 +124,24 @@ namespace pm_client.util
                 OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
         }
-        private string _path;
+        private string _iconPath;
 
 
-        public string path {
+        public string iconPath {
 
             get {
-                return _path;
+                return _iconPath;
             }
             set {
-                _path = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("path"));
+                _iconPath = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("iconPath"));
             }
         }
 
         public void load(RemoteApp b) {
+            this.absolutePath = b.absolutePath;
             this.name = b.name;
-            this.path = b.path;
+            this.iconPath = b.iconPath;
 
         }
     }
