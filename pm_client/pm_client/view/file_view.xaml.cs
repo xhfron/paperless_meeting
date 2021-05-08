@@ -29,7 +29,7 @@ namespace pm_client.view
         }
         void open(string name)
         {
-            
+
         }
         string name = "FileListView";
 

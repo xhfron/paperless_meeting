@@ -31,8 +31,10 @@ namespace pm_client.view
         public file_pdf_view(string filePath)
         {
             InitializeComponent();
-
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)) return;
             this.filePath = filePath;
+
+
 
         }
 

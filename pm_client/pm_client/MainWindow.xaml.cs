@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using static pm_client.view.DiyMessageBox;
 
 namespace pm_client {
     /// <summary>
@@ -39,8 +40,12 @@ namespace pm_client {
             showBanner(new splash());
             showBanner(new SuperSplash());
             Log.i("hello", "hello");
+
+
             new Thread(new ThreadStart(this.run)).Start();
+
             
+
             if (false) {
                 try {
                     /*getMeeting(1,1);
@@ -69,7 +74,16 @@ namespace pm_client {
         }
 
 
+<<<<<<< HEAD
         
+=======
+        void beginMeeting(int meetingId) {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["meetingId"] = meetingId;
+            WebUtil.post("/host/beginMeeting", dict);
+
+        }
+>>>>>>> origin/release_userclient
 
 
         void remoteSwitch(int mode) {
@@ -132,6 +146,16 @@ namespace pm_client {
             webSocket.Dispose();
         }
         private void toVote(object sender, RoutedEventArgs e) {
+
+            try
+            {
+                //弹出提示框
+                DiyMessageBox.Show("自定义提示框测试成功！", CustomMessageBoxButton.OK, CustomMessageBoxIcon.Success);           
+            }catch(Exception exp)
+            {
+                MessageBox.Show(exp.ToString());
+            }
+
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["vote"]);
         }
@@ -214,7 +238,7 @@ namespace pm_client {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (true) return;
+            //if (true) return;
             //you never got where it crashed
             p = new ProcessManager();
             HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
@@ -236,5 +260,13 @@ namespace pm_client {
                 addToShow(current.Peek());
             }
         }
+<<<<<<< HEAD
+=======
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e) {
+            //if (true) return;
+            p.CloseHook();
+        }
+>>>>>>> origin/release_userclient
     }
 }

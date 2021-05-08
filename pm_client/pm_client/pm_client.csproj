@@ -144,6 +144,9 @@
     <Compile Include="util\STOMPClient.cs" />
     <Compile Include="util\ViewUtil.cs" />
     <Compile Include="util\WebUtil.cs" />
+    <Compile Include="view\DiyMessageBox.xaml.cs">
+      <DependentUpon>DiyMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="view\file_view.xaml.cs">
       <DependentUpon>file_view.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="res\global_dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\DiyMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,6 +341,16 @@
     <Resource Include="res\drawable\note_checked.png" />
     <Resource Include="res\drawable\remote_checked.png" />
     <Resource Include="res\drawable\setting_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\mbIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\drawable\Error.png" />
+    <Resource Include="res\drawable\Question.png" />
+    <Resource Include="res\drawable\Success.png" />
+    <Resource Include="res\drawable\Tips.png" />
+    <Resource Include="res\drawable\Warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
