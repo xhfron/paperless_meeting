@@ -8,6 +8,8 @@ spring:
       max-file-size: 200MB
       location: C://Files/
       max-request-size: 200MB
+server:
+   port: 8081
 
 mybatis:
   mapper-locations: "classpath:/mapper/*.xml"
