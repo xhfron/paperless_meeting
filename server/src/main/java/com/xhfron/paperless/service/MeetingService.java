@@ -24,4 +24,8 @@ public class MeetingService {
         meetingVO.setRole(role);
         return meetingVO;
     }
+
+    public int latest(){
+        return meetingDao.getLatestId();
+    }
 }

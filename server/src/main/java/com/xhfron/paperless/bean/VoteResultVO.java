@@ -5,11 +5,20 @@ import java.util.List;
 
 public class VoteResultVO {
     int voteId;
+    int state;
     List<Res> res;
 
     public VoteResultVO(int voteId) {
         this.voteId = voteId;
         res = new LinkedList<>();
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public void addResItem(int optionId, int number, List<String> devices) {

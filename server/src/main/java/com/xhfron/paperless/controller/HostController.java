@@ -100,4 +100,13 @@ public class HostController {
     Msg getVoteRes(@RequestParam int voteId) {
         return hostService.getVoteRes(voteId);
     }
+
+    @PostMapping("closeVote")
+    Msg closeVote(@RequestParam int voteId) {
+        if(hostService.closeVote(voteId)){
+            return new Msg(200,"ok",null);
+        }
+        return new Msg(200, "something wrong, please reboot system",null);
+    }
+
 }

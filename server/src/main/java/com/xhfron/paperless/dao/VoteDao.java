@@ -28,4 +28,5 @@ public interface VoteDao {
 
     @Select("select name from `device` where uid in (select device_id from `device_option` where option_id = #{optionId})")
     List<String> getDevicesByOptionId(int optionId);
+
 }

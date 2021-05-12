@@ -88,11 +88,15 @@ public class VoteController {
             case 0:
                 return new Msg(200, "投票成功", null);
             case 1:
-                return new Msg(200, "禁止对同一选项多次投票", null);
+                return new Msg(-1, "禁止对同一选项多次投票", null);
             case 2:
-                return new Msg(200, "本投票为单选，禁止多次投票", null);
+                return new Msg(-1, "本投票为单选，禁止多次投票", null);
+            case -1:
+                return new Msg(-1,"投票未开始",null);
+            case -2:
+                return new Msg(-1,"投票结束",null);
             default:
-                return new Msg(200, "未知错误", null);
+                return new Msg(-1, "未知错误", null);
         }
     }
 

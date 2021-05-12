@@ -10,6 +10,8 @@ public interface MeetingDao {
     @Select("select * from `meeting` where uid = #{meetingId} limit 1")
     MeetingDO getMeetingById(int meetingId);
 
+    @Select("select id from `meeting_state` where state = 0 limit 1" )
+    int getLatestId();
 
 
 }
