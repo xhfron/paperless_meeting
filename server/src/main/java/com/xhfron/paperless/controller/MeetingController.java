@@ -20,15 +20,20 @@ public class MeetingController {
     Msg createMeeting(@RequestParam @NonNull String name,
                       @RequestParam String content,
                       @RequestParam String beginTime,
-                      @RequestParam String endTime){
+                      @RequestParam String endTime) {
         MeetingDO meetingData = new MeetingDO(name, content, beginTime, endTime);
         return meetingService.createMeeting(meetingData);
     }
 
 
     @GetMapping("getMeetingList")
-    Msg getMeetingList(@RequestParam int type){
-        return new Msg();
+    Msg getMeetingList() {
+        return new Msg(200, "ok", meetingService.getMeetingList());
     }
 
+    @PostMapping("changeState")
+    Msg changeState(int meetingId, int state) {
+        meetingService.changeState(meetingId, state);
+        return new Msg(200, "ok", null);
+    }
 }
