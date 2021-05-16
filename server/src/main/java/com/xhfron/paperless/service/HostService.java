@@ -18,6 +18,8 @@ public class HostService {
     private VoteService voteService;
     @Autowired
     private SimpMessageSendingOperations simpMessageSendingOperations;
+    @Autowired
+    private MeetingService meetingService;
 
     public void sendMessage(Command cmd) {
         simpMessageSendingOperations.convertAndSend("/topic/cmd", cmd);
@@ -25,6 +27,7 @@ public class HostService {
 
     public boolean startMeeting(int meetingId) {
         sendMessage(new Command(0, "开始会议id: " + meetingId));
+        meetingService.changeMeetingState(meetingId, 1);
         return true;
     }
 
@@ -52,8 +55,16 @@ public class HostService {
     }
 
     public Msg getVoteRes(int voteId) {
-        //倒计时再说
         return new Msg(200, "ok", voteService.getResultByVoteId(voteId));
+    }
+
+    public void cleanVoteRes(int voteId){
+        voteService.cleanRes(voteId);
+    }
+
+    public void closeMeeting(int meetingId){
+        meetingService.changeMeetingState(meetingId,2);
+        sendMessage(new Command(6, "结束会议id: " + meetingId));
     }
 
 }

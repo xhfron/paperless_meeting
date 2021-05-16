@@ -4,6 +4,7 @@ import com.xhfron.paperless.bean.MeetingDO;
 import com.xhfron.paperless.bean.MeetingVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface MeetingDao {
@@ -13,5 +14,9 @@ public interface MeetingDao {
     @Select("select id from `meeting_state` where state = 0 limit 1" )
     int getLatestId();
 
+    @Select("select state from `meeting_state` where id = #{meetingId} limit 1")
+    Integer getState(int meetingId);
 
+    @Update("update `meeting_state` set state = #{meetingState} where id = #{meetingId}")
+    int changeState(int meetingId, int meetingState);
 }

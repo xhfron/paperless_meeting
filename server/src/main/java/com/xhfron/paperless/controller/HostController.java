@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class HostController {
     @Autowired
     private HostService hostService;
+
     /**
      * @api {POST} /host/beginMeeting beginMeeting
      * @apiVersion 1.0.0
@@ -20,7 +21,7 @@ public class HostController {
      * @apiParam {int} meetingId 会议的id
      * @apiParamExample {json}
      * {
-     *     "meetingId":3
+     * "meetingId":3
      * }
      * @apiSuccess (响应结果) {Number} code
      * @apiSuccess (响应结果) {String} message
@@ -30,10 +31,10 @@ public class HostController {
      */
     @PostMapping("beginMeeting")
     Msg beginMeeting(int meetingId) {
-        if(hostService.startMeeting(meetingId)){
-            return new Msg(200,"ok",null);
+        if (hostService.startMeeting(meetingId)) {
+            return new Msg(200, "ok", null);
         }
-        return new Msg(200, "something wrong, please reboot system",null);
+        return new Msg(200, "something wrong, please reboot system", null);
     }
 
     /**
@@ -54,10 +55,10 @@ public class HostController {
      */
     @PostMapping("beginVote")
     Msg beginVote(@RequestParam int voteId) {
-        if(hostService.startVote(voteId)){
-            return new Msg(200,"ok",null);
+        if (hostService.startVote(voteId)) {
+            return new Msg(200, "ok", null);
         }
-        return new Msg(200, "something wrong, please reboot system",null);
+        return new Msg(200, "something wrong, please reboot system", null);
     }
 
     /**
@@ -79,7 +80,7 @@ public class HostController {
     @PostMapping("programLimit")
     Msg programLimit(@RequestParam int mode) {
         State state = hostService.changeMode(mode);
-        return new Msg(200,"ok",state);
+        return new Msg(200, "ok", state);
     }
 
     /**
@@ -103,10 +104,23 @@ public class HostController {
 
     @PostMapping("closeVote")
     Msg closeVote(@RequestParam int voteId) {
-        if(hostService.closeVote(voteId)){
-            return new Msg(200,"ok",null);
+        if (hostService.closeVote(voteId)) {
+            return new Msg(200, "ok", null);
         }
-        return new Msg(200, "something wrong, please reboot system",null);
+        return new Msg(200, "something wrong, please reboot system", null);
     }
+
+    @PostMapping("closeMeeting")
+    Msg closeMeeting(int meetingId) {
+        hostService.closeMeeting(meetingId);
+        return new Msg(200, "closed", null);
+    }
+
+    @GetMapping("debug/cleanVote")
+    String cleanVote(int voteId) {
+        hostService.cleanVoteRes(voteId);
+        return "Onlydebug";
+    }
+
 
 }

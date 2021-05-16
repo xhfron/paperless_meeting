@@ -54,4 +54,7 @@ public class VoteService {
         return state.getState(voteId);
     }
 
+    public void cleanRes(int voteId){
+        voteDao.cleanRes(voteId);
+    }
 }

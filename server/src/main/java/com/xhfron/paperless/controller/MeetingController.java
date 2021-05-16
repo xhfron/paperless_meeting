@@ -56,8 +56,16 @@ public class MeetingController {
         return new Msg(200,"ok",meetingVO);
     }
 
-    @GetMapping("/latestId")
+    @PostMapping("/latestId")
     Msg latest(){
         return new Msg(200,"ok",meetingService.latest());
     }
+
+    @PostMapping("/state")
+    Msg getState(int meetingId){
+        Integer state = meetingService.getState(meetingId);
+        return new Msg(200, state==null?"not exist":"ok", state);
+    }
+
+
 }

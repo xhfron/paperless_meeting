@@ -28,4 +28,12 @@ public class MeetingService {
     public int latest(){
         return meetingDao.getLatestId();
     }
+
+    public Integer getState(int meetingId){
+        return meetingDao.getState(meetingId);
+    }
+
+    public void changeMeetingState(int meetingId, int meetingState){
+        meetingDao.changeState(meetingId, meetingState);
+    }
 }

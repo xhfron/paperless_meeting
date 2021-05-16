@@ -2,6 +2,7 @@ package com.xhfron.paperless.dao;
 
 import com.xhfron.paperless.bean.Option;
 import com.xhfron.paperless.bean.VoteDO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,5 +29,8 @@ public interface VoteDao {
 
     @Select("select name from `device` where uid in (select device_id from `device_option` where option_id = #{optionId})")
     List<String> getDevicesByOptionId(int optionId);
+
+    @Delete("delete from device_option where option_id in (select uid from `option` where belongs=#{voteId})")
+    int cleanRes(int voteId);
 
 }
