@@ -64,7 +64,7 @@ public class MeetingController {
     @PostMapping("/state")
     Msg getState(int meetingId){
         Integer state = meetingService.getState(meetingId);
-        return new Msg(200, state==null?"not exist":"ok", state);
+        return new Msg(200, state==null?"not exist":"ok", state==null?-1:state);
     }
 
 

@@ -25,7 +25,7 @@ public class MeetingService {
         return meetingVO;
     }
 
-    public int latest(){
+    public Integer latest(){
         return meetingDao.getLatestId();
     }
 

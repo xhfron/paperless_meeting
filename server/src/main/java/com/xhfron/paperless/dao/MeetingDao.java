@@ -12,7 +12,7 @@ public interface MeetingDao {
     MeetingDO getMeetingById(int meetingId);
 
     @Select("select id from `meeting_state` where state = 0 limit 1" )
-    int getLatestId();
+    Integer getLatestId();
 
     @Select("select state from `meeting_state` where id = #{meetingId} limit 1")
     Integer getState(int meetingId);
