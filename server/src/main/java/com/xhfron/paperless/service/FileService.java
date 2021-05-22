@@ -27,7 +27,7 @@ public class FileService {
            dir.mkdir();
         }
         try {
-            File dest = new File(dir.getAbsoluteFile()+file.getOriginalFilename());
+            File dest = new File(dir.getAbsoluteFile()+"/"+file.getOriginalFilename());
             if(!dest.exists()){
                 dest.createNewFile();
             }

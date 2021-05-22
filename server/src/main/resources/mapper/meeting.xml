@@ -4,7 +4,7 @@
     <insert id="createMeeting" useGeneratedKeys="true" keyProperty="uid" parameterType="com.xhfron.paperless.bean.MeetingDO">
         insert into `meeting`
         (`uid`, `name`, `content`, `begin_time`, `end_time`)
-        values(uid, #{name}, #{content}, #{beginTime}, #{endTime})
+        values(uid, #{name}, #{content}, #{beginTime}, #{endTime});
     </insert>
 
     <select id="getMeetingList" resultType="com.xhfron.paperless.bean.MeetingVO">
@@ -16,4 +16,8 @@
         set state = #{state}
         where id = #{meetingId}
     </update>
+
+    <insert id="insertMeetingState">
+        insert into `meeting_state` values(#{uid},100);
+    </insert>
 </mapper>

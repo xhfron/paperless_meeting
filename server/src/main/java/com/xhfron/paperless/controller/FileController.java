@@ -30,7 +30,7 @@ public class FileController {
 
 
     @PostMapping("/upload")
-    public Msg upload(@RequestParam MultipartFile file, int meetingId) {
+    public Msg upload(@RequestParam MultipartFile file,@RequestParam("meetingId") int meetingId) {
         FileDO fileDO = fileService.uploadFile(file, meetingId);
         if (fileDO!=null) {
             return new Msg(200,"ok",fileDO);

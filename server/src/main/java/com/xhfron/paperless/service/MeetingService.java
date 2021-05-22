@@ -17,6 +17,7 @@ public class MeetingService{
 
     public Msg createMeeting(MeetingDO meetingData){
         meetingDao.createMeeting(meetingData);
+        meetingDao.insertMeetingState(meetingData.getUid());
         return new Msg(200,"ok",meetingData);
     }
 

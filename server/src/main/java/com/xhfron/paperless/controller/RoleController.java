@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class RoleController {
      * {"code":6890,"obj":{},"message":"50qP6Vo4"}
      */
     @PostMapping("uploadRole")
-    Msg  addRole(@RequestBody List<RoleInfo> roleInfos,@RequestParam int meetingId){
+    Msg  addRole(@RequestBody List<RoleInfo> roleInfos, @RequestParam int meetingId){
 
         if(roleService.addRole(roleInfos,meetingId)){
             return new Msg(200,"ok",null);

@@ -11,4 +11,5 @@ public interface MeetingDao {
     int createMeeting(MeetingDO meeting);
     List<MeetingVO> getMeetingList();
     int changeMeetingState(int meetingId, int state);
+    int insertMeetingState(int uid);
 }
