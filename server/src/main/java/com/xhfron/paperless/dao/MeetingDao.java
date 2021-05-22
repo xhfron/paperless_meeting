@@ -19,4 +19,7 @@ public interface MeetingDao {
 
     @Update("update `meeting_state` set state = #{meetingState} where id = #{meetingId}")
     int changeState(int meetingId, int meetingState);
+
+    @Select("select uid from device where mac=#{mac}")
+    Integer getDeviceId(String mac);
 }

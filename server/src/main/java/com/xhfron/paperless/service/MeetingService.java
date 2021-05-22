@@ -36,4 +36,8 @@ public class MeetingService {
     public void changeMeetingState(int meetingId, int meetingState){
         meetingDao.changeState(meetingId, meetingState);
     }
+
+    public Integer getDeviceId(String mac) {
+       return meetingDao.getDeviceId(mac);
+    }
 }

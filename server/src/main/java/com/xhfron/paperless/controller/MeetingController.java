@@ -8,6 +8,7 @@ import com.xhfron.paperless.service.MeetingService;
 import org.apache.ibatis.ognl.ObjectElementsAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.util.annotation.NonNull;
 
 @RestController()
 @RequestMapping("meeting")
@@ -65,6 +66,12 @@ public class MeetingController {
     Msg getState(int meetingId){
         Integer state = meetingService.getState(meetingId);
         return new Msg(200, state==null?"not exist":"ok", state==null?-1:state);
+    }
+
+    @PostMapping("/getDeviceId")
+    Msg getDeviceId(@RequestParam @NonNull String mac){
+        Integer id = meetingService.getDeviceId(mac);
+        return new Msg(200,"ok",id==null?-1:id);
     }
 
 
