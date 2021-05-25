@@ -56,5 +56,6 @@ public class VoteService {
 
     public void cleanRes(int voteId){
         voteDao.cleanRes(voteId);
+        state.clear();
     }
 }

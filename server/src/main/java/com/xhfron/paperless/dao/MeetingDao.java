@@ -11,7 +11,7 @@ public interface MeetingDao {
     @Select("select * from `meeting` where uid = #{meetingId} limit 1")
     MeetingDO getMeetingById(int meetingId);
 
-    @Select("select id from `meeting_state` where state = 0 limit 1" )
+    @Select("select id from `meeting_state` where state = 0 or state = 1 limit 1" )
     Integer getLatestId();
 
     @Select("select state from `meeting_state` where id = #{meetingId} limit 1")
