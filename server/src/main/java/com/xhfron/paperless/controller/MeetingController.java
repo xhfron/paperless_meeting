@@ -59,7 +59,8 @@ public class MeetingController {
 
     @PostMapping("/latestId")
     Msg latest(){
-        return new Msg(200,"ok",meetingService.latest());
+        Integer id = meetingService.latest();
+        return new Msg(200,"ok",id==null?-1:id);
     }
 
     @PostMapping("/state")
