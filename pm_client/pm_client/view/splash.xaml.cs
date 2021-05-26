@@ -21,10 +21,9 @@ namespace pm_client.view
     /// </summary>
     public partial class splash : UserControl,MessageListener
     {
-        public splash()
-        {
+        public splash() {
             InitializeComponent();
-            ViewUtil.Find<STOMPClient>(this, "STOMPClient").addJsonListener(this);
+            
             characterize();
         }
         void beginMeeting(int meetingId) {
@@ -39,7 +38,7 @@ namespace pm_client.view
             this.Visibility = Visibility.Collapsed;
         }
         private void characterize() {
-
+            
             if (ViewUtil.Find<Role>(this,"role").name == "主持人") {
 
             } else {
@@ -50,9 +49,14 @@ namespace pm_client.view
 
         public void onMessage(Dictionary<string, object> json) {
             string cmd = json["cmd"] as string;
+            Log.l("splash", cmd);
             if (cmd.StartsWith("开始会议")) {
-                hide(null, null);
+                this.Dispatcher.InvokeAsync(() => this.Visibility = Visibility.Collapsed);
             }
+        }
+
+        private void UserControl_Initialized(object sender, EventArgs e) {
+            
         }
     }
 }

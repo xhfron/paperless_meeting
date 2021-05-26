@@ -62,6 +62,14 @@
                Canvas.Bottom="0" Canvas.Right="0" Click="exit"
                 Template="{DynamicResource normalbtn}"
                 />
+        <Button Content="结束会议" 
+                Name="closeBtn"
+                Style="{StaticResource normal_btn}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Canvas.Bottom="0" Canvas.Left="0" Click="close"
+                Template="{DynamicResource normalbtn}"
+                />
 
 
 

@@ -4,9 +4,11 @@ using pm_client.view;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,38 +31,99 @@ namespace pm_client {
     /// xml，cs 大驼峰
     /// 
     /// 角色_功能_组件_状态
-    public partial class MainWindow : Window, INavigator {
+    public partial class MainWindow : Window, INavigator,MessageListener {
         Stack<UserControl> current;
         Dictionary<string, Stack<UserControl>> ui = new Dictionary<string, Stack<UserControl>>();
-        ProcessManager p;
+        HookManager p;
+        string name = "MainWindow";
+        SuperSplash superSplash;
         public MainWindow() {
             Log.fuckingCSharp = this.Dispatcher;
             var t = this.Dispatcher;
-            InitializeComponent();
-            showBanner(new splash());
-            showBanner(new SuperSplash());
-            Log.i("hello", "hello");
 
+            InitializeComponent();
+
+            this.Resources["STOMPClient"] = new STOMPClient();
+            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
+            s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
+            s.connect();
+            s.subscribe("/topic/cmd");
+
+            s.addJsonListener(this);
+
+
+            superSplash = new SuperSplash();
+            showBanner(superSplash);
 
             new Thread(new ThreadStart(this.run)).Start();
+        }
+        async void tryConnecting() {
+            await Task.Run(() => {
 
-            
-
-            if (false) {
+            });
+            int meetingId = -1;
+            Meeting meeting = null;
+            while (true) {
                 try {
-                    /*getMeeting(1,1);
-                    getFileList(1, 1);
-                    beginMeeting(1);
-                    beginVote(1);
-                    getVoteList(1,1);*/
-                    //getVoteResult(1);
-                    //submitOption(1, 1, 1);
-                    WebUtil.downloadFile(4, "a.exe");
-                } catch (Exception e) {
-                    Log.i("ca", e);
+                    Thread.Sleep(1000);
+                    meetingId = WebUtil.latestMeetingId();
+                    //meetingId = 1;
+                    meeting = WebUtil.getMeeting(meetingId, WebUtil.getDeviceId());
+                    if (meeting == null) {
+                        ViewUtil.msg("没会议，告辞");
+                        await Task.Run(() => System.Environment.Exit(0));
+                        return;
+                    }
+                    meeting.role.name = "主持人";
+                    Log.i(name, "hello");
+                    ViewUtil.Find<Meeting>(this, "meeting").load(meeting);
+                    if (meeting.role == null) {
+
+                    }Console.WriteLine("aeowifndlksvnzoijflksdjfewocdmsoiewvoi");
+                    ViewUtil.Find<Role>(this, "role").load(meeting.role);
+                    //ViewUtil.Find<Role>(this, "role").name = "mike";
+                    break;
+                } catch (NetworkException e) {
+                    Log.i("supersplash", "connection failed,trying after 3 second");
+                    Thread.Sleep(3000);
                 }
             }
-            
+            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
+
+            ui.Add("file", new Stack<UserControl>());
+            file_list_view flview = new file_list_view();
+            flview.loadFile(meetingId, meeting.role.id);
+            flview.AddBoard(this);
+            ui["file"].Push(flview);
+
+            ui.Add("settings", new Stack<UserControl>());
+            ui["settings"].Push(new view.logout());
+
+            ui.Add("vote", new Stack<UserControl>());
+            view.vote_list_view vlview = new view.vote_list_view();
+            s.addJsonListener(vlview);
+            vlview.setVoteList(WebUtil.getVoteList(meetingId, ViewUtil.Find<Role>(this, "role").id));
+            vlview.AddBoard(this);
+            //voteList = new List<Vote>();
+            //(vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
+            ui["vote"].Push(vlview);
+
+            ui.Add("note", new Stack<UserControl>());
+            ui["note"].Push(new view.note());
+            ui.Add("remote", new Stack<UserControl>());
+            ui["remote"].Push(new view.remote());
+
+            replaceBy(ui["file"]);
+
+            if (WebUtil.getMeetingState(meetingId) != 1) {
+                //0-idle 1-start 2-end -1 invalid
+
+            splash spl = new splash();
+            s.addJsonListener(spl);
+            showBanner(spl);
+            }
+
+            superSplash.Visibility = Visibility.Collapsed;
         }
         void run() {
             Thread.CurrentThread.Name = "background";
@@ -73,31 +136,6 @@ namespace pm_client {
             }
         }
 
-
-<<<<<<< HEAD
-        
-=======
-        void beginMeeting(int meetingId) {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["meetingId"] = meetingId;
-            WebUtil.post("/host/beginMeeting", dict);
-
-        }
->>>>>>> origin/release_userclient
-
-
-        void remoteSwitch(int mode) {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["mode"] = mode;
-            WebUtil.post("/host/programLimit", dict);
-        }
-        List<util.Vote> getVoteList(int meetingId, int deviceId) {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            dict["meetingId"] = meetingId;
-            dict["deviceId"] = deviceId;
-            string str = WebUtil.post("/vote/getVoteList", dict);
-            return JsonConvert.DeserializeObject<List<util.Vote>>(str);
-        }
 
 
 
@@ -135,26 +173,7 @@ namespace pm_client {
             (FindName("NoteBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["settings"]);
         }
-        async void t() {
-            ClientWebSocket webSocket = new ClientWebSocket();
-            await webSocket.ConnectAsync(new Uri("wss://echo.websocket.org"), CancellationToken.None);
-
-
-            await webSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("hello")), WebSocketMessageType.Binary, true, CancellationToken.None);
-            //await webSocket.ReceiveAsync(null,null);
-            await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "1", CancellationToken.None);
-            webSocket.Dispose();
-        }
         private void toVote(object sender, RoutedEventArgs e) {
-
-            try
-            {
-                //弹出提示框
-                DiyMessageBox.Show("自定义提示框测试成功！", CustomMessageBoxButton.OK, CustomMessageBoxIcon.Success);           
-            }catch(Exception exp)
-            {
-                MessageBox.Show(exp.ToString());
-            }
 
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
             replaceBy(ui["vote"]);
@@ -186,39 +205,11 @@ namespace pm_client {
             Grid.SetColumnSpan(newView, 2);
             g.Children.Add(newView);
         }
-        
+
 
 
         private void Window_Initialized(object sender, EventArgs e) {
-            /*this.Resources["STOMPClient"] = new STOMPClient();
-            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
-            s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
-            s.connect();
-            s.subscribe("/topic/cmd");*/
-
-            ui.Add("file", new Stack<UserControl>());
-            file_list_view flview = new file_list_view();
-            flview.AddBoard(this);
-            ui["file"].Push(flview);
-            ui.Add("settings", new Stack<UserControl>());
-            ui["settings"].Push(new view.logout());
-            ui.Add("vote", new Stack<UserControl>());
-
-            view.vote_list_view vlview = new view.vote_list_view();
-            vlview.setVoteList(getVoteList(1, 1));
-            vlview.AddBoard(this);
-            //voteList = new List<Vote>();
-            //(vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
-            ui["vote"].Push(vlview);
-            //ui["vote"].Push(new view.vote());
-            ui.Add("note", new Stack<UserControl>());
-            ui["note"].Push(new view.note());
-            ui.Add("remote", new Stack<UserControl>());
-            ui["remote"].Push(new view.remote());
-
-            replaceBy(ui["file"]);
-
-
+            tryConnecting();
         }
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
             //Log.l("msg", "" + msg);
@@ -240,7 +231,7 @@ namespace pm_client {
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //if (true) return;
             //you never got where it crashed
-            p = new ProcessManager();
+            p = new HookManager();
             HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
             if (source != null) source.AddHook(WndProc); else Log.i("wndproc", "failed");
             p.StartupHook();
@@ -260,13 +251,33 @@ namespace pm_client {
                 addToShow(current.Peek());
             }
         }
-<<<<<<< HEAD
-=======
 
-        private void Window_Unloaded(object sender, RoutedEventArgs e) {
-            //if (true) return;
-            p.CloseHook();
+        public void Pop() {
+            back(null, null);
         }
->>>>>>> origin/release_userclient
+
+        public void Replace(UserControl newView) {
+            back(null, null);
+            Push(newView);
+        }
+        private void delete(DirectoryInfo root) {
+            foreach (var x in root.GetDirectories()) {
+                delete(x);
+            }
+            foreach (var x in root.GetFiles()) {
+                x.Delete();
+            }
+            root.Delete();
+        }
+
+        public void onMessage(Dictionary<string, object> json) {
+            string cmd = (string)json["cmd"];
+            if (cmd.Contains("结束投票")) {
+                DirectoryInfo directoryInfo=new DirectoryInfo(Settings.fileDir);
+                if (directoryInfo.Exists) {
+                    delete(directoryInfo);
+                }
+            }
+        }
     }
 }

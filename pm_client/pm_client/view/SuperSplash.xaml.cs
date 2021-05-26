@@ -25,25 +25,9 @@ namespace pm_client.view
     {
         public SuperSplash(){
             InitializeComponent();
-            tryConnecting();
         }
         string name = "SuperSplash";
-        async void tryConnecting() {
-            while (true) {
-                try {
-                    Thread.Sleep(1000);
-                    Meeting meeting = await Task.Run<Meeting>(()=>getMeeting(1, 1));
-                    Log.i(name, "hello");
-                    ViewUtil.Find<Meeting>(this, "meeting").load(getMeeting(1, 1));
-                    ViewUtil.Find<Role>(this, "role").load(meeting.role);
-                    this.Visibility = Visibility.Collapsed;
-                    break;
-                } catch(NetworkException e) {
-                    Log.i("supersplash", "connection failed,trying after 3 second");
-                    Thread.Sleep(3000);
-                }
-            }
-        }
+        
         
 
         private void Button_Click(object sender, RoutedEventArgs e)

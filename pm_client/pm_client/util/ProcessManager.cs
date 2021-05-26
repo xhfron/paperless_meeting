@@ -2,54 +2,41 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pm_client.util
-{
-    public class ProcessManager
-    {
-        [DllImport("kernel32.dll")]
-        public static extern IntPtr LoadLibrary(string dllToLoad);
+namespace pm_client.util {
+    class ProcessManager {
+        List<Process> list=new List<Process>();
+        int mode;
+        public static int GRANTED=1;
+        public static int DENIED =2;
+        public void setMode(int mode) {
+            if (mode == GRANTED) {
 
-        [DllImport("kernel32.dll")]
-        public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
-
-        [DllImport("kernel32.dll")]
-        public static extern bool FreeLibrary(IntPtr hModule);
-
-        private delegate void Func();
-        Func startupHook;
-        Func closeHook;
-        static IntPtr pDll;
-
-        public void StartupHook()
-        {
-            startupHook();
+            }else if (mode == DENIED) {
+                foreach(Process process in list) {
+                    process.Kill();
+                }
+            }
         }
-        public void CloseHook()
-        {
-            closeHook();
-        }
+        public void open(string filepath) {
+            if (mode == GRANTED) {
 
-
-        public ProcessManager()
-        {
-            IntPtr pAddressOfFunctionToCall = GetProcAddress(pDll, "StartupHook");
-            startupHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
-            pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
-            closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
+            Process process = Process.Start(filepath);
+            list.Add(process);
+            process.Exited += (sender,e) => list.Remove(process);
+            } else {
+                ViewUtil.msg("点什么点");
+            }
         }
-        public void test() {
-            Process p=Process.GetProcessById(20);
-            p.Kill();
+        public void onProcessStart(string path,Process process) {
+            if (shouldClose(path)) {
+                process.Kill();
+            }
         }
-
-        static ProcessManager()
-        {
-            pDll = LoadLibrary(@".\HookProc.dll");
-            Console.WriteLine(pDll);
+        public bool shouldClose(string path) {
+            return false;
         }
     }
 }

@@ -9,5 +9,7 @@ namespace pm_client.util
     public interface INavigator
     {
         void Push(System.Windows.Controls.UserControl newView);
+        void Pop();
+        void Replace(System.Windows.Controls.UserControl newView);
     }
 }

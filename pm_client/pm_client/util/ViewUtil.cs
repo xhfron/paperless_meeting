@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,8 @@ namespace pm_client.util
         }
         public static void msg(string text)
         {
-            MessageBox.Show(text);
+            DiyMessageBox.Show(text, DiyMessageBox.CustomMessageBoxButton.OK, DiyMessageBox.CustomMessageBoxIcon.None);
+            //MessageBox.Show(text);
         }
     }
 }

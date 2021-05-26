@@ -24,6 +24,7 @@ namespace pm_client.view
         static Log log;
         public static void say(string type,string name,string text)
         {
+            
             fuckingCSharp.Invoke(() =>
             {
 
@@ -36,6 +37,7 @@ namespace pm_client.view
                 TextBox echo = (TextBox)log.FindName("echo");
                 echo.AppendText(type + "[" + name + "]" + text);
                 echo.AppendText("\n");
+                Console.WriteLine(type + "[" + name + "]" + text);
             });
         }
         public static void i(string name, string text)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pm_client.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,13 @@ namespace pm_client.view {
         private void exit(object sender, RoutedEventArgs e) {
             Task.Run(() => System.Environment.Exit(0));
         }
+        private void close(object sender, RoutedEventArgs e) {
+            Task.Run(() => {
+                WebUtil.closeMeeting(ViewUtil.Find<Meeting>(this, "meeting").meetingId);
+                //System.Environment.Exit(0);
+            });
+        }
+
     }
 
 }

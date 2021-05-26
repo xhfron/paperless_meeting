@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace pm_client.util
 {
-    class ChoiceResult : INotifyPropertyChanged {
+    public class ChoiceResultViewData : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e) {
@@ -81,7 +81,7 @@ namespace pm_client.util
             }
         }
 
-        public void load(ChoiceResult b) {
+        public void load(ChoiceResultViewData b) {
             this.option = b.option;
             this.percent = b.percent;
             this.number = b.number;
@@ -124,10 +124,10 @@ namespace pm_client.util
                 OnPropertyChanged(new PropertyChangedEventArgs("name"));
             }
         }
-        private string _iconPath;
+        private System.Windows.Media.Imaging.BitmapImage _iconPath;
 
 
-        public string iconPath {
+        public System.Windows.Media.Imaging.BitmapImage iconPath {
 
             get {
                 return _iconPath;

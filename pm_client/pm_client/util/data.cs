@@ -174,6 +174,8 @@ namespace pm_client.util {
                 OnPropertyChanged(new PropertyChangedEventArgs("optionId"));
             }
         }
+        
+
         private int _number;
 
 
@@ -207,6 +209,17 @@ namespace pm_client.util {
         public void OnPropertyChanged(PropertyChangedEventArgs e) {
             if (PropertyChanged != null) {
                 PropertyChanged(this, e);
+            }
+        }
+        private int _state;
+        public int state {
+
+            get {
+                return _state;
+            }
+            set {
+                _state = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("state"));
             }
         }
         private int _voteId;
@@ -418,16 +431,16 @@ namespace pm_client.util {
                 PropertyChanged(this, e);
             }
         }
-        private int _id;
+        private int _uid;
 
 
-        public int id {
+        public int uid {
 
             get {
-                return _id;
+                return _uid;
             }
             set {
-                _id = value;
+                _uid = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("id"));
             }
         }
@@ -449,7 +462,12 @@ namespace pm_client.util {
         }
 
     }
-    public class Vote : INotifyPropertyChanged {
+    partial class Vote {
+        public static int IDLE = -1;
+        public static int VOTING = 0;
+        public static int VOTED = -2;
+    }
+    public partial class Vote : INotifyPropertyChanged {
         static Random r = new Random();
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(PropertyChangedEventArgs e) {
@@ -457,17 +475,17 @@ namespace pm_client.util {
                 PropertyChanged(this, e);
             }
         }
-        private int _id;
+        private int _uid;
 
 
-        public int id {
+        public int uid {
 
             get {
-                return _id;
+                return _uid;
             }
             set {
-                _id = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("id"));
+                _uid = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("uid"));
             }
         }
         private string _name;
@@ -494,6 +512,19 @@ namespace pm_client.util {
             set {
                 _content = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("content"));
+            }
+        }
+        private int _state;
+
+
+        public int state {
+
+            get {
+                return _state;
+            }
+            set {
+                _state = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("state"));
             }
         }
         private int _type;
@@ -548,6 +579,17 @@ namespace pm_client.util {
             }
         }
 
+        public void load(Vote b) {
+            this.uid = b.uid;
+            this.name = b.name;
+            this.content = b.content;
+            this.state = b.state;
+            this.type = b.type;
+            this.anonymous = b.anonymous;
+            this.meetingId = b.meetingId;
+            this.options = b.options;
+
+        }
     }
     public class VoteList : INotifyPropertyChanged {
         static Random r = new Random();

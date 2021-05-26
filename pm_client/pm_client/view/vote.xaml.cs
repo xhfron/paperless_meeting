@@ -4,31 +4,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace pm_client.view
-{
+namespace pm_client.view {
     /// <summary>
     /// vote.xaml 的交互逻辑
     /// </summary>
-    public partial class vote : UserControl
-    {
+    public partial class vote : UserControl {
         INavigator board;
-        public void AddBoard(INavigator board)
-        {
+        public void AddBoard(INavigator board) {
             this.board = board;
         }
         util.Vote _vote;
-        public void setVote(util.Vote vote)
-        {
+        public void setVote(util.Vote vote) {
             this._vote = vote;
             this.DataContext = vote;
         }
-
-        public vote()
-        {
+        public vote() {
             InitializeComponent();
 
             if (ViewUtil.Find<Role>(this, "role").name == "主持人") {
-
+                this.choiceListBox.IsEnabled = false;
                 this.userBtn.Visibility = Visibility.Hidden;
             } else {
                 this.countingPanel.Visibility = Visibility.Hidden;
@@ -37,18 +31,18 @@ namespace pm_client.view
 
         }
 
-        private void shootVote(object sender, TouchEventArgs e) {
+        private void shootVote(object sender, RoutedEventArgs e) {
             if (this.choiceListBox.SelectedItems.Count == 0) {
                 ViewUtil.msg("你至少选一个啊");
                 return;
             }
             try {
-                foreach(var c in this.choiceListBox.SelectedItems){
-                    VoteOption choice= (VoteOption)c;
-                    submitOption(1, choice.id, 1);
+                foreach (var c in this.choiceListBox.SelectedItems) {
+                    VoteOption choice = (VoteOption)c;
+                    submitOption(_vote.uid, choice.uid, WebUtil.getDeviceId());
                 }
                 ViewUtil.msg("投票成功");
-            }catch(NetworkException ex) {
+            } catch (NetworkException) {
                 ViewUtil.msg("投票失败");
             }
         }
@@ -62,16 +56,20 @@ namespace pm_client.view
             dict["optionId"] = optionId;
             dict["voteId"] = voteId;
             dict["deviceId"] = deviceId;
-            WebUtil.post("/vote/submitOption", dict);
+            try {
+                WebUtil.post("/vote/submitOption", dict);
+            } catch (NetworkException e) {
+                ViewUtil.msg($"投票失败:{e.message}");
+            }
         }
 
         private void startVote(object sender, TouchEventArgs e) {
-            beginVote(this._vote.id);
+            beginVote(this._vote.uid);
             ViewUtil.msg("投票开始");
             vote_result t = new vote_result();
             t.setVote(_vote);
             t.AddBoard(board);
-            board.Push(t);
+            board.Replace(t);
         }
 
         private void fakeClick(object sender, RoutedEventArgs e) {

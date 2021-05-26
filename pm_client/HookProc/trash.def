@@ -1,5 +1,5 @@
-LIBRARY HookProc
+LIBRARY "HookProc"
 
 EXPORTS
-StartupHook
-CloseHook
+	StartupHook
+	CloseHook

@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:util="clr-namespace:pm_client.util">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:util="clr-namespace:pm_client.util" xmlns:local="clr-namespace:pm_client.view">
     <util:SuperInfo x:Key="superInfo" time="haha"/>
     <util:Meeting x:Key="meeting" 
                       meetingId="-1" 
@@ -8,6 +8,8 @@
                       endTime="unknown"
                       />
     <util:Role name="none" id="-1" x:Key="role"/>
+    <local:AnonymousConverter x:Key="anonymousConverter" ></local:AnonymousConverter>
+    <local:VoteStateConverter x:Key="voteStateConverter" ></local:VoteStateConverter>
     <SolidColorBrush x:Key="sdu_red" Color="#9C0C13"/>
     <SolidColorBrush x:Key="sidebar_white" Color="#F7F7F7"/>
     <SolidColorBrush x:Key="sidebar_text" Color="#77899E"/>

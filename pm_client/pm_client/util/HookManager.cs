@@ -1,14 +1,16 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace Test {
+namespace pm_client.util {
     public class HookManager {
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern bool SetDllDirectory(string path);
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern int GetLastError();
 
 
         [DllImport("kernel32.dll")]
@@ -27,14 +29,14 @@ namespace Test {
 
         public void StartupHook() {
             if (startupHook == null) {
-                Console.WriteLine("start up failed");
+                ViewUtil.msg("start up failed");
                 return;
             }
             startupHook();
         }
         public void CloseHook() {
             if (startupHook == null) {
-                Console.WriteLine("ending failed");
+                ViewUtil.msg("ending failed");
                 return;
             }
             closeHook();
@@ -43,44 +45,29 @@ namespace Test {
 
         public HookManager() {
             IntPtr pAddressOfFunctionToCall = GetProcAddress(pDll, "StartupHook");
+            if (pAddressOfFunctionToCall == IntPtr.Zero) {
+                ViewUtil.msg("hook failed");
+                return;
+            }
             startupHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
-            
-            Console.WriteLine($"start up handle:{startupHook.ToString()}");
-            
             pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
             closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
         }
 
+        public void test() {
+            Process p = Process.GetProcessById(20);
+            p.Kill();
+        }
 
         static HookManager() {
-            //if (!SetDllDirectory(@".\lib")) {
-            //  Console.WriteLine("false");
-            //}
-            FileInfo file=new FileInfo(@".\lib\HookProc.dll");
-            
-            pDll = LoadLibrary(file.FullName);
-            if (pDll == IntPtr.Zero) {
-                Console.WriteLine(file.FullName+"::hook failed:" + GetLastError());
-                return;
-            }
-            Console.WriteLine($"dll handle:{pDll}");
+            SetDllDirectory(@".\lib");
+            pDll = LoadLibrary(@"HookProc");
+
+            Console.WriteLine(pDll);
         }
         bool shouldKill(int pid) {
             return false;
         }
 
-    }
-    class Program
-    {
-        
-        static void Main(string[] args)
-        {
-            if (true) {
-                HookManager hookManager = new HookManager();
-                hookManager.StartupHook();
-                hookManager.CloseHook();
-                return;
-            }
-        }
     }
 }

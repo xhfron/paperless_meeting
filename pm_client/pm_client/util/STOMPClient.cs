@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pm_client.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace pm_client.util {
             end= raw.IndexOf("\n", start) == -1 ? raw.Length : raw.IndexOf("\n", start);
         }
         string get() {
-            return raw.Substring(start, start - end);
+            return raw.Substring(start,  end-start);
         }
         string build(string raw) {
             Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -28,10 +29,12 @@ namespace pm_client.util {
             this.raw = raw;
             start = 0;
             end = raw.IndexOf("\n", start) == -1 ? raw.Length : raw.IndexOf("\n", start);
+            Console.WriteLine($"start{start},end{end}");
             if (get().ToLower() != "message") {
                 return null;
             }
             next();
+            Console.WriteLine($"start{start},end{end}");
             while (get() != "") {
                 int delim = get().IndexOf(":");
                 dict[get().Substring(0, delim - 0)] = get().Substring(delim + 1, get().Length - delim - 1);
@@ -40,6 +43,7 @@ namespace pm_client.util {
             next();
             end = raw.IndexOf('\0');
             msg = raw.Substring(start, end - start);
+            
             return msg;
         }
         public Dictionary<string,object> asDict(string raw) {
@@ -48,7 +52,6 @@ namespace pm_client.util {
     }
     class STOMPClient {
         WebSocket webSocket;
-        byte[] buffer;
         List<MessageListener> listeners = new List<MessageListener>();
         public void addJsonListener(MessageListener listener) {
             listeners.Add(listener);
@@ -62,10 +65,16 @@ namespace pm_client.util {
                 if (e.IsPing) {
                     return;
                 }
+                Log.l("STOMP", e.Data);
                 MsgBuilder builder = new MsgBuilder();
-                Dictionary<string, object> dict = builder.asDict(e.Data);
-                foreach(var l in listeners) {
-                    l.onMessage(dict);
+                try {
+
+                    Dictionary<string, object> dict = builder.asDict(e.Data);
+                    foreach(var l in listeners) {
+                        l.onMessage(dict);
+                    }
+                }catch(Exception ex) {
+                    Log.l("STOMP", ex.ToString());
                 }
             };
             webSocket.Connect();

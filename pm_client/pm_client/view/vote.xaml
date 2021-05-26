@@ -94,7 +94,7 @@
                 <CheckBox  Style="{StaticResource choice2}" 
                            Template="{DynamicResource choice}" 
                            VerticalAlignment="Center" 
-                           IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" 
+                           IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                            Margin="40,0,0,25"
                            Foreground="{StaticResource font_black}">
                     <ContentPresenter Margin="36,0,0,0"></ContentPresenter>
@@ -135,7 +135,7 @@
                     ></TextBlock>
             <TextBlock HorizontalAlignment="Left" 
                        Style="{StaticResource title_40}"  
-                       Text="匿名投票"
+                       Text="{Binding Path=anonymous, Converter={StaticResource anonymousConverter}}"
                        Grid.Row="1"
                        Grid.ColumnSpan="2"
                        VerticalAlignment="Bottom"
@@ -151,7 +151,8 @@
                    FontFamily="DengXian" 
                    FontSize="48" 
                    Margin="0,25,-66,18.5" 
-                   FontWeight="Bold"    ><Run Text="倒计时：∞"/> <Run/></TextBlock>
+                   FontWeight="Bold"
+                   Visibility="Collapsed"><Run Text="倒计时：∞"/> <Run/></TextBlock>
         <ScrollViewer 
             VerticalScrollBarVisibility="Auto" 
             HorizontalAlignment="Stretch"   
@@ -200,7 +201,7 @@
                 Height="95" 
                 Width="300" 
                 Grid.ColumnSpan="2" 
-                TouchUp="shootVote" 
+                Click="shootVote" 
                 Margin="29,10,30,10"  />
         <StackPanel 
             Orientation="Horizontal" 
@@ -209,11 +210,21 @@
             Grid.Row="4" 
             VerticalAlignment="Top" 
             Grid.ColumnSpan="2"  
-            Name="countingPanel">
+            Name="countingPanel"
+            Visibility="Collapsed">
             <CheckBox Style="{StaticResource title_48}" Template="{StaticResource choice}" FontFamily="DengXian" >倒计时：</CheckBox>
             <TextBox Style="{StaticResource title_48}" Width="150" Margin="0"></TextBox>
             <TextBlock Style="{StaticResource title_48}" FontFamily="DengXian" Margin="4,0,0,0">s</TextBlock>
         </StackPanel>
+        <Button Content="resetBtn" 
+                Visibility="Collapsed"
+                Grid.Column="1" 
+                HorizontalAlignment="Left" 
+                Margin="0,10,0,0" Grid.Row="4" 
+                VerticalAlignment="Top" 
+                Width="137" Height="99" 
+                Grid.RowSpan="2" 
+                Name="resetBtn"/>
 
     </Grid>
 </UserControl>

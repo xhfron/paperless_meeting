@@ -43,7 +43,7 @@ LRESULT CALLBACK ProcessClose(int nCode, WPARAM wParam, LPARAM lParam)
 	return CallNextHookEx(hThis, nCode, wParam, lParam);
 }
 	wchar_t ws[203];
-void StartupHook(void)
+	__declspec(dllexport) void StartupHook(void)
 {
 	DWORD dwPID;
 	HMODULE h = GetModuleHandleW(L"ProcHook.dll");
@@ -61,10 +61,10 @@ void StartupHook(void)
 	}
 	ws[i++] = '\0';
 	
-	MessageBoxW(FindWindow(NULL, L"pm_client"), ws, L"WORLD", MB_OK);
+	//MessageBoxW(FindWindow(NULL, L"pm_client"), ws, L"WORLD", MB_OK);
 }
 
-void CloseHook(void)
+	__declspec(dllexport) void CloseHook(void)
 {
 	UnhookWindowsHookEx(hThis);
 }

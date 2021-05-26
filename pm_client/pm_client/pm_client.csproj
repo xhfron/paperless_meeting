@@ -106,6 +106,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -139,6 +141,7 @@
     <Compile Include="util\INavigator.cs" />
     <Compile Include="util\NetworkException.cs" />
     <Compile Include="util\PersistentData.cs" />
+    <Compile Include="util\HookManager.cs" />
     <Compile Include="util\ProcessManager.cs" />
     <Compile Include="util\Settings.cs" />
     <Compile Include="util\STOMPClient.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="view\file_video_view.xaml.cs">
       <DependentUpon>file_video_view.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\IValueConverterTest.cs" />
     <Compile Include="view\Log.xaml.cs">
       <DependentUpon>Log.xaml</DependentUpon>
     </Compile>
@@ -183,6 +187,7 @@
     <Compile Include="view\vote.xaml.cs">
       <DependentUpon>vote.xaml</DependentUpon>
     </Compile>
+    <Compile Include="view\VotePages.cs" />
     <Compile Include="view\vote_list_view.xaml.cs">
       <DependentUpon>vote_list_view.xaml</DependentUpon>
     </Compile>

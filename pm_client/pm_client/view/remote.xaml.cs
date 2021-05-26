@@ -2,6 +2,8 @@
 using pm_client.util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,11 +25,7 @@ namespace pm_client.view
     /// </summary>
     public partial class remote : UserControl
     {
-        public remote()
-        {
-            InitializeComponent();
-
-
+        public Dictionary<string,string> findAllApp() {
             List<RegistryKey> RegistryKeys = new List<RegistryKey>();
             RegistryKeys.Add(Registry.ClassesRoot);
             RegistryKeys.Add(Registry.CurrentConfig);
@@ -37,7 +35,7 @@ namespace pm_client.view
             RegistryKeys.Add(Registry.Users);
             Dictionary<string, string> Softwares = new Dictionary<string, string>();
             string[] names = { @"Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall", @"Software\Microsoft\Windows\CurrentVersion\Uninstall" };
-            foreach(string SubKeyName in names) {
+            foreach (string SubKeyName in names) {
                 foreach (RegistryKey Registrykey in RegistryKeys) {
                     using (RegistryKey RegistryKey1 = Registrykey.OpenSubKey(SubKeyName, false)) {
                         if (RegistryKey1 == null) // 判断对象不存在
@@ -63,27 +61,88 @@ namespace pm_client.view
                     }
                 }
             }
+            return Softwares;
+        }
+        string name = "remote";
+
+        public void sendMode(object sender,RoutedEventArgs e) {
+            if (this.remoteSwitchButton.Content == "开启应用") {
+                try {
+                    WebUtil.remoteSwitch(ProcessManager.GRANTED);
+                    this.remoteSwitchButton.Content = "关闭应用";
+                } catch (NetworkException) {
+                    ViewUtil.msg("权限变更失败");
+                }
+            } else {
+                try {
+                    WebUtil.remoteSwitch(ProcessManager.DENIED);
+                    this.remoteSwitchButton.Content = "开启应用";
+                } catch (NetworkException) {
+                    ViewUtil.msg("权限变更失败");
+                }
+            }
+        }
+
+        public remote()
+        {
+            InitializeComponent();
+
+            if (ViewUtil.Find<Role>(this, "role").name == "主持人") {
+                this.remoteSwitchButton.Content = "开启应用";
+                this.remoteSwitchButton.Click += sendMode;
+            } else {
+                this.remoteSwitchButton.Visibility = Visibility.Collapsed;
+            }
+            Dictionary<string, string> Softwares = findAllApp();//<name,home>
             
             foreach (string SoftwareName in Softwares.Keys) {
                 Log.i("remote", $"app:{SoftwareName} path:{Softwares[SoftwareName]}");
+                if (SoftwareName == "腾讯会议") {
+                    Log.i(name, $"got {SoftwareName}");
+
+                    string parent = new DirectoryInfo(Softwares[SoftwareName].Trim('"')).Parent.FullName;
+                    string filepath = System.IO.Path.Combine(parent, "wemeetapp.exe");
+
+                    if(new FileInfo(filepath).Exists) {
+                        Icon resultIcon=Icon.ExtractAssociatedIcon(filepath);
+                        RemoteApp app = new RemoteApp();
+                        app.absolutePath = filepath;
+                        app.iconPath = BitmapToBitmapImage(resultIcon.ToBitmap());
+                        app.name = SoftwareName;
+
+                        Button button = new Button();
+                        button.Style = (Style)FindResource("remoteAppBtn");
+                        button.DataContext = app;
+                        button.Click += Button_Click;
+                        this.app_panel.Children.Add(button);
+                    }
+                }
             }
-            if (true) return;
-
-
-            FileInfo remoteApp=FileUtil.getFile(Settings.remoteFilePath);
-            StreamReader streamReader=new StreamReader(remoteApp.OpenRead());
-            string s = streamReader.ReadLine();
-            while (s != null) {
-
-
-
-
-                FileInfo exeFile = new FileInfo(s);
-                
-                Button btn = new Button();
-                btn.Style = (Style)FindResource("remoteAppBtn");
-                this.app_panel.Children.Add(btn);
+            
+        }
+        private BitmapImage BitmapToBitmapImage(System.Drawing.Bitmap bitmap) {
+            BitmapImage bitmapImage = new BitmapImage();
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream()) {
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = ms;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+            }
+            return bitmapImage;
+        }
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            if (mode == GRANTED) {
+                if(sender is Button) {
+                    RemoteApp app = ((Button)sender).DataContext as RemoteApp;
+                    ProcessStartInfo processInfo=new ProcessStartInfo();
+                    Process process = Process.Start(app.absolutePath);
+                    
+                }
             }
         }
+        int GRANTED = 1;
+        int mode = 1;
     }
 }

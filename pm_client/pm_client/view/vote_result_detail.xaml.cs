@@ -25,8 +25,19 @@ namespace pm_client.view
         {
             InitializeComponent();
         }
-        void setVoteResultDetail(util.VoteResult voteResult,Vote vote,ChoiceResult r) {
-            
+        public void setVoteResultDetail(util.VoteResult voteResult,Vote vote,ChoiceResultViewData r) {
+            this.fooBar.DataContext = r;
+            this.hahaha.DataContext = vote;
+            if (vote.anonymous != 0) {
+                this.padContainer.Children.Clear();
+                foreach(string pad in voteResult.devices) {
+                    Button button = new Button();
+                    button.Style = (Style)this.Resources["padBlockStyle"];
+                    button.DataContext = pad;
+                    button.Content = pad;
+                    this.padContainer.Children.Add(button);
+                }
+            }
         }
     }
 }

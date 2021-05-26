@@ -53,7 +53,12 @@
         <WrapPanel Orientation="Horizontal"
                    Name="app_panel"
                    Margin="66,69,10,10">
-            <Button Style="{DynamicResource remoteAppBtn}">hello</Button>
         </WrapPanel>
+        <Button 
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            x:Name="remoteSwitchButton"
+            Style="{StaticResource normal_btn}"
+            Content="开启应用"></Button>
     </Grid>
 </UserControl>
