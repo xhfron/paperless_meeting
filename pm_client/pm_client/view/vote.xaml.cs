@@ -1,5 +1,8 @@
-﻿using pm_client.util;
+﻿using Newtonsoft.Json;
+using pm_client.util;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,6 +12,7 @@ namespace pm_client.view {
     /// vote.xaml 的交互逻辑
     /// </summary>
     public partial class vote : UserControl {
+        static Dictionary<int, List<int>> localVotingResult;
         INavigator board;
         public void AddBoard(INavigator board) {
             this.board = board;
@@ -17,6 +21,27 @@ namespace pm_client.view {
         public void setVote(util.Vote vote) {
             this._vote = vote;
             this.DataContext = vote;
+            if (localVotingResult == null) {
+                FileInfo file=new FileInfo(Path.Combine(Settings.tempDir,"xxx"));
+                if (file.Exists) {
+                    var reader = file.OpenText();
+                    localVotingResult = JsonConvert.DeserializeObject<Dictionary<int, List<int>>>(reader.ReadToEnd());
+                    reader.Close();
+                } else {
+                    localVotingResult = new Dictionary<int, List<int>>();
+                }
+            }
+            if (localVotingResult.ContainsKey(vote.uid)) {
+                List<int> selectedCid = localVotingResult[vote.uid];
+                foreach (var c in this.choiceListBox.ItemsSource) {
+                    VoteOption choice = (VoteOption)c;
+                    if (selectedCid.Contains(choice.uid)) {
+                        this.choiceListBox.SelectedItems.Add(choice);
+                    }
+                }
+                this.choiceListBox.IsEnabled = false;
+                this.userBtn.Visibility = Visibility.Hidden;
+            }
         }
         public vote() {
             InitializeComponent();
@@ -37,11 +62,26 @@ namespace pm_client.view {
                 return;
             }
             try {
+                localVotingResult[_vote.uid] = new List<int>();
                 foreach (var c in this.choiceListBox.SelectedItems) {
                     VoteOption choice = (VoteOption)c;
+                    localVotingResult[_vote.uid].Add(choice.uid);
                     submitOption(_vote.uid, choice.uid, WebUtil.getDeviceId());
                 }
+
+                DirectoryInfo directoryInfo = new DirectoryInfo(Settings.tempDir);
+                if (!directoryInfo.Exists) {
+                    directoryInfo.Create();
+                }
+                FileInfo file = new FileInfo(Path.Combine(Settings.tempDir, "xxx"));
+                byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(localVotingResult));
+                FileStream writer = file.OpenWrite();
+                writer.Write(data, 0, data.Length);
+                writer.Close();
+
                 ViewUtil.msg("投票成功");
+                this.choiceListBox.IsEnabled = false;
+                this.userBtn.Visibility = Visibility.Collapsed;
             } catch (NetworkException) {
                 ViewUtil.msg("投票失败");
             }

@@ -139,6 +139,7 @@
     <Compile Include="util\data.cs" />
     <Compile Include="util\FileUtil.cs" />
     <Compile Include="util\INavigator.cs" />
+    <Compile Include="util\MessagePublisher.cs" />
     <Compile Include="util\NetworkException.cs" />
     <Compile Include="util\PersistentData.cs" />
     <Compile Include="util\HookManager.cs" />

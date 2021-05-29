@@ -158,7 +158,7 @@
             HorizontalAlignment="Stretch"   
             Grid.Row="2"  
             VerticalAlignment="Stretch" 
-            Grid.ColumnSpan="4"    
+            Grid.ColumnSpan="5"    
             Padding="160,40,0,0">
             <TextBlock 
                 TextWrapping="Wrap" 

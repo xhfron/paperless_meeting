@@ -28,7 +28,7 @@ namespace pm_client.view
         public void setVoteResultDetail(util.VoteResult voteResult,Vote vote,ChoiceResultViewData r) {
             this.fooBar.DataContext = r;
             this.hahaha.DataContext = vote;
-            if (vote.anonymous != 0) {
+            if (vote.anonymous == 0) {
                 this.padContainer.Children.Clear();
                 foreach(string pad in voteResult.devices) {
                     Button button = new Button();

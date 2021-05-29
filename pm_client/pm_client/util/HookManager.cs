@@ -60,8 +60,10 @@ namespace pm_client.util {
         }
 
         static HookManager() {
-            SetDllDirectory(@".\lib");
-            pDll = LoadLibrary(@"HookProc");
+            pDll = LoadLibrary(@".\lib\HookProc_x64.dll");
+            if (pDll == IntPtr.Zero) {
+                pDll = LoadLibrary(@".\lib\HookProc_x86.dll");
+            }
 
             Console.WriteLine(pDll);
         }

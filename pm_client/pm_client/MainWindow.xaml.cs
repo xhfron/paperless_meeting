@@ -31,136 +31,13 @@ namespace pm_client {
     /// xml，cs 大驼峰
     /// 
     /// 角色_功能_组件_状态
-    public partial class MainWindow : Window, INavigator,MessageListener {
+    public partial class MainWindow : Window, INavigator,MessageListener,MessageSubscriber {
+        string name = "MainWindow";
+
+        #region frame
+
         Stack<UserControl> current;
         Dictionary<string, Stack<UserControl>> ui = new Dictionary<string, Stack<UserControl>>();
-        HookManager p;
-        string name = "MainWindow";
-        SuperSplash superSplash;
-        public MainWindow() {
-            Log.fuckingCSharp = this.Dispatcher;
-            var t = this.Dispatcher;
-
-            InitializeComponent();
-
-            this.Resources["STOMPClient"] = new STOMPClient();
-            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
-            s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
-            s.connect();
-            s.subscribe("/topic/cmd");
-
-            s.addJsonListener(this);
-
-
-            superSplash = new SuperSplash();
-            showBanner(superSplash);
-
-            new Thread(new ThreadStart(this.run)).Start();
-        }
-        async void tryConnecting() {
-            await Task.Run(() => {
-
-            });
-            int meetingId = -1;
-            Meeting meeting = null;
-            while (true) {
-                try {
-                    Thread.Sleep(1000);
-                    meetingId = WebUtil.latestMeetingId();
-                    //meetingId = 1;
-                    meeting = WebUtil.getMeeting(meetingId, WebUtil.getDeviceId());
-                    if (meeting == null) {
-                        ViewUtil.msg("没会议，告辞");
-                        await Task.Run(() => System.Environment.Exit(0));
-                        return;
-                    }
-                    meeting.role.name = "主持人";
-                    Log.i(name, "hello");
-                    ViewUtil.Find<Meeting>(this, "meeting").load(meeting);
-                    if (meeting.role == null) {
-
-                    }Console.WriteLine("aeowifndlksvnzoijflksdjfewocdmsoiewvoi");
-                    ViewUtil.Find<Role>(this, "role").load(meeting.role);
-                    //ViewUtil.Find<Role>(this, "role").name = "mike";
-                    break;
-                } catch (NetworkException e) {
-                    Log.i("supersplash", "connection failed,trying after 3 second");
-                    Thread.Sleep(3000);
-                }
-            }
-            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
-
-            ui.Add("file", new Stack<UserControl>());
-            file_list_view flview = new file_list_view();
-            flview.loadFile(meetingId, meeting.role.id);
-            flview.AddBoard(this);
-            ui["file"].Push(flview);
-
-            ui.Add("settings", new Stack<UserControl>());
-            ui["settings"].Push(new view.logout());
-
-            ui.Add("vote", new Stack<UserControl>());
-            view.vote_list_view vlview = new view.vote_list_view();
-            s.addJsonListener(vlview);
-            vlview.setVoteList(WebUtil.getVoteList(meetingId, ViewUtil.Find<Role>(this, "role").id));
-            vlview.AddBoard(this);
-            //voteList = new List<Vote>();
-            //(vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
-            ui["vote"].Push(vlview);
-
-            ui.Add("note", new Stack<UserControl>());
-            ui["note"].Push(new view.note());
-            ui.Add("remote", new Stack<UserControl>());
-            ui["remote"].Push(new view.remote());
-
-            replaceBy(ui["file"]);
-
-            if (WebUtil.getMeetingState(meetingId) != 1) {
-                //0-idle 1-start 2-end -1 invalid
-
-            splash spl = new splash();
-            s.addJsonListener(spl);
-            showBanner(spl);
-            }
-
-            superSplash.Visibility = Visibility.Collapsed;
-        }
-        void run() {
-            Thread.CurrentThread.Name = "background";
-            while (true) {
-                Thread.Sleep(800);
-                var dt = DateTime.Now;
-                ViewUtil.Find<SuperInfo>(this, "superInfo").time = dt.ToShortTimeString();
-                //Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
-
-            }
-        }
-
-
-
-
-        private void RadioButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("hello");
-            Grid g = this.FindName("container") as Grid;
-            UserControl k = new pm_client.view.vote();
-            Grid.SetRow(k, 1);
-            Grid.SetColumn(k, 1);
-            pm_client.util.Meeting j = new util.Meeting();
-            j.meetingId = 20;
-            g.DataContext = j;
-            g.Children.Add(k);
-
-        }
-        void showBanner(UserControl newView) {
-            Grid g = this.FindName("container") as Grid;
-            Grid.SetRow(newView, 0);
-            Grid.SetRowSpan(newView, 2);
-            Grid.SetColumn(newView, 0);
-            Grid.SetColumnSpan(newView, 3);
-            Grid.SetZIndex(newView, 1288);
-            g.Children.Add(newView);
-        }
-
         private void toFile(object sender, RoutedEventArgs e) {
             (FindName("SettingsBtn") as RadioButton).IsChecked = false;
 
@@ -205,12 +82,111 @@ namespace pm_client {
             Grid.SetColumnSpan(newView, 2);
             g.Children.Add(newView);
         }
+        #endregion
+        
+        HookManager p;
+        SuperSplash superSplash;
+        public MainWindow() {
+            Log.fuckingCSharp = this.Dispatcher;
+            var t = this.Dispatcher;
 
+            Log.l(name, "start init");
+            InitializeComponent();
+            Log.l(name, "end init");
 
-
-        private void Window_Initialized(object sender, EventArgs e) {
-            tryConnecting();
+            
         }
+        private void Window_Initialized(object sender, EventArgs e) {
+            Log.l(name, "on inited");
+
+            superSplash = new SuperSplash();
+            showBanner(superSplash);
+            tryConnecting();
+
+            MessagePublisher.subscribe(this, MessagePublisher.CLOSE_MESSAGE);
+        }
+        
+        async void tryConnecting() {
+            this.Resources["STOMPClient"] = new STOMPClient();
+            STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
+            await s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
+            await s.connect();
+            await s.subscribe("/topic/cmd");
+
+            s.addJsonListener(this);
+
+            new Thread(new ThreadStart(this.run)).Start();
+
+            int meetingId = -1;
+            Meeting meeting = null;
+            while (true) {
+                try {
+                    Thread.Sleep(1000);
+                    meetingId = WebUtil.latestMeetingId();
+                    //meetingId = 1;
+                    meeting = WebUtil.getMeeting(meetingId, WebUtil.getDeviceId());
+
+                    if (meeting == null) {
+                        ViewUtil.msg("没会议，告辞");
+                        await Task.Run(() => System.Environment.Exit(0));
+                        return;
+                    }
+
+                    //meeting.role.name = "主持人";
+
+                    ViewUtil.Find<Meeting>(this, "meeting").load(meeting);
+                    ViewUtil.Find<Role>(this, "role").load(meeting.role);
+
+                    break;
+                } catch (NetworkException e) {
+                    Log.i("supersplash", "connection failed,trying after 3 second");
+                    Thread.Sleep(3000);
+                }
+            }
+
+            ui.Add("file", new Stack<UserControl>());
+            file_list_view flview = new file_list_view();
+            flview.loadFile(meetingId, meeting.role.id);
+            flview.AddBoard(this);
+            ui["file"].Push(flview);
+
+            ui.Add("settings", new Stack<UserControl>());
+            logout ll = new logout();
+            s.addJsonListener(ll);
+            ui["settings"].Push(ll);
+
+            ui.Add("vote", new Stack<UserControl>());
+            view.vote_list_view vlview = new view.vote_list_view();
+            s.addJsonListener(vlview);
+            vlview.setVoteList(WebUtil.getVoteList(meetingId, ViewUtil.Find<Role>(this, "role").id));
+            vlview.AddBoard(this);
+            //voteList = new List<Vote>();
+            //(vlview.FindName("VoteListViewVoteList") as ListBox).ItemsSource = voteList;
+            ui["vote"].Push(vlview);
+
+            ui.Add("note", new Stack<UserControl>());
+            ui["note"].Push(new view.note());
+
+            ui.Add("remote", new Stack<UserControl>());
+            ui["remote"].Push(new view.remote());
+
+            replaceBy(ui["file"]);
+            (FindName("FileBtn") as RadioButton).IsChecked = false;
+
+            int flag = WebUtil.getMeetingState(meetingId);
+            if (flag == 0) {
+                //0-idle 1-start 2-end -1 invalid
+                splash spl = new splash();
+                s.addJsonListener(spl);
+                showBanner(spl);
+            }else if (flag != 1) {
+                ViewUtil.msg("会议已结束");
+                MessagePublisher.publish(MessagePublisher.CLOSE_MESSAGE, "");
+            }
+
+            superSplash.Visibility = Visibility.Collapsed;
+        }
+
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
             //Log.l("msg", "" + msg);
             if (msg == 0x0400 + 7) {
@@ -221,6 +197,47 @@ namespace pm_client {
             }
             return IntPtr.Zero;
         }
+        void run() {
+            Thread.CurrentThread.Name = "background";
+            while (true) {
+                Thread.Sleep(800);
+                var dt = DateTime.Now;
+                ViewUtil.Find<SuperInfo>(this, "superInfo").time = dt.ToShortTimeString();
+                //Dispatcher.Invoke(()=> Log.l("b", dt.ToLongTimeString()));
+
+            }
+        }
+
+
+
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show("hello");
+            Grid g = this.FindName("container") as Grid;
+            UserControl k = new pm_client.view.vote();
+            Grid.SetRow(k, 1);
+            Grid.SetColumn(k, 1);
+            pm_client.util.Meeting j = new util.Meeting();
+            j.meetingId = 20;
+            g.DataContext = j;
+            g.Children.Add(k);
+
+        }
+        void showBanner(UserControl newView) {
+            Grid g = this.FindName("container") as Grid;
+            Grid.SetRow(newView, 0);
+            Grid.SetRowSpan(newView, 2);
+            Grid.SetColumn(newView, 0);
+            Grid.SetColumnSpan(newView, 3);
+            Grid.SetZIndex(newView, 1288);
+            g.Children.Add(newView);
+        }
+
+
+
+
+
+        
 
         public void Push(UserControl newView) {
             removeFromShowing();
@@ -229,6 +246,7 @@ namespace pm_client {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+            Log.l(name, "on loaded");
             //if (true) return;
             //you never got where it crashed
             p = new HookManager();
@@ -261,6 +279,9 @@ namespace pm_client {
             Push(newView);
         }
         private void delete(DirectoryInfo root) {
+            if (!root.Exists) {
+                return;
+            }
             foreach (var x in root.GetDirectories()) {
                 delete(x);
             }
@@ -278,6 +299,11 @@ namespace pm_client {
                     delete(directoryInfo);
                 }
             }
+        }
+
+        public void onMessage(string message, string args) {
+            delete(new DirectoryInfo(Settings.fileDir));
+            delete(new DirectoryInfo(Settings.tempDir));
         }
     }
 }

@@ -42,13 +42,17 @@ namespace Test {
 
 
         public HookManager() {
-            IntPtr pAddressOfFunctionToCall = GetProcAddress(pDll, "StartupHook");
-            startupHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
+            try {
+                IntPtr pAddressOfFunctionToCall = GetProcAddress(pDll, "StartupHook");
+                startupHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
+
+                Console.WriteLine("GetProcAddress:" + pAddressOfFunctionToCall);
             
-            Console.WriteLine($"start up handle:{startupHook.ToString()}");
-            
-            pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
-            closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
+                pAddressOfFunctionToCall = GetProcAddress(pDll, "CloseHook");
+                closeHook = (Func)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(Func));
+            }catch(ArgumentNullException) {
+                Console.ReadKey();
+            }
         }
 
 
@@ -56,14 +60,10 @@ namespace Test {
             //if (!SetDllDirectory(@".\lib")) {
             //  Console.WriteLine("false");
             //}
-            FileInfo file=new FileInfo(@".\lib\HookProc.dll");
+            FileInfo file=new FileInfo(@".\lib\HookProc_x64.dll");
             
             pDll = LoadLibrary(file.FullName);
-            if (pDll == IntPtr.Zero) {
-                Console.WriteLine(file.FullName+"::hook failed:" + GetLastError());
-                return;
-            }
-            Console.WriteLine($"dll handle:{pDll}");
+            Console.WriteLine("LoadLibrary:" + pDll);
         }
         bool shouldKill(int pid) {
             return false;

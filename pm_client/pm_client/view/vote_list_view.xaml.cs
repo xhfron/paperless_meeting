@@ -15,28 +15,34 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace pm_client.view {
-    /// <summary>
-    /// vote_list_view.xaml 的交互逻辑
-    /// </summary>
     public partial class vote_list_view : UserControl, MessageListener {
+        List<util.Vote> list;
+        List<util.Vote> listToShow=new List<Vote>();
+
+        #region util
+
         INavigator board;
         public void AddBoard(INavigator board) {
             this.board = board;
         }
-        public void setVoteList(List<util.Vote> list) {
-            if (list == null) return;
-            this.VoteListViewVoteList.ItemsSource = list;
-        }
-
         public vote_list_view() {
             InitializeComponent();
         }
 
-        private void VoteListViewVoteList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            foreach (object k in e.AddedItems) {
-                System.Console.WriteLine(k);
+        #endregion
+
+        public void setVoteList(List<util.Vote> list) {
+            if (list == null) return;
+            this.list = list;
+            if (ViewUtil.Find<Role>(this, "role").name.Contains("主持人")) {
+                listToShow = list;
+            } else {
+                foreach (var v in list) if (v.state == Vote.VOTING) listToShow.Add(v);
+                foreach (var v in list) if (v.state == Vote.VOTED) listToShow.Add(v);
             }
+            this.VoteListViewVoteList.ItemsSource = listToShow;
         }
+
 
         private void toVoteDetail(object sender, SelectionChangedEventArgs e) {
             Vote selected = (Vote)this.VoteListViewVoteList.SelectedItem;
@@ -82,16 +88,41 @@ namespace pm_client.view {
                 }
                 ViewUtil.msg("vote not found");
             } else if (cmd.Contains("开始投票")) {
-                int idx = cmd.IndexOf(":");
-                int voteId = Int32.Parse(cmd.Substring(idx + 1));
-                List<util.Vote> list = (List<Vote>)this.VoteListViewVoteList.ItemsSource;
-                foreach (util.Vote v in list) {
-                    if (v.uid == voteId) {
-                        v.state = Vote.VOTING;
-                        return;
+                if(ViewUtil.Find<Role>(this, "role").name.Contains("主持人")) {
+                    int idx = cmd.IndexOf(":");
+                    int voteId = Int32.Parse(cmd.Substring(idx + 1));
+                    List<util.Vote> list = (List<Vote>)this.VoteListViewVoteList.ItemsSource;
+                    foreach (util.Vote v in list) {
+                        if (v.uid == voteId) {
+                            v.state = Vote.VOTING;
+                            return;
+                        }
                     }
+                    ViewUtil.msg("vote not found");
+                } else {
+                    int idx = cmd.IndexOf(":");
+                    int voteId = Int32.Parse(cmd.Substring(idx + 1));
+                    List<util.Vote> list = (List<Vote>)this.VoteListViewVoteList.ItemsSource;
+                    Vote vote = null, voteShowing = null;
+                    foreach (util.Vote v in this.list) {
+                        if (v.uid == voteId) {
+                            vote = v;
+                            break;
+                        }
+                    }
+                    foreach (util.Vote v in list) {
+                        if (v.uid == voteId) {
+                            voteShowing = v;
+                            break;
+                        }
+                    }
+                    if (voteShowing == null) {
+                        list.Insert(0, vote);
+                        vote.state = Vote.VOTING;
+                        this.UpdateLayout();
+                    }
+                    ViewUtil.msg("vote not found");
                 }
-                ViewUtil.msg("vote not found");
             }
         }
     }

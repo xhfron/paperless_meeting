@@ -95,7 +95,8 @@
             <TextBlock x:Name="loading_text" Height="110" Style="{StaticResource title_48}" Text="???"/>
             <Image x:Name="loading_img"
                 Source="/res/drawable/loading.jpg" 
-                   Width="110" Height="100">
+                   Width="110" Height="100"
+                   Visibility="Collapsed">
             </Image>
         </StackPanel>
 

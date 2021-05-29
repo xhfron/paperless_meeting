@@ -75,7 +75,11 @@ namespace pm_client.util
             string res = WebUtil.post("/host/closeMeeting", dict);
         }
 
+        static int deviceId = -1;
         public static int getDeviceId() {
+            if (deviceId != -1) {
+                return deviceId;
+            }
             string macAddr = null;
             ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
             ManagementObjectCollection moc2 = mc.GetInstances();

@@ -18,9 +18,14 @@ namespace pm_client.view {
     /// <summary>
     /// logout.xaml 的交互逻辑
     /// </summary>
-    public partial class logout : UserControl {
+    public partial class logout : UserControl,MessageListener {
         public logout() {
             InitializeComponent();
+            if (ViewUtil.Find<Role>(this, "role").name.Contains("主持人")) {
+
+            } else {
+                closeBtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
@@ -56,6 +61,7 @@ namespace pm_client.view {
 
 
         private void exit(object sender, RoutedEventArgs e) {
+            MessagePublisher.publish(MessagePublisher.CLOSE_MESSAGE, "");
             Task.Run(() => System.Environment.Exit(0));
         }
         private void close(object sender, RoutedEventArgs e) {
@@ -65,6 +71,12 @@ namespace pm_client.view {
             });
         }
 
+        public void onMessage(Dictionary<string, object> json) {
+            string cmd = (string)json["cmd"];
+            if (cmd.Contains("结束会议")) {
+                exit(null, null);
+            }
+        }
     }
 
 }
