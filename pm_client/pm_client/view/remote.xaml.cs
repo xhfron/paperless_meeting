@@ -146,8 +146,9 @@ namespace pm_client.view
 
         public void onMessage(Dictionary<string, object> json) {
             string cmd = (string)json["cmd"];
+            //Log.l("f",json["code"].GetType().ToString());
             if (cmd.Contains("腾讯会议")) {
-                int code = (int)json["code"];
+                Int64 code = (Int64)json["code"];
                 if (code == 2) {
                     mode = GRANTED;
                     this.remoteSwitchButton.Content = "关闭应用";
@@ -159,6 +160,6 @@ namespace pm_client.view
         }//end
 
         int GRANTED = 1;
-        int mode = -1;
+        volatile int mode = -1;
     }
 }

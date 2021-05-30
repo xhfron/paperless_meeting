@@ -133,7 +133,7 @@ namespace pm_client {
                         return;
                     }
 
-                    //00meeting.role.name = "主持人";
+                    //meeting.role.name = "主持人";
 
                     ViewUtil.Find<Meeting>(this, "meeting").load(meeting);
                     ViewUtil.Find<Role>(this, "role").load(meeting.role);
