@@ -23,8 +23,7 @@ namespace pm_client.view
     /// <summary>
     /// remote.xaml 的交互逻辑
     /// </summary>
-    public partial class remote : UserControl
-    {
+    public partial class remote : UserControl, MessageListener {
         public Dictionary<string,string> findAllApp() {
             List<RegistryKey> RegistryKeys = new List<RegistryKey>();
             RegistryKeys.Add(Registry.ClassesRoot);
@@ -140,9 +139,26 @@ namespace pm_client.view
                     Process process = Process.Start(app.absolutePath);
                     
                 }
+            } else {
+                ViewUtil.msg("打不开打不开打不开");
             }
         }
+
+        public void onMessage(Dictionary<string, object> json) {
+            string cmd = (string)json["cmd"];
+            if (cmd.Contains("腾讯会议")) {
+                int code = (int)json["code"];
+                if (code == 2) {
+                    mode = GRANTED;
+                    this.remoteSwitchButton.Content = "关闭应用";
+                } else {
+                    this.remoteSwitchButton.Content = "开启应用";
+                    mode = -GRANTED;
+                }
+            }
+        }//end
+
         int GRANTED = 1;
-        int mode = 1;
+        int mode = -1;
     }
 }

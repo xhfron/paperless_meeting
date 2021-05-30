@@ -110,11 +110,7 @@ namespace pm_client {
             this.Resources["STOMPClient"] = new STOMPClient();
             STOMPClient s = (this.Resources["STOMPClient"] as STOMPClient);
             await s.connectWs("ws://paperless.ronwhite.online:10087/websocket");
-            await s.connect();
-            await s.subscribe("/topic/cmd");
-
-            s.addJsonListener(this);
-
+            
             new Thread(new ThreadStart(this.run)).Start();
 
             int meetingId = -1;
@@ -122,6 +118,11 @@ namespace pm_client {
             while (true) {
                 try {
                     Thread.Sleep(1000);
+                    await s.connect();
+                    await s.subscribe("/topic/cmd");
+
+                    s.addJsonListener(this);
+
                     meetingId = WebUtil.latestMeetingId();
                     //meetingId = 1;
                     meeting = WebUtil.getMeeting(meetingId, WebUtil.getDeviceId());
@@ -132,13 +133,16 @@ namespace pm_client {
                         return;
                     }
 
-                    //meeting.role.name = "主持人";
+                    //00meeting.role.name = "主持人";
 
                     ViewUtil.Find<Meeting>(this, "meeting").load(meeting);
                     ViewUtil.Find<Role>(this, "role").load(meeting.role);
 
                     break;
                 } catch (NetworkException e) {
+                    Log.i("supersplash", "connection failed,trying after 3 second");
+                    Thread.Sleep(3000);
+                } catch(InvalidOperationException e) {
                     Log.i("supersplash", "connection failed,trying after 3 second");
                     Thread.Sleep(3000);
                 }
@@ -168,7 +172,9 @@ namespace pm_client {
             ui["note"].Push(new view.note());
 
             ui.Add("remote", new Stack<UserControl>());
-            ui["remote"].Push(new view.remote());
+            remote rm = new view.remote();
+            s.addJsonListener(rm);
+            ui["remote"].Push(rm);
 
             replaceBy(ui["file"]);
             (FindName("FileBtn") as RadioButton).IsChecked = false;
@@ -218,7 +224,7 @@ namespace pm_client {
             Grid.SetRow(k, 1);
             Grid.SetColumn(k, 1);
             pm_client.util.Meeting j = new util.Meeting();
-            j.meetingId = 20;
+            j.uid = 20;
             g.DataContext = j;
             g.Children.Add(k);
 
@@ -302,8 +308,12 @@ namespace pm_client {
         }
 
         public void onMessage(string message, string args) {
-            delete(new DirectoryInfo(Settings.fileDir));
-            delete(new DirectoryInfo(Settings.tempDir));
+            try {
+                delete(new DirectoryInfo(Settings.fileDir));
+                delete(new DirectoryInfo(Settings.tempDir));
+            } catch (IOException e) {
+                Log.l(name, e.ToString());
+            }
         }
     }
 }

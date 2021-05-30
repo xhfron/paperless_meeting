@@ -4,6 +4,7 @@ using pm_client.view;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -107,12 +108,12 @@ namespace pm_client.util
             string str = WebUtil.post("/host/getVoteRes", dict);
             return JsonConvert.DeserializeObject<VoteResultCollection>(str);
         }
-        public static List<util.Vote> getVoteList(int meetingId, int deviceId) {
+        public static BindingList<util.Vote> getVoteList(int meetingId, int deviceId) {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             dict["meetingId"] = meetingId;
             dict["deviceId"] = deviceId;
             string str = WebUtil.post("/vote/getVoteList", dict);
-            List<util.Vote> list = JsonConvert.DeserializeObject<List<util.Vote>>(str);
+            BindingList<util.Vote> list = JsonConvert.DeserializeObject<BindingList<util.Vote>>(str);
             foreach (Vote vote in list) {
                 VoteResultCollection collection = getVoteResult(vote.uid);
                 vote.state = collection.state;

@@ -36,7 +36,7 @@ namespace pm_client.util {
             }
         }
         public bool shouldClose(string path) {
-            return false;
+            return !path.Contains(@"C:\Windows");
         }
     }
 }

@@ -320,17 +320,17 @@ namespace pm_client.util {
                 PropertyChanged(this, e);
             }
         }
-        private int _meetingId;
+        private int _uid;
 
 
-        public int meetingId {
+        public int uid {
 
             get {
-                return _meetingId;
+                return _uid;
             }
             set {
-                _meetingId = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("meetingId"));
+                _uid = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("uid"));
             }
         }
         private string _name;
@@ -413,7 +413,7 @@ namespace pm_client.util {
         }
 
         public void load(Meeting b) {
-            this.meetingId = b.meetingId;
+            this.uid = b.uid;
             this.name = b.name;
             this.content = b.content;
             this.beginTime = b.beginTime;

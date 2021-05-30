@@ -102,6 +102,8 @@ namespace pm_client.view
             moonPdfPanel.GotoLastPage();
             current_page_view.Text = moonPdfPanel.GetCurrentPageNumber().ToString();
         }
+        double dist = 0.0;
+
 
 
 
@@ -152,6 +154,105 @@ namespace pm_client.view
             //f_view.Children.Add(f_sub_view);
            
         }
+        string name = "pdf";
+        void say(string text) {
+            //if (true) return;
+            Log.l(name, text);
+        }
 
+        private void zoom(object sender, TouchEventArgs e) {
+            if (true) return;
+            TouchPointCollection collection = e.GetIntermediateTouchPoints(this);
+            say("--------------------------start zoom");
+            say($"collection len {collection.Count}");
+            if (collection.Count <= 1) {
+                say("count less");
+                return;
+            }
+
+            TouchPoint pivot = collection[0];
+            double maxDist = 0.0;
+            TouchPoint maxP = pivot;
+
+            say($"pivot:({pivot.Position.X},{pivot.Position.Y})");
+
+            foreach(var x in collection) {
+                double tempDist = 0.0;
+                TouchPoint p1 =x, p2 = pivot;
+                //say($"pick:({p1.Position.X},{p1.Position.Y})");
+                double x1 = p1.Position.X, y1 = p1.Position.Y, x2 = p2.Position.X, y2 = p2.Position.Y;
+                tempDist = (y1 - y2) * (y1 - y2) + (x1 - x2) * (x1 - x2);
+                //say($"tempDist:{tempDist}");
+                if (tempDist > maxDist) {
+                    //say("updated");
+                    maxDist = tempDist;
+                    maxP = x;
+                }
+            }
+
+            pivot = maxP;
+            maxDist = 0.0;
+            say($"pivot:({pivot.Position.X},{pivot.Position.Y})");
+
+            foreach (var x in collection) {
+                double tempDist = 0.0;
+                TouchPoint p1 = x, p2 = pivot;
+                double x1 = p1.Position.X, 
+                    y1 = p1.Position.Y, 
+                    x2 = p2.Position.X, 
+                    y2 = p2.Position.Y;
+                tempDist = (y1 - y2) * (y1 - y2) + (x1 - x2) * (x1 - x2);
+                if (tempDist > maxDist) {
+                    say($"with:({p2.Position.X},{p2.Position.Y})");
+                    say($"pick:({p1.Position.X},{p1.Position.Y})");
+                    say($"tempDist:{tempDist}");
+                    say("updated");
+                    maxDist = tempDist;
+                    maxP = x;
+                }
+            }
+
+            say("maxDist:" + maxDist);
+            if (maxDist < 70*70) {
+                say("single");
+                return;
+            }
+
+            say("dist:" + dist);
+            say("delta:" + (maxDist - dist));
+            if (dist == 0) {
+                dist = maxDist;
+            } else {
+                if (Math.Abs(maxDist - dist) > 50*50) {
+                    double factor = Math.Sqrt(maxDist) - Math.Sqrt(dist);
+                    factor = factor / 50*0.2 + moonPdfPanel.CurrentZoom;
+                    moonPdfPanel.Zoom(factor);
+                    say("::zoom");
+                    dist = maxDist;
+                }
+            }
+
+        }
+
+        private void clear(object sender, TouchEventArgs e) {
+            dist = 0;
+            Log.l("pdf", "awjeifodsonicewoicndczkvljdfs");
+        }
+
+
+    }
+class ZoomManager {
+        void begin() {
+
+        }
+        void update(TouchPointCollection collection) {
+
+        }
+        void end() {
+
+        }
+        bool belong() {
+            return false;
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace pm_client.view {
         }
         private void close(object sender, RoutedEventArgs e) {
             Task.Run(() => {
-                WebUtil.closeMeeting(ViewUtil.Find<Meeting>(this, "meeting").meetingId);
+                WebUtil.closeMeeting(ViewUtil.Find<Meeting>(this, "meeting").uid);
                 //System.Environment.Exit(0);
             });
         }

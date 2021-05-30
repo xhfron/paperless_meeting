@@ -42,6 +42,9 @@ namespace pm_client.view {
                 this.choiceListBox.IsEnabled = false;
                 this.userBtn.Visibility = Visibility.Hidden;
             }
+            if (vote.type == 0) {
+                this.choiceListBox.SelectionMode = SelectionMode.Single;
+            }
         }
         public vote() {
             InitializeComponent();
@@ -96,11 +99,7 @@ namespace pm_client.view {
             dict["optionId"] = optionId;
             dict["voteId"] = voteId;
             dict["deviceId"] = deviceId;
-            try {
-                WebUtil.post("/vote/submitOption", dict);
-            } catch (NetworkException e) {
-                ViewUtil.msg($"投票失败:{e.message}");
-            }
+            WebUtil.post("/vote/submitOption", dict);
         }
 
         private void startVote(object sender, TouchEventArgs e) {

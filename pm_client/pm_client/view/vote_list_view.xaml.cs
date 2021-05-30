@@ -1,6 +1,7 @@
 ﻿using pm_client.util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ using System.Windows.Shapes;
 
 namespace pm_client.view {
     public partial class vote_list_view : UserControl, MessageListener {
-        List<util.Vote> list;
-        List<util.Vote> listToShow=new List<Vote>();
+        BindingList<util.Vote> list;
+        BindingList<util.Vote> listToShow=new BindingList<Vote>();
 
         #region util
 
@@ -31,7 +32,7 @@ namespace pm_client.view {
 
         #endregion
 
-        public void setVoteList(List<util.Vote> list) {
+        public void setVoteList(BindingList<util.Vote> list) {
             if (list == null) return;
             this.list = list;
             if (ViewUtil.Find<Role>(this, "role").name.Contains("主持人")) {
@@ -100,28 +101,37 @@ namespace pm_client.view {
                     }
                     ViewUtil.msg("vote not found");
                 } else {
-                    int idx = cmd.IndexOf(":");
-                    int voteId = Int32.Parse(cmd.Substring(idx + 1));
-                    List<util.Vote> list = (List<Vote>)this.VoteListViewVoteList.ItemsSource;
-                    Vote vote = null, voteShowing = null;
-                    foreach (util.Vote v in this.list) {
-                        if (v.uid == voteId) {
-                            vote = v;
-                            break;
+                    this.Dispatcher.Invoke(() => {
+                        int idx = cmd.IndexOf(":");
+                        int voteId = Int32.Parse(cmd.Substring(idx + 1));
+                        BindingList<util.Vote> list = (BindingList<Vote>)this.VoteListViewVoteList.ItemsSource;
+                        Vote vote = null, voteShowing = null;
+                        foreach (util.Vote v in this.list) {
+                            if (v.uid == voteId) {
+                                vote = v;
+                                break;
+                            }
                         }
-                    }
-                    foreach (util.Vote v in list) {
-                        if (v.uid == voteId) {
-                            voteShowing = v;
-                            break;
+                        foreach (util.Vote v in list) {
+                            if (v.uid == voteId) {
+                                voteShowing = v;
+                                break;
+                            }
                         }
-                    }
-                    if (voteShowing == null) {
-                        list.Insert(0, vote);
-                        vote.state = Vote.VOTING;
-                        this.UpdateLayout();
-                    }
-                    ViewUtil.msg("vote not found");
+                        if (voteShowing == null) {
+                            list.Insert(0, vote);
+                            //this.VoteListViewVoteList.ItemsSource = list;
+                            //this.VoteListViewVoteList.Items.Add(vote);
+                            vote.state = Vote.VOTING;
+                            this.Dispatcher.Invoke(() => {
+                                this.VoteListViewVoteList.InvalidateArrange();
+                                this.UpdateLayout();
+                            });
+                        }
+                        if (vote == null) {
+                            this.Dispatcher.Invoke(() => ViewUtil.msg("vote not found"));
+                        }
+                    });
                 }
             }
         }

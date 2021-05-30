@@ -34,7 +34,8 @@ namespace pm_client.view
 
         private void hide(object sender, RoutedEventArgs e)
         {
-            beginMeeting(1);
+            Meeting meeting = ViewUtil.Find<Meeting>(this, "meeting");
+            beginMeeting(meeting.uid);
             this.Visibility = Visibility.Collapsed;
         }
         private void characterize() {
