@@ -32,8 +32,8 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Background="#EF4045" CornerRadius="15,15,0,0" Margin="0,0,-0.333,15">
-                <TextBlock Margin="15,7,14.667,7.333" Foreground="White" FontSize="14" RenderTransformOrigin="0.504,-0.022">提示</TextBlock>
+            <Border Grid.Row="0" Background="#EF4045" CornerRadius="15,15,0,0" Margin="0,0,-0.666,30">
+                <TextBlock Margin="30,15,30,15" Foreground="White" FontSize="25" RenderTransformOrigin="1,-0.05">提示</TextBlock>
             </Border>
             
             <!--图片和文本-->
@@ -49,7 +49,7 @@
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
 
 
-                <Button Content="确 定" x:Name="OkButton" Width="160" Height="50" TouchDown="OkButton_Click" Margin="20,0,30,0" IsDefault="True"
+                <Button Content="确 定" x:Name="OkButton" Width="160" Height="50" TouchDown="OkButton_Click" Margin="20,0,30,0" IsDefault="True" FontSize="25"
                         Visibility="{Binding OkButtonVisibility,Mode=OneWay}" Background="#EF4045" Foreground="White" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -58,7 +58,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="是" x:Name="YesButton" Width="160" Height="50" TouchDown="YesButton_Click" Margin="20,0,30,0" 
+                <Button Content="是" x:Name="YesButton" Width="160" Height="50" TouchDown="YesButton_Click" Margin="20,0,30,0" FontSize="25"
                     Visibility="{Binding YesButtonVisibility,Mode=OneWay}" Background="#EF4045" Foreground="White" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -67,7 +67,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="否" x:Name="NoButton" Width="160" Height="50" TouchDown="NoButton_Click" Margin="20,0,30,0"
+                <Button Content="否" x:Name="NoButton" Width="160" Height="50" TouchDown="NoButton_Click" Margin="20,0,30,0" FontSize="25"
                     Visibility="{Binding NoButtonVisibility,Mode=OneWay}" Background="#EF4045" Foreground="White" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -76,7 +76,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button Content="取消" x:Name="CancelButton" Width="160" Height="50" TouchDown="CancelButton_Click" Margin="20,0,30,0"
+                <Button Content="取消" x:Name="CancelButton" Width="160" Height="50" TouchDown="CancelButton_Click" Margin="20,0,30,0" FontSize="25"
                     Visibility="{Binding CancelButtonVisibility}" Background="#EF4045" Foreground="White" BorderThickness="0">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">

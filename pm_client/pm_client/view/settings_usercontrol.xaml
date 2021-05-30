@@ -11,7 +11,7 @@
     <Canvas Background="White">
 
 
-        <Grid Width="800" Height="400" Canvas.Left="650" Canvas.Top="450">
+        <Grid Width="800" Height="400" Canvas.Left="600" Canvas.Top="440">
 
 
             <Grid.RowDefinitions>
