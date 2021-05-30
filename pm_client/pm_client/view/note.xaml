@@ -20,22 +20,20 @@
 
         <StackPanel Grid.Column="1" Background="DarkGray">
 
-            <Button x:Name="btnsave" Margin="5" Click="btnsave_Click" FontSize="15">保存</Button>
-
-            <TextBlock HorizontalAlignment="Center" FontSize="15">模式选择：</TextBlock>
-            <Button x:Name="btnselection" Margin="5" Click="btnselection_Click" FontSize="15">选中</Button>
-            <Button x:Name="btndraw" Margin="5" Click="btndraw_Click" FontSize="15">绘制</Button>
-            <Button x:Name="btnerase" Margin="5" Click="btnerase_Click" FontSize="15">擦除</Button>
+            <TextBlock HorizontalAlignment="Center" FontSize="30">模式选择：</TextBlock>
+            <Button x:Name="btnselection" Margin="5" Click="btnselection_Click" FontSize="30">选中</Button>
+            <Button x:Name="btndraw" Margin="5" Click="btndraw_Click" FontSize="30">绘制</Button>
+            <Button x:Name="btnerase" Margin="5" Click="btnerase_Click" FontSize="30">擦除</Button>
 
 
-            <TextBlock HorizontalAlignment="Center" FontSize="15">选择颜色：</TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontSize="30">选择颜色：</TextBlock>
 
             <StackPanel Orientation="Horizontal" Background="LightGray">
-                <Rectangle x:Name="rectred" Fill="Red" Width="25" Height="25" Margin="5" Stroke="Gray" MouseDown="rectred_MouseDown"></Rectangle>
-                <Rectangle x:Name="rectgreen" Fill="Green" Width="25" Height="25" Margin="2.5" Stroke="Gray" MouseDown="rectgreen_MouseDown"></Rectangle>
-                <Rectangle x:Name="rectblue" Fill="Blue" Width="25" Height="25" Margin="2.5" Stroke="Gray" MouseDown="rectblue_MouseDown"></Rectangle>
-                <Rectangle x:Name="rectyellow" Fill="Yellow" Width="25" Height="25" Margin="2.5" Stroke="Gray" MouseDown="rectyellow_MouseDown"></Rectangle>
-                <Rectangle x:Name="rectblack" Fill="Black" Width="25" Height="25" Margin="2.5" Stroke="Gray" MouseDown="rectblack_MouseDown"></Rectangle>
+                <Rectangle x:Name="rectred" Fill="Red" Width="50" Height="50" Margin="5" Stroke="Gray" MouseDown="rectred_MouseDown"></Rectangle>
+                <Rectangle x:Name="rectgreen" Fill="Green" Width="50" Height="50" Margin="2.5" Stroke="Gray" MouseDown="rectgreen_MouseDown"></Rectangle>
+                <Rectangle x:Name="rectblue" Fill="Blue" Width="50" Height="50" Margin="2.5" Stroke="Gray" MouseDown="rectblue_MouseDown"></Rectangle>
+                <Rectangle x:Name="rectyellow" Fill="Yellow" Width="50" Height="50" Margin="2.5" Stroke="Gray" MouseDown="rectyellow_MouseDown"></Rectangle>
+                <Rectangle x:Name="rectblack" Fill="Black" Width="50" Height="50" Margin="2.5" Stroke="Gray" MouseDown="rectblack_MouseDown"></Rectangle>
             </StackPanel>
 
         </StackPanel>
