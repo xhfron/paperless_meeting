@@ -63,6 +63,7 @@ public class HostService {
     }
 
     public void closeMeeting(int meetingId){
+
         meetingService.changeMeetingState(meetingId,2);
         sendMessage(new Command(6, "结束会议id: " + meetingId));
     }
