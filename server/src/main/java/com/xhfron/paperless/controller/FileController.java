@@ -25,7 +25,6 @@ public class FileController {
         } else {
             return new Msg(200, "文件不存在", null);
         }
-
     }
 
 
@@ -37,6 +36,11 @@ public class FileController {
         }
         return new Msg("上传失败");
 
+    }
+
+    @PostMapping("/delete")
+    public Msg delete(@RequestParam int fileId){
+        return new Msg(200,fileService.deleteFile(fileId),null);
     }
 
 }

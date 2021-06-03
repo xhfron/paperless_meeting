@@ -8,6 +8,7 @@
     </insert>
 
     <select id="getMeetingList" resultType="com.xhfron.paperless.bean.MeetingVO">
+
         select * from meeting join meeting_state on uid = id limit 300;
     </select>
 

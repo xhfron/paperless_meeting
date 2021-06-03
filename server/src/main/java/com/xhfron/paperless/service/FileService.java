@@ -43,4 +43,8 @@ public class FileService {
     public List<FileDO> getFileList(int meetingId){
         return fileDao.getFilesByMeetingId(meetingId);
     }
+
+    public String deleteFile(int fileId) {
+        return fileDao.deleteById(fileId)==1?"ok":"not exist";
+    }
 }

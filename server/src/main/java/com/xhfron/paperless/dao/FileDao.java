@@ -9,4 +9,5 @@ import java.util.List;
 public interface FileDao {
     int createFileRecord(FileDO fileDO);
     List<FileDO> getFilesByMeetingId(int meetingId);
+    int deleteById(int fileId);
 }

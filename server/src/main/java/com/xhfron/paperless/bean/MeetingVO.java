@@ -2,7 +2,7 @@ package com.xhfron.paperless.bean;
 
 public class MeetingVO {
     int uid;
-    String title;
+    String name;
     String content;
     String beginTime;
     String endTime;
@@ -18,12 +18,12 @@ public class MeetingVO {
         this.uid = uid;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {

@@ -3,6 +3,7 @@ package com.xhfron.paperless.service;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
+
 import com.xhfron.paperless.bean.DeviceDO;
 import com.xhfron.paperless.bean.RouterInfo;
 import com.xhfron.paperless.bean.Token;
@@ -83,6 +84,7 @@ public class DeviceService {
     private Connection getConnection(){
         try{
             Connection connection = new Connection(host);
+
             connection.connect();
             if(!connection.authenticateWithPassword(username, passwd)){
                 throw new Exception("登录失败");
@@ -122,12 +124,13 @@ public class DeviceService {
         try{
             List<DeviceDO> devices = deviceDao.getDevices();
             List<String> cmds = new LinkedList<>();
+            //测试用管理，上线时mac替换为超管设备
+            cmds.add("iptables -I INPUT -m mac ! --mac-source 7C:76:35:E7:13:05 -j DROP");
             for(DeviceDO device : devices){
                cmds.add("iptables -I INPUT -m mac --mac-source "
                         +device.getMac()+" -j ACCEPT");
             }
-            //测试用管理，上线时mac替换为超管设备
-            cmds.add("iptables -I INPUT -m mac ! --mac-source 7c:76:35:e7:13:05 -j DROP");
+
             exeCmds(cmds);
             return true;
 
@@ -141,12 +144,13 @@ public class DeviceService {
        try{
            List<DeviceDO> devices = deviceDao.getDevices();
            List<String> cmds = new LinkedList<>();
-           for(DeviceDO device : devices){
-               cmds.add("iptables -I INPUT -m mac --mac-source "
-                       +device.getMac()+" -j ACCEPT");
-           }
-           //测试用管理，上线时mac替换为超管设备
-           cmds.add("iptables -I INPUT -m mac ! --mac-source 7c:76:35:e7:13:05 -j DROP");
+//           for(DeviceDO device : devices){
+//               cmds.add("iptables -I INPUT -m mac --mac-source "
+//                       +device.getMac()+" -j ACCEPT");
+//           }
+//           //测试用管理，上线时mac替换为超管设备
+//           cmds.add("iptables -I INPUT -m mac ! --mac-source 7C:76:35:E7:13:05 -j DROP");
+           cmds.add("iptables -F INPUT");
            exeCmds(cmds);
            return true;
 
@@ -157,4 +161,8 @@ public class DeviceService {
    }
 
 
+    public String deleteDevice(int id) {
+        return deviceDao.deleteDevice(id).toString();
+
+    }
 }

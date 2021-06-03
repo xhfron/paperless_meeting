@@ -1,8 +1,7 @@
 package com.xhfron.paperless.controller;
 
-import com.xhfron.paperless.bean.Msg;
-import com.xhfron.paperless.bean.RouterInfo;
-import com.xhfron.paperless.service.DeviceService;
+import com.xhfron.paperless.bean.*;
+import com.xhfron.paperless.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,5 +35,10 @@ public class DeviceController {
     @PostMapping("blockNewDevice")
     Msg blockNewDevice(){
         return new Msg(200,deviceService.blockNewDevice().toString(),null);
+    }
+
+    @PostMapping("/deleteDevice")
+    Msg deleteDevice(@RequestParam int id){
+        return new Msg(200,deviceService.deleteDevice(id),null);
     }
 }
